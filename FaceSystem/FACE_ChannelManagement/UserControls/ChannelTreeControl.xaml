@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="FACE_ChannelManagement.UserControls.ChannelTreeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_ChannelManagement.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel HorizontalAlignment="Left" 
+                    Grid.Row="0"
+                    Orientation="Horizontal" 
+                    VerticalAlignment="Center">
+            <TextBox Margin="5" 
+                         Grid.Column="0"
+                     x:Name="textBox" 
+                     Height="23" 
+                     TextWrapping="Wrap" 
+                        Width="200"
+                     Text="TextBox"/>
+            <Button Margin="5" 
+                        Grid.Column="1"
+                    x:Name="button" 
+                    Content="Button" 
+                    Height="23"/>
+        </StackPanel>
+
+        <TreeView Grid.Row="2" 
+                  ItemsSource="{Binding FirstGeneration}"
+                  x:Name="treeView"
+                  HorizontalAlignment="Left" 
+                  Height="300" Grid.RowSpan="2" 
+                  VerticalAlignment="Top"
+                  Width="300"
+                  Opacity="0.7">
+            <TreeView.ItemContainerStyle>
+                <!-- 
+    This Style binds a TreeViewItem to a PersonViewModel. 
+    -->
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TreeView.ItemContainerStyle>
+
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Name}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+
+        </TreeView>
+
+    </Grid>
+</UserControl>

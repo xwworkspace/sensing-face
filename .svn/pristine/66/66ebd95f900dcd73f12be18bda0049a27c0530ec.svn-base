@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev_Shell", "FACE\Shell\Dev_Shell.csproj", "{EA6FFD9C-36E8-4432-BD3D-FFF3A5D53A09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FACE_ChannelManagement", "FACE_ChannelManagement\FACE_ChannelManagement.csproj", "{D8053DE6-21B2-446D-B41D-FC9BC2148CF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev_SING.Data", "FACE\SING.Data\Dev_SING.Data.csproj", "{35A1C45E-F5F7-4EE7-8681-3228648EB93B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev_SING.Infrastructure", "FACE\SING.Infrastructure\Dev_SING.Infrastructure.csproj", "{27D04AE8-C4EB-474F-B7B6-A8A6FC958D69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev_SING.Service", "FACE\SING.Service\Dev_SING.Service.csproj", "{4408F396-E180-45F8-BD21-E02B76FE54B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FACE_SnapAlignmentManagement", "FACE_SnapAlignmentManagement\FACE_SnapAlignmentManagement.csproj", "{2931CE5C-3FAB-4888-A872-4192683BC77D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA6FFD9C-36E8-4432-BD3D-FFF3A5D53A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA6FFD9C-36E8-4432-BD3D-FFF3A5D53A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA6FFD9C-36E8-4432-BD3D-FFF3A5D53A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA6FFD9C-36E8-4432-BD3D-FFF3A5D53A09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8053DE6-21B2-446D-B41D-FC9BC2148CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8053DE6-21B2-446D-B41D-FC9BC2148CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8053DE6-21B2-446D-B41D-FC9BC2148CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8053DE6-21B2-446D-B41D-FC9BC2148CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A1C45E-F5F7-4EE7-8681-3228648EB93B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A1C45E-F5F7-4EE7-8681-3228648EB93B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A1C45E-F5F7-4EE7-8681-3228648EB93B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A1C45E-F5F7-4EE7-8681-3228648EB93B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D04AE8-C4EB-474F-B7B6-A8A6FC958D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D04AE8-C4EB-474F-B7B6-A8A6FC958D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D04AE8-C4EB-474F-B7B6-A8A6FC958D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D04AE8-C4EB-474F-B7B6-A8A6FC958D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4408F396-E180-45F8-BD21-E02B76FE54B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4408F396-E180-45F8-BD21-E02B76FE54B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4408F396-E180-45F8-BD21-E02B76FE54B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4408F396-E180-45F8-BD21-E02B76FE54B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2931CE5C-3FAB-4888-A872-4192683BC77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2931CE5C-3FAB-4888-A872-4192683BC77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2931CE5C-3FAB-4888-A872-4192683BC77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2931CE5C-3FAB-4888-A872-4192683BC77D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

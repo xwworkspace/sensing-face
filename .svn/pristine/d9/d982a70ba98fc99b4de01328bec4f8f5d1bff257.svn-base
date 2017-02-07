@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Shell.DigitalClock.DigitalClockControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Shell.DigitalClock"  MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" >
+    <Border  BorderThickness="3" BorderBrush="Transparent" CornerRadius="4" x:Name="masterBorder" >
+        <Grid MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <local:DigitalClockElement Focusable="False" MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" Grid.RowSpan="2" x:Name="p0" Grid.Column="0" />
+            <local:DigitalClockElement MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" Grid.RowSpan="2" x:Name="p1" Grid.Column="1" />
+
+            <local:DigitalClockDots MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" Grid.RowSpan="2" x:Name="p2" Grid.Column="2" />
+
+            <local:DigitalClockElement MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" Grid.RowSpan="2" x:Name="p3" Grid.Column="3" />
+            <local:DigitalClockElement MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" Grid.RowSpan="2" x:Name="p4" Grid.Column="4" />
+
+            <TextBlock x:Name="zone1" MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" Margin="2,0,0,0" Grid.Column="5" Grid.ColumnSpan="3"   Grid.Row="0"  Foreground="OrangeRed" >北</TextBlock>
+            <TextBlock x:Name="zone2" MouseLeftButtonUp="masterBorder_MouseLeftButtonUp"                  Grid.Column="6"  Grid.Row="0"  Foreground="OrangeRed">京</TextBlock>
+            <TextBlock x:Name="zone3" MouseLeftButtonUp="masterBorder_MouseLeftButtonUp"                  Grid.Column="7"  Grid.Row="0" Foreground="OrangeRed">时</TextBlock>
+            <TextBlock x:Name="zone4" MouseLeftButtonUp="masterBorder_MouseLeftButtonUp"  Margin="0,0,0,1" Grid.Column="8"  Grid.Row="0" Foreground="OrangeRed">间</TextBlock>
+
+            <TextBlock x:Name="yearNumber" MouseLeftButtonUp="masterBorder_MouseLeftButtonUp" Margin="1,0,0,0"  Grid.Column="5" Grid.ColumnSpan="4"  Grid.Row="1" Foreground="AliceBlue"></TextBlock>
+            
+
+            <!--<local:DigitalClockDots x:Name="p5" Grid.Column="5" Visibility="Collapsed"/>
+
+            <local:DigitalClockElement x:Name="p6" Grid.Column="6" Visibility="Collapsed" />
+            <local:DigitalClockElement x:Name="p7" Grid.Column="7" Visibility="Collapsed" />-->
+        </Grid>
+    </Border>
+</UserControl>
