@@ -2,8 +2,6 @@
 using Microsoft.Practices.Prism.ViewModel;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Linq;
 
 namespace FACE_ChannelManagement.ViewModels
@@ -12,9 +10,9 @@ namespace FACE_ChannelManagement.ViewModels
     {
         #region Data
 
-        readonly ReadOnlyCollection<ChannelViewModel> _children;
-        readonly ChannelViewModel _parent;
-        readonly Channel _person;
+         Collection<ChannelViewModel> _children;
+         ChannelViewModel _root;
+         Channel _person;
 
         bool _isExpanded;
         bool _isSelected;
@@ -31,9 +29,9 @@ namespace FACE_ChannelManagement.ViewModels
         private ChannelViewModel(Channel person, ChannelViewModel parent)
         {
             _person = person;
-            _parent = parent;
+            _root = parent;
 
-            _children = new ReadOnlyCollection<ChannelViewModel>(
+            _children = new Collection<ChannelViewModel>(
                     (from child in _person.Children
                      select new ChannelViewModel(child, this))
                      .ToList<ChannelViewModel>());
@@ -43,14 +41,16 @@ namespace FACE_ChannelManagement.ViewModels
 
         #region Person Properties
 
-        public ReadOnlyCollection<ChannelViewModel> Children
+        public Collection<ChannelViewModel> Children
         {
             get { return _children; }
+            set { value = _children; }
         }
 
         public string Name
         {
             get { return _person.Name; }
+            set { value = _person.Name; }
         }
 
         #endregion // Person Properties
@@ -71,12 +71,12 @@ namespace FACE_ChannelManagement.ViewModels
                 if (value != _isExpanded)
                 {
                     _isExpanded = value;
-                    this.OnPropertyChanged("IsExpanded");
+                    this.RaisePropertyChanged("IsExpanded");
                 }
 
                 // Expand all the way up to the root.
-                if (_isExpanded && _parent != null)
-                    _parent.IsExpanded = true;
+                if (_isExpanded && _root != null)
+                    _root.IsExpanded = true;
             }
         }
 
@@ -96,7 +96,7 @@ namespace FACE_ChannelManagement.ViewModels
                 if (value != _isSelected)
                 {
                     _isSelected = value;
-                    this.OnPropertyChanged("IsSelected");
+                    this.RaisePropertyChanged("IsSelected");
                 }
             }
         }
@@ -117,25 +117,13 @@ namespace FACE_ChannelManagement.ViewModels
 
         #region Parent
 
-        public ChannelViewModel Parent
+        public ChannelViewModel Root
         {
-            get { return _parent; }
+            get { return _root; }
         }
 
         #endregion // Parent
 
-        #endregion // Presentation Members        
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion // INotifyPropertyChanged Members
+        #endregion // Presentation Members    
     }
 }

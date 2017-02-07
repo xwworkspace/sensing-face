@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 using FACE_ChannelManagement.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -13,12 +8,13 @@ using Microsoft.Practices.Prism.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 using Sofa.Commons;
 using Sofa.Container;
+using System.ComponentModel;
 
 namespace FACE_ChannelManagement.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class ViewModel : NotificationObject, INavigationAware
+    public class ViewModel : INotifyPropertyChanged, INavigationAware
     {
         public readonly IDataService _dataService;
         public readonly IEventAggregator _eventAggregator;
@@ -37,6 +33,9 @@ namespace FACE_ChannelManagement.ViewModels
         }
 
         #region 属性
+
+
+
         #endregion
 
         #region RefreshChannel
@@ -48,7 +47,7 @@ namespace FACE_ChannelManagement.ViewModels
             {
                 
             }
-            catch (Exception err)
+            catch
             {
                 
             }
@@ -85,10 +84,11 @@ namespace FACE_ChannelManagement.ViewModels
         #endregion
 
         #region SofaCommonEventHandler
-
-
+        
         public SofaComponent ThisSofaComponent;
         public IBaseContainer Container;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void SofaCommonEventHandler(object sender, SofaEventArgs e)
         {

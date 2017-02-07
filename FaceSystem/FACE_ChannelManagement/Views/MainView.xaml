@@ -52,6 +52,7 @@
                         <Image Width="40" Height="40"  Source="../Images/refreshButton.png"/>
                     </Button>
                 </Grid>
+
                 <!--<ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="{StaticResource channelPrecinct}" x:Name="ChannelManageListBox" ItemTemplate="{StaticResource ChannelManageDataTemplate}" Margin="0,-1,0,-1" BorderThickness="0" Grid.Row="1">
                     <ListBox.Resources>
                         <Style TargetType="{x:Type ListBoxItem}">
@@ -83,7 +84,9 @@
                         </Style>
                     </ListBox.Resources>
                 </ListBox>-->
+
                 <userCtrl:ChannelTreeControl Grid.Row="1"/>
+                
 
                 <Grid Grid.Row="2" Background="{StaticResource channelDownBackground}">
                     <Grid.ColumnDefinitions>
