@@ -7,11 +7,13 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Resources;
+using System.Windows.Threading;
 using Microsoft.Practices.Prism.Events;
 using Shell.Models;
 using Shell.ViewModels;
 using SING.Data;
 using SING.Data.BaseTools;
+using SING.Data.ScheduleProcess;
 using SING.Infrastructure.Events;
 using Telerik.Windows;
 using Telerik.Windows.Controls;
@@ -25,6 +27,7 @@ namespace Shell.Views
     public partial class ShellView : Window,IPartImportsSatisfiedNotification
     {
         private readonly IEventAggregator _eventAggregator;
+        private DispatcherTimer heartBeatTimer;
 
         [Import(AllowRecomposition = false)]
         public ShellViewModel ViewModel
@@ -49,22 +52,33 @@ namespace Shell.Views
             Screen screen = Screen.FromPoint(new System.Drawing.Point(0, 0));
 
             window.WindowState = WindowState.Maximized;
-
+            //window.Left = SystemParameters.WorkArea.Left;
+            //window.Top = SystemParameters.WorkArea.Top;
             window.MaxWidth = screen.Bounds.Width;
             window.MaxHeight = screen.Bounds.Height;
-
             #endregion
 
             this.TopMenu.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
             this.TopMenu.MouseDoubleClick += TopMenu_MouseDoubleClick;
+
+            heartBeatTimer = new DispatcherTimer();
+            heartBeatTimer.Interval = new TimeSpan(1);
+            heartBeatTimer.Tick += new EventHandler(HeartBeat_Tick);
+            heartBeatTimer.Start();
         }
-       
+
 
         #region 属性
 
         #endregion
 
         #region Event
+
+        void HeartBeat_Tick(object sender, EventArgs e)
+        {
+            ScheduleHeartBeat.HearBeat();
+        }
+
         private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try

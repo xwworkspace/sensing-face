@@ -24,10 +24,11 @@ namespace FACE_ChannelManagement.ViewModels
         #region Constructor
 
         public ICommand SearchCommand { get; private set; }
-        
+        public ICommand SelectedCommand { get; private set; }
+
         public ChannelGroupViewModel()
         {
-            Channel rootNode = DataAccess.GetFamilyTree();            
+            Channel rootNode = DataAccess.GetFamilyTree();
             _rootNode = new ChannelViewModel(rootNode);
 
             _firstGeneration = new Collection<ChannelViewModel>(
@@ -36,14 +37,7 @@ namespace FACE_ChannelManagement.ViewModels
                     _rootNode
                 });
 
-            SearchCommand = new DelegateCommand<object>(QueryCommandFunc);
-        }
-        
-        private void QueryCommandFunc(object obj)
-        {
-            MessageBox.Show(_rootNode.IsSelected.ToString());
-            this.PerformSearch();
-            
+            SearchCommand = new DelegateCommand<object>((obj) => { this.PerformSearch(); });
         }
 
         #endregion // Constructor
@@ -80,6 +74,7 @@ namespace FACE_ChannelManagement.ViewModels
                 _matchingChannelEnumerator = null;
             }
         }
+        
         #endregion // SearchText
 
         #endregion // Properties

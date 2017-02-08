@@ -87,9 +87,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+<<<<<<< .mine
     <Reference Include="System.Reflection.Context">
       <HintPath>bin\Debug\System.Reflection.Context.dll</HintPath>
     </Reference>
+=======
+    <Reference Include="System.Reflection.Context">
+      <HintPath>..\Lib\System.Reflection.Context.dll</HintPath>
+    </Reference>
+>>>>>>> .r30
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />

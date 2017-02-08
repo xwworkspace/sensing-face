@@ -8,8 +8,10 @@ namespace FACE_ChannelManagement.Models
         public IList<Channel> Children
         {
             get { return _children; }
+            set { value = _children; }
         }
 
+        public string ID { get; set; }
         public string Name { get; set; }
     }
 }

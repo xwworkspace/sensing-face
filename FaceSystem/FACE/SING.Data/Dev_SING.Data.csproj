@@ -95,6 +95,7 @@
     <Compile Include="ScheduleProcess\ScheduleDelete.cs" />
     <Compile Include="ScheduleProcess\ScheduleFileProcess.cs" />
     <Compile Include="ScheduleProcess\ScheduleGet.cs" />
+    <Compile Include="ScheduleProcess\ScheduleHeartBeat.cs" />
     <Compile Include="ScheduleProcess\ScheduleUpdate.cs" />
     <Compile Include="TClient.cs" />
     <Compile Include="VerifyInfo.cs" />

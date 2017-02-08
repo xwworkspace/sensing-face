@@ -212,8 +212,8 @@ namespace Shell
                 AppConfig.Instance.UserInfo = identity;
 
 
-                if (AppConfig.Instance.VersionType == VersionType.Net)
-                    Thread.CurrentPrincipal = new GenericPrincipal(identity, new string[] { Uid, UType, divIndex, divOrder });
+               
+                Thread.CurrentPrincipal = new GenericPrincipal(identity, new string[] { Uid, UType, divIndex, divOrder });
                 this._result = true;
 
                 this.progressReport.Value = 5;
@@ -243,6 +243,7 @@ namespace Shell
             this.btnLogin.IsEnabled = true;
         }
         #endregion
+
         private void tempOpen_ShowLoadProcess(string txt)
         {
             this.progressReport.Value = this.progressReport.Value + 10;
@@ -254,8 +255,6 @@ namespace Shell
         {
             try
             {
-                userInfo = string.Empty;
-                return true;
                 // 验证用户信息
                 if (AppConfig.Instance.VersionType == VersionType.Net)
                 {

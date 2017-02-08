@@ -52,7 +52,7 @@ namespace SING.Data.ScheduleProcess
             tsocket.Timeout = 5000;
             TTransport transport = tsocket;
             TProtocol protocol = new TBinaryProtocol(transport);
-            BusinessServer.Client _BusinessServerClient = new BusinessServer.Client(protocol);
+            BusinessServerNet.Client _BusinessServerClient = new BusinessServerNet.Client(protocol);
             Data.UserCfgData UserCfgData = new Data.UserCfgData();
             try
             {
@@ -95,7 +95,7 @@ namespace SING.Data.ScheduleProcess
             tsocket.Timeout = 100;
             TTransport transport = tsocket;
             TProtocol protocol = new TBinaryProtocol(transport);
-            BusinessServer.Client _BusinessServerClient = new BusinessServer.Client(protocol);
+            BusinessServerNet.Client _BusinessServerClient = new BusinessServerNet.Client(protocol);
             Data.UserCfgData _UserCfgData = new Data.UserCfgData();
             try
             {
@@ -107,7 +107,7 @@ namespace SING.Data.ScheduleProcess
                 try
                 {
                     UserCfg _UserCfg = _BusinessServerClient.QueryUser(UserName);
-                    _UserCfgData = Data.UserCfgData.ConvertToData(_UserCfg);
+                    _UserCfgData = UserCfgData.ConvertToData(_UserCfg);
                 }
                 catch (Exception ex)
                 {
@@ -127,6 +127,76 @@ namespace SING.Data.ScheduleProcess
                 Logger.Logger.Error("连接服务器失败", ex);
             }
             return _UserCfgData;
+        }
+
+        public static List<ChannelCfgData> QueryAllChannel()
+        {
+            List<ChannelCfgData> ListChannelCfgData = new List<ChannelCfgData>();
+            List<ChannelCfg> ListChannelCfg = new List<ChannelCfg>();
+            TTransport transport = new TSocket(AppConfig.Instance.LoginHost, AppConfig.Instance.Port);
+            TProtocol protocol = new TBinaryProtocol(transport);
+            BusinessServer.Client _BusinessServerClient = new BusinessServer.Client(protocol);
+
+            try
+            {
+                #region
+                if (!transport.IsOpen)
+                {
+                    transport.Open();
+                }
+                ListChannelCfg = _BusinessServerClient.QueryAllChannel();
+                transport.Close();
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                if (transport.IsOpen)
+                {
+                    transport.Close();
+                }
+                System.Windows.MessageBox.Show("连接服务器失败");
+                Logger.Logger.Error("连接服务器失败", ex);
+            }
+
+            foreach (ChannelCfg cc in ListChannelCfg)
+            {
+                ListChannelCfgData.Add(ChannelCfgData.ConvertToData(cc));
+            }
+
+            return ListChannelCfgData;
+        }
+
+        /// <summary>
+        /// 查询当前的域值
+        /// </summary>
+        /// <returns></returns>
+        public static int QueryThreshold()
+        {
+            TTransport transport = new TSocket(AppConfig.Instance.LoginHost, AppConfig.Instance.Port);
+            TProtocol protocol = new TBinaryProtocol(transport);
+            BusinessServer.Client _BusinessServerClient = new BusinessServer.Client(protocol);
+            int nSucess = -1;
+            try
+            {
+                #region
+                if (!transport.IsOpen)
+                {
+                    transport.Open();
+                }
+                nSucess = _BusinessServerClient.QueryThreshold();
+                transport.Close();
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                if (transport.IsOpen)
+                {
+                    transport.Close();
+                }
+                //System.Windows.MessageBox.Show("查询域值失败，稍后重试！");
+                Logger.Logger.Error("查询阈值方法异常：QueryThreshold", ex);
+            }
+            return nSucess;
         }
     }
 }

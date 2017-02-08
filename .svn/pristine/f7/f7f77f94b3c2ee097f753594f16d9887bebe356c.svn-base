@@ -1,0 +1,250 @@
+2017-02-08 09:35:13,654 获取用户mac：：38D547E18C8E
+2017-02-08 09:35:13,673 引导初始化......---->15
+2017-02-08 09:35:13,674 载入程序中......---->25
+2017-02-08 09:35:13,701 初始化日志......---->35
+2017-02-08 09:35:13,702 注册相关目录......---->45
+2017-02-08 09:35:13,705 注册窗体......---->55
+2017-02-08 09:35:13,828 初始化Modules......---->65
+2017-02-08 09:35:13,829 扫描相关目录，......---->75
+2017-02-08 09:35:14,115 初始化类型......---->85
+2017-02-08 09:35:14,121 初始化IOC......---->95
+2017-02-08 09:35:14,149 初始化服务......---->100
+2017-02-08 09:35:14,195 9:35引导完成
+2017-02-08 09:35:14,225 初始化相关模块，......---->100
+2017-02-08 09:35:14,236 初始化主窗体......---->100
+2017-02-08 09:35:14,275 获取用户信息失败
+Thrift.TApplicationException: Invalid method name: 'QueryUser'
+   在 BusinessServerNet.Client.recv_QueryUser() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3062
+   在 BusinessServerNet.Client.QueryUser(String uid) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3030
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryUser(String UserName) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 109
+2017-02-08 09:35:14,877 初始化完成......---->100
+2017-02-08 09:35:14,878 初始化完成......---->100
+2017-02-08 09:35:14,947 BEGIN: Load data from Sofa.xml
+2017-02-08 09:35:14,971 END: Load data from Sofa.xml
+2017-02-08 09:35:14,972 BEGIN: Load perspectives list
+2017-02-08 09:35:14,973 END: Load perspectives list
+2017-02-08 09:35:15,003 初始化完成......---->100
+2017-02-08 09:35:15,007 初始化完成......---->100
+2017-02-08 09:35:15,009 初始化完成......---->100
+2017-02-08 09:35:15,009 已引导完成
+2017-02-08 09:35:15,010 已进入主界面显示
+2017-02-08 09:35:15,312 显示最后一步进度
+2017-02-08 09:35:15,313 显示界面......---->100
+2017-02-08 09:35:17,024 TopMenu_OnItemClick
+2017-02-08 09:35:17,024 TopMenu_OnItemClick
+2017-02-08 09:35:17,024 ClickOperator
+2017-02-08 09:35:17,025 ClickOperator2
+2017-02-08 09:35:17,030 进入打开窗体功能
+2017-02-08 09:35:17,030 进入打开窗体功能-->FACE_SnapAlignmentManagement
+2017-02-08 09:35:17,030 进入打开窗体功能2-->FACE_SnapAlignmentManagement
+2017-02-08 09:35:17,030 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:35:17,031 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:35:17,031 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:35:17,032 BEGIN: Open application 'FACE_SnapAlignmentManagement'--''.
+2017-02-08 09:35:17,032 Found application 'FACE_SnapAlignmentManagement'--'' in list.
+2017-02-08 09:35:17,033 BEGIN: Loading application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:35:17,050 查询阈值方法异常：QueryThreshold
+Thrift.TApplicationException: Invalid method name: 'QueryThreshold'
+   在 BusinessServer.Client.recv_QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServer.cs:行号 7311
+   在 BusinessServer.Client.QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServer.cs:行号 7280
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 186
+2017-02-08 09:35:17,217 Application 'FACE_SnapAlignmentManagement' loaded.
+2017-02-08 09:35:17,217 END: Open application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:35:17,249 END: Loading application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:35:17,259 进入打开窗体功能5-->FACE_SnapAlignmentManagement
+2017-02-08 09:35:17,259 退出打开窗体功能
+2017-02-08 09:35:24,024 窗口向下还原
+2017-02-08 09:41:20,194 获取用户mac：：38D547E18C8E
+2017-02-08 09:41:20,210 引导初始化......---->15
+2017-02-08 09:41:20,211 载入程序中......---->25
+2017-02-08 09:41:20,220 初始化日志......---->35
+2017-02-08 09:41:20,223 注册相关目录......---->45
+2017-02-08 09:41:20,225 注册窗体......---->55
+2017-02-08 09:41:20,255 初始化Modules......---->65
+2017-02-08 09:41:20,255 扫描相关目录，......---->75
+2017-02-08 09:41:20,363 初始化类型......---->85
+2017-02-08 09:41:20,368 初始化IOC......---->95
+2017-02-08 09:41:20,393 初始化服务......---->100
+2017-02-08 09:41:20,418 9:41引导完成
+2017-02-08 09:41:20,444 初始化相关模块，......---->100
+2017-02-08 09:41:20,454 初始化主窗体......---->100
+2017-02-08 09:41:20,484 获取用户信息失败
+Thrift.TApplicationException: Invalid method name: 'QueryUser'
+   在 BusinessServerNet.Client.recv_QueryUser() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3062
+   在 BusinessServerNet.Client.QueryUser(String uid) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3030
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryUser(String UserName) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 109
+2017-02-08 09:41:20,691 初始化完成......---->100
+2017-02-08 09:41:20,692 初始化完成......---->100
+2017-02-08 09:41:20,744 BEGIN: Load data from Sofa.xml
+2017-02-08 09:41:20,755 END: Load data from Sofa.xml
+2017-02-08 09:41:20,755 BEGIN: Load perspectives list
+2017-02-08 09:41:20,756 END: Load perspectives list
+2017-02-08 09:41:20,774 初始化完成......---->100
+2017-02-08 09:41:20,779 初始化完成......---->100
+2017-02-08 09:41:20,779 初始化完成......---->100
+2017-02-08 09:41:20,779 已引导完成
+2017-02-08 09:41:20,781 已进入主界面显示
+2017-02-08 09:41:21,060 显示最后一步进度
+2017-02-08 09:41:21,061 显示界面......---->100
+2017-02-08 09:41:22,631 TopMenu_OnItemClick
+2017-02-08 09:41:22,631 TopMenu_OnItemClick
+2017-02-08 09:41:22,631 ClickOperator
+2017-02-08 09:41:22,633 ClickOperator2
+2017-02-08 09:41:22,638 进入打开窗体功能
+2017-02-08 09:41:22,638 进入打开窗体功能-->FACE_SnapAlignmentManagement
+2017-02-08 09:41:22,638 进入打开窗体功能2-->FACE_SnapAlignmentManagement
+2017-02-08 09:41:22,639 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:41:22,639 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:41:22,640 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:41:22,641 BEGIN: Open application 'FACE_SnapAlignmentManagement'--''.
+2017-02-08 09:41:22,641 Found application 'FACE_SnapAlignmentManagement'--'' in list.
+2017-02-08 09:41:22,641 BEGIN: Loading application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:41:22,657 查询阈值方法异常：QueryThreshold
+Thrift.TApplicationException: Invalid method name: 'QueryThreshold'
+   在 BusinessServer.Client.recv_QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServer.cs:行号 7311
+   在 BusinessServer.Client.QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServer.cs:行号 7280
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 186
+2017-02-08 09:41:22,744 Application 'FACE_SnapAlignmentManagement' loaded.
+2017-02-08 09:41:22,744 END: Open application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:41:22,775 END: Loading application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:41:22,783 进入打开窗体功能5-->FACE_SnapAlignmentManagement
+2017-02-08 09:41:22,783 退出打开窗体功能
+2017-02-08 09:41:24,588 窗口向下还原
+2017-02-08 09:41:27,623 窗口最大化
+2017-02-08 09:41:35,906 窗口最大化为假
+2017-02-08 09:44:35,127 获取用户mac：：38D547E18C8E
+2017-02-08 09:44:35,145 引导初始化......---->15
+2017-02-08 09:44:35,145 载入程序中......---->25
+2017-02-08 09:44:35,152 初始化日志......---->35
+2017-02-08 09:44:35,153 注册相关目录......---->45
+2017-02-08 09:44:35,155 注册窗体......---->55
+2017-02-08 09:44:35,187 初始化Modules......---->65
+2017-02-08 09:44:35,187 扫描相关目录，......---->75
+2017-02-08 09:44:35,295 初始化类型......---->85
+2017-02-08 09:44:35,299 初始化IOC......---->95
+2017-02-08 09:44:35,323 初始化服务......---->100
+2017-02-08 09:44:35,344 9:44引导完成
+2017-02-08 09:44:35,371 初始化相关模块，......---->100
+2017-02-08 09:44:35,381 初始化主窗体......---->100
+2017-02-08 09:44:35,411 获取用户信息失败
+Thrift.TApplicationException: Invalid method name: 'QueryUser'
+   在 BusinessServerNet.Client.recv_QueryUser() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3062
+   在 BusinessServerNet.Client.QueryUser(String uid) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3030
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryUser(String UserName) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 109
+2017-02-08 09:44:35,613 初始化完成......---->100
+2017-02-08 09:44:35,614 初始化完成......---->100
+2017-02-08 09:44:35,657 BEGIN: Load data from Sofa.xml
+2017-02-08 09:44:35,668 END: Load data from Sofa.xml
+2017-02-08 09:44:35,668 BEGIN: Load perspectives list
+2017-02-08 09:44:35,669 END: Load perspectives list
+2017-02-08 09:44:35,685 初始化完成......---->100
+2017-02-08 09:44:35,690 初始化完成......---->100
+2017-02-08 09:44:35,691 初始化完成......---->100
+2017-02-08 09:44:35,691 已引导完成
+2017-02-08 09:44:35,691 已进入主界面显示
+2017-02-08 09:44:35,955 显示最后一步进度
+2017-02-08 09:44:35,956 显示界面......---->100
+2017-02-08 09:44:37,935 TopMenu_OnItemClick
+2017-02-08 09:44:37,935 TopMenu_OnItemClick
+2017-02-08 09:44:37,935 ClickOperator
+2017-02-08 09:44:37,937 ClickOperator2
+2017-02-08 09:44:37,942 进入打开窗体功能
+2017-02-08 09:44:37,942 进入打开窗体功能-->FACE_SnapAlignmentManagement
+2017-02-08 09:44:37,942 进入打开窗体功能2-->FACE_SnapAlignmentManagement
+2017-02-08 09:44:37,942 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:44:37,943 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:44:37,943 FACE_SnapAlignmentManagement --   --- --- --- 
+2017-02-08 09:44:37,944 BEGIN: Open application 'FACE_SnapAlignmentManagement'--''.
+2017-02-08 09:44:37,944 Found application 'FACE_SnapAlignmentManagement'--'' in list.
+2017-02-08 09:44:37,945 BEGIN: Loading application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:44:37,960 查询阈值方法异常：QueryThreshold
+Thrift.TApplicationException: Invalid method name: 'QueryThreshold'
+   在 BusinessServer.Client.recv_QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServer.cs:行号 7311
+   在 BusinessServer.Client.QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServer.cs:行号 7280
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryThreshold() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 186
+2017-02-08 09:44:38,045 Application 'FACE_SnapAlignmentManagement' loaded.
+2017-02-08 09:44:38,045 END: Open application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:44:38,067 END: Loading application 'FACE_SnapAlignmentManagement'.
+2017-02-08 09:44:38,074 进入打开窗体功能5-->FACE_SnapAlignmentManagement
+2017-02-08 09:44:38,074 退出打开窗体功能
+2017-02-08 09:44:39,749 窗口向下还原
+2017-02-08 10:02:07,859 获取用户mac：：38D547E18C8E
+2017-02-08 10:02:07,879 引导初始化......---->15
+2017-02-08 10:02:07,880 载入程序中......---->25
+2017-02-08 10:02:07,898 初始化日志......---->35
+2017-02-08 10:02:07,899 注册相关目录......---->45
+2017-02-08 10:02:07,902 注册窗体......---->55
+2017-02-08 10:02:07,931 初始化Modules......---->65
+2017-02-08 10:02:07,932 扫描相关目录，......---->75
+2017-02-08 10:02:08,029 初始化类型......---->85
+2017-02-08 10:02:08,033 初始化IOC......---->95
+2017-02-08 10:02:08,057 初始化服务......---->100
+2017-02-08 10:02:08,077 10:02引导完成
+2017-02-08 10:02:08,104 初始化相关模块，......---->100
+2017-02-08 10:02:08,115 初始化主窗体......---->100
+2017-02-08 10:02:08,146 获取用户信息失败
+Thrift.TApplicationException: Invalid method name: 'QueryUser'
+   在 BusinessServerNet.Client.recv_QueryUser() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3062
+   在 BusinessServerNet.Client.QueryUser(String uid) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3030
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryUser(String UserName) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 109
+2017-02-08 10:02:08,346 初始化完成......---->100
+2017-02-08 10:02:08,347 初始化完成......---->100
+2017-02-08 10:02:08,389 BEGIN: Load data from Sofa.xml
+2017-02-08 10:02:08,399 END: Load data from Sofa.xml
+2017-02-08 10:02:08,400 BEGIN: Load perspectives list
+2017-02-08 10:02:08,401 END: Load perspectives list
+2017-02-08 10:02:08,417 初始化完成......---->100
+2017-02-08 10:02:08,422 初始化完成......---->100
+2017-02-08 10:02:08,422 初始化完成......---->100
+2017-02-08 10:02:08,422 已引导完成
+2017-02-08 10:02:08,424 已进入主界面显示
+2017-02-08 10:02:08,690 显示最后一步进度
+2017-02-08 10:02:08,691 显示界面......---->100
+2017-02-08 10:02:10,063 窗口向下还原
+2017-02-08 10:02:12,992 窗口最大化
+2017-02-08 10:02:17,975 TopMenu_OnItemClick
+2017-02-08 10:02:18,055 窗口向下还原
+2017-02-08 10:02:27,776 窗口最大化
+2017-02-08 10:02:32,813 TopMenu_OnItemClick
+2017-02-08 10:02:33,247 TopMenu_OnItemClick
+2017-02-08 10:02:33,444 窗口向下还原
+2017-02-08 10:02:40,184 窗口最大化为假
+2017-02-08 10:02:40,184 窗口最大化为假
+2017-02-08 10:06:21,218 获取用户mac：：38D547E18C8E
+2017-02-08 10:06:21,232 引导初始化......---->15
+2017-02-08 10:06:21,233 载入程序中......---->25
+2017-02-08 10:06:21,240 初始化日志......---->35
+2017-02-08 10:06:21,241 注册相关目录......---->45
+2017-02-08 10:06:21,244 注册窗体......---->55
+2017-02-08 10:06:21,274 初始化Modules......---->65
+2017-02-08 10:06:21,276 扫描相关目录，......---->75
+2017-02-08 10:06:21,379 初始化类型......---->85
+2017-02-08 10:06:21,385 初始化IOC......---->95
+2017-02-08 10:06:21,409 初始化服务......---->100
+2017-02-08 10:06:21,429 10:06引导完成
+2017-02-08 10:06:21,455 初始化相关模块，......---->100
+2017-02-08 10:06:21,466 初始化主窗体......---->100
+2017-02-08 10:06:21,500 获取用户信息失败
+Thrift.TApplicationException: Invalid method name: 'QueryUser'
+   在 BusinessServerNet.Client.recv_QueryUser() 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3062
+   在 BusinessServerNet.Client.QueryUser(String uid) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Service\BusinessServer\BusinessServerNet.cs:行号 3030
+   在 SING.Data.ScheduleProcess.ScheduleGet.QueryUser(String UserName) 位置 E:\C#代码\trunk\开发库\源代码\客户端\FaceSystem\FACE\SING.Data\ScheduleProcess\ScheduleGet.cs:行号 109
+2017-02-08 10:06:21,714 初始化完成......---->100
+2017-02-08 10:06:21,715 初始化完成......---->100
+2017-02-08 10:06:21,758 BEGIN: Load data from Sofa.xml
+2017-02-08 10:06:21,769 END: Load data from Sofa.xml
+2017-02-08 10:06:21,769 BEGIN: Load perspectives list
+2017-02-08 10:06:21,770 END: Load perspectives list
+2017-02-08 10:06:21,793 初始化完成......---->100
+2017-02-08 10:06:21,797 初始化完成......---->100
+2017-02-08 10:06:21,798 初始化完成......---->100
+2017-02-08 10:06:21,798 已引导完成
+2017-02-08 10:06:21,798 已进入主界面显示
+2017-02-08 10:06:22,059 显示最后一步进度
+2017-02-08 10:06:22,060 显示界面......---->100
+2017-02-08 10:06:25,791 窗口向下还原
+2017-02-08 10:06:33,183 窗口最大化
+2017-02-08 10:06:54,721 窗口向下还原
+2017-02-08 10:06:58,959 窗口最大化
+2017-02-08 10:07:03,704 窗口最大化为假
+2017-02-08 10:07:03,704 窗口最大化为假

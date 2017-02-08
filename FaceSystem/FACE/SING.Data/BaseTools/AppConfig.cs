@@ -365,6 +365,37 @@ namespace SING.Data.BaseTools
         }
 
         /// <summary>
+        /// 登录服务器地址
+        /// </summary>
+        public string Threshold
+        {
+            get
+            {
+                try
+                {
+                    return _innerConfig.AppSettings.Settings["Threshold"].Value;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("配置文件读取错误！");
+                    Logger.Logger.Error("配置节点【Threshold】读取失败");
+                }
+                return string.Empty;
+            }
+            set
+            {
+                try
+                {
+                    this._innerConfig.AppSettings.Settings["Threshold"].Value = value;
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        /// <summary>
         /// 读取配置信息到内存中
         /// </summary>
         private void ReadConfig()

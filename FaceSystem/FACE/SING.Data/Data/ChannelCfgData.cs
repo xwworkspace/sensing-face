@@ -15,8 +15,8 @@ namespace SING.Data.Data
         private string _tcPSW;
         private string _name;
         private string _tcDescription;
-        private CaptureCfgData _captureCfg;
-        private CatchFaceCfgData _catchFaceCfg;
+        private CaptureCfgData _captureCfgData;
+        private CatchFaceCfgData _catchFaceCfgData;
         private string _addr;
         private int _port;
         private string _div_index;
@@ -87,29 +87,29 @@ namespace SING.Data.Data
             }
         }
 
-        public virtual CaptureCfgData CaptureCfg
+        public virtual CaptureCfgData CaptureCfgData
         {
             get
             {
-                return _captureCfg;
+                return _captureCfgData;
             }
             set
             {
-                this._captureCfg = value;
-                OnPropertyChanged("CaptureCfg");
+                this._captureCfgData = value;
+                OnPropertyChanged("CaptureCfgData");
             }
         }
 
-        public virtual CatchFaceCfgData CatchFaceCfg
+        public virtual CatchFaceCfgData CatchFaceCfgData
         {
             get
             {
-                return _catchFaceCfg;
+                return _catchFaceCfgData;
             }
             set
             {
-                this._catchFaceCfg = value;
-                OnPropertyChanged("CatchFaceCfg");
+                this._catchFaceCfgData = value;
+                OnPropertyChanged("CatchFaceCfgData");
             }
         }
 
@@ -172,8 +172,24 @@ namespace SING.Data.Data
             target.TcPSW = oridata.TcPSW;
             target.Name = oridata.Name;
             target.TcDescription = oridata.TcDescription;
-            target.CaptureCfg = CaptureCfgData.Convert(oridata.CaptureCfg);
-            target.CatchFaceCfg = CatchFaceCfgData.Convert(oridata.CatchFaceCfg);
+            target.CaptureCfg = CaptureCfgData.Convert(oridata.CaptureCfgData);
+            target.CatchFaceCfg = CatchFaceCfgData.Convert(oridata.CatchFaceCfgData);
+            target.Addr = oridata.Addr;
+            target.Port = oridata.Port;
+            target.Div_index = oridata.Div_index;
+            target.Sst = oridata.Sst;
+            return target;
+        }
+        public static ChannelCfgData ConvertToData(ChannelCfg oridata)
+        {
+            ChannelCfgData target = new ChannelCfgData();
+            target.TcChaneelID = oridata.TcChaneelID;
+            target.TcUID = oridata.TcUID;
+            target.TcPSW = oridata.TcPSW;
+            target.Name = oridata.Name;
+            target.TcDescription = oridata.TcDescription;
+            target.CaptureCfgData = CaptureCfgData.ConvertToData(oridata.CaptureCfg);
+            target.CatchFaceCfgData = CatchFaceCfgData.ConvertToData(oridata.CatchFaceCfg);
             target.Addr = oridata.Addr;
             target.Port = oridata.Port;
             target.Div_index = oridata.Div_index;

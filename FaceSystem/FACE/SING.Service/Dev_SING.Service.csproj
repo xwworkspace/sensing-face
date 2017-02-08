@@ -43,27 +43,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessServer\AreaStatInfo.cs" />
     <Compile Include="BusinessServer\AuthCfg.cs" />
     <Compile Include="BusinessServer\BusinessServer.cs" />
+    <Compile Include="BusinessServer\BusinessServerNet.cs" />
     <Compile Include="BusinessServer\CapFaceLog.cs" />
+    <Compile Include="BusinessServer\CapFaceLogGY.cs" />
     <Compile Include="BusinessServer\CapFaceLogWithImg.cs" />
+    <Compile Include="BusinessServer\CapFaceLogWithImgGY.cs" />
     <Compile Include="BusinessServer\CapObjImg.cs" />
+    <Compile Include="BusinessServer\CapObjImgGY.cs" />
     <Compile Include="BusinessServer\CapServer.cs" />
     <Compile Include="BusinessServer\CapServerErrCode.cs" />
     <Compile Include="BusinessServer\CaptureCfg.cs" />
     <Compile Include="BusinessServer\CatchFaceCfg.cs" />
     <Compile Include="BusinessServer\ChannelCfg.cs" />
+    <Compile Include="BusinessServer\ChannelCfgGY.cs" />
     <Compile Include="BusinessServer\ChannelErrCode.cs" />
     <Compile Include="BusinessServer\ChannelState.cs" />
     <Compile Include="BusinessServer\ClientCfg.cs" />
     <Compile Include="BusinessServer\CmpFaceLog.cs" />
+    <Compile Include="BusinessServer\CmpFaceLogGY.cs" />
     <Compile Include="BusinessServer\CmpFaceLogInfo.cs" />
     <Compile Include="BusinessServer\CmpFaceLogWidthImg.cs" />
+    <Compile Include="BusinessServer\CmpFaceLogWidthImgGY.cs" />
+    <Compile Include="BusinessServer\CmpInfo2Cap.cs" />
+    <Compile Include="BusinessServer\CmpInfo2CapGY.cs" />
     <Compile Include="BusinessServer\CmpResult.cs" />
     <Compile Include="BusinessServer\CmpServer.cs" />
     <Compile Include="BusinessServer\CmpServerFaceObj.cs" />
     <Compile Include="BusinessServer\CompareImgResult.cs" />
     <Compile Include="BusinessServer\CResultCfg.cs" />
+    <Compile Include="BusinessServer\DiaplayAreaCfg.cs" />
     <Compile Include="BusinessServer\ErrorInfo.cs" />
     <Compile Include="BusinessServer\FaceInfo.cs" />
     <Compile Include="BusinessServer\FaceObj.cs" />
@@ -72,9 +83,17 @@
     <Compile Include="BusinessServer\FaceTemplateEx.cs" />
     <Compile Include="BusinessServer\FrontServer.cs" />
     <Compile Include="BusinessServer\NotifyCfg.cs" />
+    <Compile Include="BusinessServer\PieChartStat.cs" />
     <Compile Include="BusinessServer\RealtimeCapInfo.cs" />
     <Compile Include="BusinessServer\RealtimeCmpInfo.cs" />
     <Compile Include="BusinessServer\ResourceCfg.cs" />
+    <Compile Include="BusinessServer\SConfigInfo.cs" />
+    <Compile Include="BusinessServer\SCountInfo.cs" />
+    <Compile Include="BusinessServer\SCountInfoArea.cs" />
+    <Compile Include="BusinessServer\SCountInfoOneDay.cs" />
+    <Compile Include="BusinessServer\SServerInfo.cs" />
+    <Compile Include="BusinessServer\STypeInfo.cs" />
+    <Compile Include="BusinessServer\SVisitorOrbit.cs" />
     <Compile Include="BusinessServer\TmpGroupCfg.cs" />
     <Compile Include="BusinessServer\UIServer.cs" />
     <Compile Include="BusinessServer\UserCfg.cs" />

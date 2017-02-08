@@ -124,6 +124,20 @@ namespace SING.Data.Data
             target.TcSdkVer = oridata.TcSdkVer;
             return target;
         }
+        public static CatchFaceCfgData ConvertToData(CatchFaceCfg oridata)
+        {
+            CatchFaceCfgData target = new CatchFaceCfgData();
+            target.NMinFace = oridata.NMinFace;
+            target.NMinQuality = oridata.NMinQuality;
+            target.NMinCapDistance = oridata.NMinCapDistance;
+            target.NMaxFaceSaveDistance = oridata.NMaxFaceSaveDistance;
+            target.NYaw = oridata.NYaw;
+            target.NPitch = oridata.NPitch;
+            target.NYoll = oridata.NYoll;
+            target.NReserved = oridata.NReserved;
+            target.TcSdkVer = oridata.TcSdkVer;
+            return target;
+        }
 
         public static void CopyValue(object origin, object target)
         {

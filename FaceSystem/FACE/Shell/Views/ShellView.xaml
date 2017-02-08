@@ -75,11 +75,10 @@
             <GradientStop Color="#595959" Offset="0.50"/>
             <GradientStop Color="#525252" Offset="0.51"/>
             <GradientStop Color="#404042" Offset="1"/>-->
-
             <GradientStop Color="#2D2D30" Offset="0"/>
-            <GradientStop Color="#2D2D30" Offset="0.50"/>
-            <GradientStop Color="#2D2D30" Offset="0.51"/>
-            <GradientStop Color="#2D2D30" Offset="1"/>
+            <GradientStop Color="#414141" Offset="0.50"/>
+            <GradientStop Color="#444444" Offset="0.51"/>
+            <GradientStop Color="#443F3F" Offset="1"/>
         </LinearGradientBrush>
 
         <SolidColorBrush x:Key="MenuItemSeparatorDark" Color="#FFE4E4E4" />
@@ -555,6 +554,7 @@
 
         <Style x:Key="MenuItemGalleryStyle" TargetType="telerik:RadMenuItem" BasedOn="{StaticResource MenuItemBaseStyle}">
             <Setter Property="Template" Value="{StaticResource MenuItemGalleryControlTemplate}"/>
+            <Setter Property="DockPanel.Dock" Value="Right"/>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>

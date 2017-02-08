@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace FACE_ChannelManagement.ViewModels
 {
-    public class ChannelViewModel: NotificationObject
+    public class ChannelViewModel : NotificationObject
     {
         #region Data
 
-         Collection<ChannelViewModel> _children;
-         ChannelViewModel _root;
-         Channel _person;
+        Collection<ChannelViewModel> _children;
+        ChannelViewModel _root;
+        Channel _person;
 
         bool _isExpanded;
         bool _isSelected;
@@ -41,18 +41,10 @@ namespace FACE_ChannelManagement.ViewModels
 
         #region Person Properties
 
-        public Collection<ChannelViewModel> Children
-        {
-            get { return _children; }
-            set { value = _children; }
-        }
-
-        public string Name
-        {
-            get { return _person.Name; }
-            set { value = _person.Name; }
-        }
-
+        public Collection<ChannelViewModel> Children { get { return _children; } set { _children = value; } }
+        public string Name { get { return _person.Name; } set { _person.Name = value; } }
+        public string ID { get { return _person.Name; } set { _person.ID = value; } }
+        
         #endregion // Person Properties
 
         #region Presentation Members
@@ -60,8 +52,7 @@ namespace FACE_ChannelManagement.ViewModels
         #region IsExpanded
 
         /// <summary>
-        /// Gets/sets whether the TreeViewItem 
-        /// associated with this object is expanded.
+        /// 展开/折叠 树
         /// </summary>
         public bool IsExpanded
         {
@@ -73,8 +64,7 @@ namespace FACE_ChannelManagement.ViewModels
                     _isExpanded = value;
                     this.RaisePropertyChanged("IsExpanded");
                 }
-
-                // Expand all the way up to the root.
+                
                 if (_isExpanded && _root != null)
                     _root.IsExpanded = true;
             }
@@ -83,11 +73,7 @@ namespace FACE_ChannelManagement.ViewModels
         #endregion // IsExpanded
 
         #region IsSelected
-
-        /// <summary>
-        /// Gets/sets whether the TreeViewItem 
-        /// associated with this object is selected.
-        /// </summary>
+        
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -117,10 +103,7 @@ namespace FACE_ChannelManagement.ViewModels
 
         #region Parent
 
-        public ChannelViewModel Root
-        {
-            get { return _root; }
-        }
+        public ChannelViewModel Root { get; set; }
 
         #endregion // Parent
 

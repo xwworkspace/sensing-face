@@ -53,6 +53,9 @@
       <HintPath>..\Lib\System.ComponentModel.Composition.Registration.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Reflection.Context">
+      <HintPath>..\Lib\System.Reflection.Context.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -92,6 +95,7 @@
     <Compile Include="Behaviors\ViewExportAttribute.cs" />
     <Compile Include="BusyAnimation.cs" />
     <Compile Include="Converter\ColorConvert.cs" />
+    <Compile Include="Converter\TestBindingConvert.cs" />
     <Compile Include="Events\CallForDocumentEvent.cs" />
     <Compile Include="Events\CallForDocumentParameters.cs" />
     <Compile Include="Events\ClosingApplicationEvent.cs" />

@@ -19,7 +19,7 @@
                     Grid.Row="0"
                     Orientation="Horizontal" 
                     VerticalAlignment="Center">
-            
+
             <TextBox Margin="5" 
                      Grid.Column="0"
                      x:Name="textBox" 
@@ -33,7 +33,7 @@
                     Height="23"
                     Command="{Binding SearchCommand}"/>
         </StackPanel>
-     
+
         <TreeView Grid.Row="1" 
                   ItemsSource="{Binding FirstGeneration,Mode=TwoWay}"
                   Margin="5"
@@ -44,7 +44,9 @@
                   Height="430"
                   Width="350"
                   MaxHeight="430"
-                  Foreground="White">
+                  Foreground="White"
+                  SelectedValuePath="{Binding ChannelViewModel.Name,Mode=TwoWay}"
+                  MouseDoubleClick="treeView_MouseDoubleClick">
             <TreeView.ItemContainerStyle>
 
                 <Style TargetType="{x:Type TreeViewItem}">
@@ -67,7 +69,11 @@
                     ItemsSource="{Binding Children}">
 
                     <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <TextBlock Text="{Binding Name}" />
+
+                        <TextBlock x:Name="txtBlockNode" Text="{Binding Name,Mode=TwoWay}" Visibility="{Binding}"/>
+
+                        <TextBox x:Name="txtBoxNode" Text="{Binding Name,Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" 
+                                 HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed"/>
 
                         <Button x:Name="button1" Width="16" Height="16" Margin="3,0">
                             <Image Stretch="Fill" Width="16" Height="16" Source="../Images/link.png"/>
@@ -75,6 +81,7 @@
                         <Button x:Name="button2" Width="16" Height="16" Margin="3,0">
                             <Image Stretch="Fill" Width="16" Height="16" Source="../Images/link.png"/>
                         </Button>
+
                     </StackPanel>
 
                 </HierarchicalDataTemplate>

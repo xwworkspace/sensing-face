@@ -121,6 +121,18 @@ namespace SING.Data.Data
             target.TcPSW = oridata.TcPSW;
             return target;
         }
+        public static CaptureCfgData ConvertToData(CaptureCfg oridata)
+        {
+            CaptureCfgData target = new CaptureCfgData();
+            target.NLevel1ID = oridata.NLevel1ID;
+            target.NLevel2ID = oridata.NLevel2ID;
+            target.NCaptureType = oridata.NCaptureType;
+            target.NPort = oridata.NPort;
+            target.TcAddr = oridata.TcAddr;
+            target.TcUID = oridata.TcUID;
+            target.TcPSW = oridata.TcPSW;
+            return target;
+        }
 
         public static void CopyValue(object origin, object target)
         {
