@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using FACE_SnapAlignmentManagement.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;

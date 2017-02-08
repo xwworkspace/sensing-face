@@ -1,25 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Resources;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.Practices.Prism.Events;
 using Shell.Models;
 using Shell.ViewModels;
 using SING.Data;
 using SING.Data.BaseTools;
+using SING.Data.Logger;
 using SING.Data.ScheduleProcess;
 using SING.Infrastructure.Events;
 using Telerik.Windows;
 using Telerik.Windows.Controls;
 using Application = System.Windows.Application;
 using Logger = SING.Data.Logger.Logger;
+using MessageBox = System.Windows.Forms.MessageBox;
 using Screen = System.Windows.Forms.Screen;
+
+using Timer = System.Threading.Timer;
 
 namespace Shell.Views
 {

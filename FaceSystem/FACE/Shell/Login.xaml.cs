@@ -251,6 +251,7 @@ namespace Shell
             if (this.progressReport.Value >= 100)
                 this.Close();
         }
+
         private bool IsAuth(out string userInfo)
         {
             try
