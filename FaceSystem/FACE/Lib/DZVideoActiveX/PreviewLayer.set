@@ -1,0 +1,13 @@
+[User]
+bUseVag = 1
+bVtduDirect = 0
+
+nTryTimes = 1
+nTimeout = 10
+
+nCasStreamType =0
+
+
+nSaveStream = 0
+
+bYUVCallback = 0

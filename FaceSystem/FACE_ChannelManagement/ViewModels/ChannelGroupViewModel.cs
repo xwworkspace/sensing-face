@@ -1,4 +1,5 @@
 ﻿using FACE_ChannelManagement.Models;
+using FACE_ChannelManagement.Utilities;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using System;
@@ -26,6 +27,9 @@ namespace FACE_ChannelManagement.ViewModels
         public ICommand SearchCommand { get; private set; }
         public ICommand SelectedCommand { get; private set; }
 
+        public ICommand AddNewFolderCommand { get; private set; }
+        public ICommand RenameCommand { get; set; }
+
         public ChannelGroupViewModel()
         {
             Channel rootNode = DataAccess.GetFamilyTree();
@@ -38,6 +42,18 @@ namespace FACE_ChannelManagement.ViewModels
                 });
 
             SearchCommand = new DelegateCommand<object>((obj) => { this.PerformSearch(); });
+            AddNewFolderCommand = new DelegateCommand<object>(AddNewFolderFunc);
+            RenameCommand = new DelegateCommand<object>(RenameFunc);
+        }
+
+        private void RenameFunc(object obj)
+        {
+
+        }
+
+        private void AddNewFolderFunc(object obj)
+        {
+
         }
 
         #endregion // Constructor
@@ -74,7 +90,7 @@ namespace FACE_ChannelManagement.ViewModels
                 _matchingChannelEnumerator = null;
             }
         }
-        
+
         #endregion // SearchText
 
         #endregion // Properties

@@ -1,0 +1,157 @@
+<DevInfo>
+<DeviceItem>
+	<DeviceType min=10000 max=19999></DeviceType>
+	<DeviceName>海康设备</DeviceName>
+	<PlaySdk>0</PlaySdk>
+	<PlaySdkStr>hik</PlaySdkStr>
+	<Support>
+		<Preview support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+			<Talk>1</Talk>
+			<InstantPlay>1</InstantPlay>
+			<SubChan>1</SubChan>
+			<VideoParam>1</VideoParam>
+			<TVWall>1</TVWall>
+			<DevVideoParam>0</DevVideoParam>
+		</Preview>
+		<PlayBack  support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+		</PlayBack>
+		<PTZCtrl support=1>
+			<Preset>1</Preset>
+			<Cruise>1</Cruise>
+			<PTZZoom>1</PTZZoom>
+		</PTZCtrl>
+	</Support>
+</DeviceItem>
+<DeviceItem>
+	<DeviceType min=20000 max=29999></DeviceType>
+	<DeviceName>大华设备</DeviceName>
+	<PlaySdk>1</PlaySdk>
+	<PlaySdkStr>dahua</PlaySdkStr>
+	<Support>
+		<Preview support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+			<Talk>0</Talk>
+			<InstantPlay>1</InstantPlay>
+			<SubChan>1</SubChan>
+			<VideoParam>1</VideoParam>
+			<TVWall>1</TVWall>
+			<DevVideoParam>0</DevVideoParam>
+		</Preview>
+		<PlayBack  support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+		</PlayBack>
+		<PTZCtrl support=1>
+			<Preset>1</Preset>
+			<Cruise>1</Cruise>
+			<PTZZoom>1</PTZZoom>
+		</PTZCtrl>
+	</Support>
+</DeviceItem>
+<DeviceItem>
+	<DeviceType min=98181 max=98181></DeviceType>
+	<DeviceName>国标设备</DeviceName>
+	<PlaySdk>9</PlaySdk>
+	<PlaySdkStr>db33</PlaySdkStr>
+	<Support>
+		<Preview support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+			<Talk>0</Talk>
+			<InstantPlay>1</InstantPlay>
+			<SubChan>0</SubChan>
+			<VideoParam>1</VideoParam>
+			<TVWall>1</TVWall>
+			<DevVideoParam>0</DevVideoParam>
+		</Preview>
+		<PlayBack  support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+		</PlayBack>
+		<PTZCtrl support=1>
+			<Preset>1</Preset>
+			<Cruise>1</Cruise>
+			<PTZZoom>0</PTZZoom>
+		</PTZCtrl>
+	</Support>
+</DeviceItem>
+<DeviceItem>
+	<DeviceType min=90001 max=90001></DeviceType>
+	<DeviceName>第三方E家设备</DeviceName>
+	<PlaySdk>0</PlaySdk>
+	<PlaySdkStr>hik</PlaySdkStr>
+	<Support>
+		<Preview support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+			<Talk>1</Talk>
+			<InstantPlay>1</InstantPlay>
+			<SubChan>1</SubChan>
+			<VideoParam>1</VideoParam>
+			<TVWall>1</TVWall>
+			<DevVideoParam>0</DevVideoParam>
+		</Preview>
+		<PlayBack  support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+		</PlayBack>
+		<PTZCtrl support=1>
+			<Preset>1</Preset>
+			<Cruise>1</Cruise>
+			<PTZZoom>1</PTZZoom>
+		</PTZCtrl>
+	</Support>
+</DeviceItem>
+<DeviceItem>
+	<DeviceType min=80001 max=80001></DeviceType>
+	<DeviceName>onvif设备</DeviceName>
+	<PlaySdk>0</PlaySdk>
+	<PlaySdkStr>hik</PlaySdkStr>
+	<Support>
+		<Preview support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+			<Talk>0</Talk>
+			<InstantPlay>1</InstantPlay>
+			<SubChan>1</SubChan>
+			<VideoParam>1</VideoParam>
+			<TVWall>1</TVWall>
+			<DevVideoParam>0</DevVideoParam>
+		</Preview>
+		<PlayBack  support=1>
+			<Snap>1</Snap>
+			<Record>1</Record>
+			<Sound>1</Sound>
+			<DigitalZoom>1</DigitalZoom>
+		</PlayBack>
+		<PTZCtrl support=1>
+			<Preset>1</Preset>
+			<Cruise>1</Cruise>
+			<PTZZoom>0</PTZZoom>
+		</PTZCtrl>
+	</Support>
+</DeviceItem>
+</DevInfo>

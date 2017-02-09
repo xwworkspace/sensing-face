@@ -30,6 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.DZVideoActiveXLib">
+      <HintPath>..\Lib\AxDZVideoActiveXLib\AxInterop.DZVideoActiveXLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.DZVideoActiveXLib">
+      <HintPath>..\Lib\AxDZVideoActiveXLib\Interop.DZVideoActiveXLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\Lib\log4net.dll</HintPath>
     </Reference>
@@ -39,7 +46,10 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +66,12 @@
   <ItemGroup>
     <Compile Include="BaseTools\AppConfig.cs" />
     <Compile Include="BaseTools\FACEIdentity.cs" />
+    <Compile Include="Controls\ActiveXControl\DZVideoActiveX\AxDZVideoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ActiveXControl\DZVideoActiveX\AxDZVideoControl.Designer.cs">
+      <DependentUpon>AxDZVideoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\AuthCfgData.cs" />
     <Compile Include="Data\CapFaceLogData.cs" />
     <Compile Include="Data\CapFaceLogWithImgData.cs" />
@@ -100,14 +116,17 @@
     <Compile Include="TClient.cs" />
     <Compile Include="VerifyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SING.Service\Dev_SING.Service.csproj">
       <Project>{4408f396-e180-45f8-bd21-e02b76fe54b9}</Project>
       <Name>Dev_SING.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\ActiveXControl\DZVideoActiveX\AxDZVideoControl.resx">
+      <DependentUpon>AxDZVideoControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

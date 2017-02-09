@@ -1,0 +1,22 @@
+[2016-12-26 10:19:57.671]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:24:07.535]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:24:32.925]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:26:05.671]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:27:40.517]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:29:23.281]	[INFO] CHikCamBase::Open 192.168.1.79 8000 admin agv10086
+[2016-12-26 10:29:23.617]	[INFO] ChikCamBase::Play 1 1509560
+[2016-12-26 10:29:28.469]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:30:04.488]	[INFO] CHikCamBase::Open 192.168.1.79 8000 admin agv10086
+[2016-12-26 10:30:05.043]	[INFO] ChikCamBase::Play 1 396558
+[2016-12-26 10:34:07.868]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:35:12.209]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:36:29.223]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:37:07.392]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:37:35.948]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:37:51.951]	[INFO] ChikCamBase::Play 1 658546
+[2016-12-26 10:37:52.100]	[INFO] CHikCamBase::Open 192.168.1.79 8000 admin agv10086
+[2016-12-26 10:37:52.526]	[INFO] ChikCamBase::Play 1 4851804
+[2016-12-26 10:40:03.464]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:53:46.338]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:53:58.222]	[INFO] DZVideo_Uninit succ
+[2016-12-26 10:54:40.023]	[INFO] DZVideo_Uninit succ

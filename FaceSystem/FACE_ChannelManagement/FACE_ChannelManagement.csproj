@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.DZVideoActiveXLib">
+      <HintPath>..\FACE\Lib\AxDZVideoActiveXLib\AxInterop.DZVideoActiveXLib.dll</HintPath>
+    </Reference>
     <Reference Include="ExternalFrameworks">
       <HintPath>..\FACE\Lib\ExternalFrameworks.dll</HintPath>
     </Reference>
@@ -116,8 +119,11 @@
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ChannelCameraCfgModel.cs" />
+    <Compile Include="Models\ChannelTreeUtilitiesModel.cs" />
     <Compile Include="Models\DataAccess.cs" />
     <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\TreeNodeCtrl.cs" />
@@ -125,17 +131,28 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\IDataService.cs" />
+    <Compile Include="UserControls\ChannelGridControl.xaml.cs">
+      <DependentUpon>ChannelGridControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChannelLocationControl.xaml.cs">
+      <DependentUpon>ChannelLocationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChannelPreviewControl.xaml.cs">
+      <DependentUpon>ChannelPreviewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ChannelTreeControl.xaml.cs">
       <DependentUpon>ChannelTreeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\AddNewFolderCmd.cs" />
+    <Compile Include="Utilities\IChannelTree.cs" />
+    <Compile Include="Utilities\RenameCmd.cs" />
+    <Compile Include="ViewModels\ChannelGridViewModel.cs" />
     <Compile Include="ViewModels\ChannelGroupViewModel.cs" />
+    <Compile Include="ViewModels\ChannelPreviewViewModel.cs" />
     <Compile Include="ViewModels\ChannelViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +160,18 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="StyleResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ChannelGridControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ChannelLocationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ChannelPreviewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,16 +183,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FACE\SING.Infrastructure\Dev_SING.Infrastructure.csproj">
-      <Project>{27d04ae8-c4eb-474f-b7b6-a8a6fc958d69}</Project>
-      <Name>Dev_SING.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\channelName.png" />
@@ -219,11 +238,25 @@
     <Resource Include="Images\captureResultBackgroundBorderLine.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Images\link.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\FACE\SING.Data\Dev_SING.Data.csproj">
+      <Project>{35A1C45E-F5F7-4EE7-8681-3228648EB93B}</Project>
+      <Name>Dev_SING.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FACE\SING.Infrastructure\Dev_SING.Infrastructure.csproj">
+      <Project>{27d04ae8-c4eb-474f-b7b6-a8a6fc958d69}</Project>
+      <Name>Dev_SING.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FACE\SING.Service\Dev_SING.Service.csproj">
+      <Project>{4408f396-e180-45f8-bd21-e02b76fe54b9}</Project>
+      <Name>Dev_SING.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

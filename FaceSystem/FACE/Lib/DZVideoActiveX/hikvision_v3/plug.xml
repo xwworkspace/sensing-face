@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+<PacketCount>30
+</PacketCount>
+<SockBuf>4
+</SockBuf>
+<PlayBuf>6
+</PlayBuf>
+<DisPlayBuf>15
+</DisPlayBuf>
+<StreamMode>1
+</StreamMode>
+<DownSpeed>8
+</DownSpeed>
+<TimeOut>0
+</TimeOut>
+<YUVBack>0
+</YUVBack>
+<Log>0</Log>
+<InputCount>500</InputCount>
+<StreamTimeOut>5</StreamTimeOut>
+</Config>

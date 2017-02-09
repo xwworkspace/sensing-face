@@ -1,0 +1,10 @@
+<DecorderInfo>
+<Info>
+	<DECOCER_TAG>hikvision</DECOCER_TAG>
+	<PATH>\hikvision_v3\hikvision_v3.dll</PATH>
+</Info>
+<Info>
+	<DECOCER_TAG>dahua</DECOCER_TAG>
+	<PATH>\dahua\dahua_v3.dll</PATH>
+</Info>
+</DecorderInfo>

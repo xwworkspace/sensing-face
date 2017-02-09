@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Versioninfo>
+	<Module name="PlatformSDK" path="/BASPlatform/DSSModule/PlatformSDK/Trunk" version="568258">
+		<Module name="DssBaseLib" path="http://10.6.5.2/svnpl/BASPlatform/DSSModule/DssBaseLib/Branches/P_2014.09.23_DssBaseLib_Stable1.3.X" stable="False" version="498476"/>
+		<Module name="DssProto" path="/BASPlatform/DSSModule/DssProto/Branches/P_2014.09.23_DssProto_Stable1.3.X" version="526368">
+			<Module name="DssBaseLib" path="http://10.6.5.2/svnpl/BASPlatform/DSSModule/DssBaseLib/Branches/P_2014.09.23_DssBaseLib_Stable1.3.X" stable="False" version="498476"/>
+		</Module>
+		<External name="VAXPlayer" path="^/DSSModule/Bin/3rdParty/VAXPlayer" version="472809"/>
+		<External name="StreamAnalyzer" path="^/DSSModule/Bin/3rdParty/StreamParser" version="293800"/>
+		<External name="amrcodec" path="^/DSSModule/Bin/3rdParty/amrcodec" version="368659"/>
+		<External name="IVSDrawer" path="^/DSSModule/Bin/3rdParty/IVSDrawer" version="335828"/>
+		<External name="Sip" path="^/DSSModule/Bin/3rdParty/Sip" version="369889"/>
+		<External name="MediaParser" path="^/DSSModule/Bin/3rdParty/MediaParser" version="441123"/>
+		<External name="Infra" path="^/DSSModule/Bin/3rdParty/Infra" version="368657"/>
+		<External name="Memory" path="http://10.6.5.2/svnpl/Renascence/Include/Trunk/Memory" version="282672"/>
+		<External name="H264Parser" path="^/DSSModule/Bin/3rdParty/H264Parser" version="371340"/>
+		<External name="H265Parser" path="^/DSSModule/Bin/3rdParty/H265Parser" version="299793"/>
+		<External name="NetSdk" path="^/DSSModule/Bin/3rdParty/NetSdk" version="367474"/>
+		<External name="vcredist" path="^/DSSModule/Bin/3rdParty/vcredist" version="290263"/>
+		<External name="Component" path="http://10.6.5.2/svnpl/Renascence/Include/Trunk/Component" version="285791"/>
+		<External name="VideoEncoder" path="^/DSSModule/Bin/3rdParty/VideoEncoder" version="471453"/>
+	</Module>
+</Versioninfo>

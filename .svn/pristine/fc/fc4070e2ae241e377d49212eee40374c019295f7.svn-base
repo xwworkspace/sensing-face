@@ -1,0 +1,147 @@
+#缺省不输出日志到控制台
+#log4j.rootLogger=TRACE, stdout, searchdefault
+
+log4j.rootLogger=TRACE,default
+
+#log4j.logger用于控制日志采集级别及采集内容，Threshold用于控制日志输出级别
+
+#应用于控制台
+log4j.logger.stdout = TRACE
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender 
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout 
+log4j.appender.stdout.layout.ConversionPattern=%d [%t] %-5p %.16c - %m%n
+log4j.additivity.stdout = false
+
+#应用于default
+log4j.logger.searchdefault=TRACE, default
+log4j.appender.searchdefault=org.apache.log4j.RollingFileAppender
+log4j.appender.searchdefault.File=./log/default.log
+log4j.appender.searchdefault.MaxFileSize=25MB
+log4j.appender.searchdefault.MaxBackupIndex=2
+log4j.appender.searchdefault.Append=true
+log4j.appender.searchdefault.Threshold=TRACE
+log4j.appender.searchdefault.layout=org.apache.log4j.PatternLayout
+log4j.appender.searchdefault.layout.ConversionPattern=%d [%t] %-5p %.16c - %m%n
+# log4j.additivity.searchdefault = false
+
+#设置 Platform
+log4j.logger.Platform=TRACE, Platform
+log4j.appender.Platform = org.apache.log4j.RollingFileAppender
+log4j.appender.Platform.File=./log/Platform.log
+log4j.appender.Platform.MaxFileSize=10MB
+log4j.appender.Platform.MaxBackupIndex=2
+log4j.appender.Platform.Append=true
+log4j.appender.Platform.Threshold=TRACE
+log4j.appender.Platform.layout=org.apache.log4j.PatternLayout
+log4j.appender.Platform.layout.ConversionPattern=%d %-5p %.16c - %m%n
+log4j.additivity.Platform = false
+
+#设置previewlayer
+log4j.logger.preview =TRACE, preview
+log4j.appender.preview=org.apache.log4j.RollingFileAppender
+log4j.appender.preview.File=./log/preview.log
+log4j.appender.preview.MaxFileSize=10MB
+log4j.appender.preview.MaxBackupIndex=2
+log4j.appender.preview.Append=true
+log4j.appender.preview.Threshold=TRACE
+log4j.appender.preview.layout=org.apache.log4j.PatternLayout
+log4j.appender.preview.layout.ConversionPattern=%d %-5p %.16c - %m%n
+log4j.additivity.preview = false
+
+#设置PlayBackLayer
+log4j.logger.PlayBackLayer = TRACE, PlayBackLayer
+log4j.appender.PlayBackLayer = org.apache.log4j.RollingFileAppender
+log4j.appender.PlayBackLayer.File = ./log/PlayBackLayer.log
+log4j.appender.PlayBackLayer.MaxBackupIndex = 2
+log4j.appender.PlayBackLayer.MaxFileSize=20MB
+log4j.appender.PlayBackLayer.Append=true
+log4j.appender.PlayBackLayer.layout = org.apache.log4j.PatternLayout
+log4j.appender.PlayBackLayer.layout.ConversionPattern=%d [%t] %-5p %.16c - %m%n
+log4j.additivity.PlayBackLayer = false
+
+#设置 StreamLayer
+log4j.logger.StreamLayer=TRACE, StreamLayer
+log4j.appender.StreamLayer = org.apache.log4j.RollingFileAppender
+log4j.appender.StreamLayer.File=./log/StreamLayer.log
+log4j.appender.StreamLayer.MaxFileSize=10MB
+log4j.appender.StreamLayer.MaxBackupIndex=2
+log4j.appender.StreamLayer.Append=true
+log4j.appender.StreamLayer.Threshold=TRACE
+log4j.appender.StreamLayer.layout=org.apache.log4j.PatternLayout
+log4j.appender.StreamLayer.layout.ConversionPattern=%d %-5p %.16c - %m%n
+log4j.additivity.StreamLayer = false
+
+#设置StreamClientErrorSync
+log4j.logger.StreamClientErrorSync = TRACE, StreamClientErrorSync
+log4j.appender.StreamClientErrorSync = org.apache.log4j.RollingFileAppender
+log4j.appender.StreamClientErrorSync.File = ./log/StreamClientErrorSync.log
+log4j.appender.StreamClientErrorSync.MaxBackupIndex = 2
+log4j.appender.StreamClientErrorSync.MaxFileSize = 25MB
+log4j.appender.StreamClientErrorSync.Append = true
+log4j.appender.StreamClientErrorSync.Threshold = TRACE
+log4j.appender.StreamClientErrorSync.layout = org.apache.log4j.PatternLayout
+log4j.appender.StreamClientErrorSync.layout.ConversionPattern = %d [%t] %-5p %.16c - %m%n
+log4j.additivity.StreamClientErrorSync = false
+
+#设置StreamClientWarnSync
+log4j.logger.StreamClientWarnSync = TRACE, StreamClientWarnSync
+log4j.appender.StreamClientWarnSync = org.apache.log4j.RollingFileAppender
+log4j.appender.StreamClientWarnSync.File = ./log/StreamClientWarnSync.log
+log4j.appender.StreamClientWarnSync.MaxBackupIndex = 2
+log4j.appender.StreamClientWarnSync.MaxFileSize = 25MB
+log4j.appender.StreamClientWarnSync.Append = true
+log4j.appender.StreamClientWarnSync.Threshold = TRACE
+log4j.appender.StreamClientWarnSync.layout = org.apache.log4j.PatternLayout
+log4j.appender.StreamClientWarnSync.layout.ConversionPattern = %d [%t] %-5p %.16c - %m%n
+log4j.additivity.StreamClientWarnSync = false
+
+#设置StreamClientTraceSync
+log4j.logger.StreamClientTraceSync = TRACE, StreamClientTraceSync
+log4j.appender.StreamClientTraceSync = org.apache.log4j.RollingFileAppender
+log4j.appender.StreamClientTraceSync.File = ./log/StreamClientTraceSync.log
+log4j.appender.StreamClientTraceSync.MaxBackupIndex = 2
+log4j.appender.StreamClientTraceSync.MaxFileSize = 25MB
+log4j.appender.StreamClientTraceSync.Append = true
+log4j.appender.StreamClientTraceSync.Threshold = TRACE
+log4j.appender.StreamClientTraceSync.layout = org.apache.log4j.PatternLayout
+log4j.appender.StreamClientTraceSync.layout.ConversionPattern = %d [%t] %-5p %.16c - %m%n
+log4j.additivity.StreamClientTraceSync = false
+
+#设置basenet日志
+log4j.logger.basenet=TRACE, basenet
+log4j.appender.basenet=org.apache.log4j.RollingFileAppender
+log4j.appender.basenet.File=./log/basenet.log
+log4j.appender.basenet.MaxBackupIndex = 2
+log4j.appender.basenet.MaxFileSize = 25MB
+log4j.appender.basenet.Append=true
+log4j.appender.basenet.Threshold=TRACE
+log4j.appender.basenet.layout=org.apache.log4j.PatternLayout
+log4j.appender.basenet.layout.ConversionPattern=%d [%t] %-5p %.16c - %m%n
+log4j.additivity.basenet = false
+
+#设置ZMQ日志
+log4j.logger.ZMQ=TRACE, ZMQ
+log4j.appender.ZMQ=org.apache.log4j.RollingFileAppender
+log4j.appender.ZMQ.File=./log/ZMQ.log
+log4j.appender.ZMQ.MaxBackupIndex = 2
+log4j.appender.ZMQ.MaxFileSize = 25MB
+log4j.appender.ZMQ.Append=true
+log4j.appender.ZMQ.Threshold=TRACE
+log4j.appender.ZMQ.layout=org.apache.log4j.PatternLayout
+log4j.appender.ZMQ.layout.ConversionPattern=%d [%t] %-5p %.16c - %m%n
+log4j.additivity.ZMQ = false
+
+#设置local_play日志
+log4j.logger.local_play=TRACE, local_play
+log4j.appender.local_play=org.apache.log4j.RollingFileAppender
+log4j.appender.local_play.File=./log/local_play.log
+log4j.appender.local_play.MaxBackupIndex = 2
+log4j.appender.local_play.MaxFileSize = 25MB
+log4j.appender.local_play.Append=true
+log4j.appender.local_play.Threshold=TRACE
+log4j.appender.local_play.layout=org.apache.log4j.PatternLayout
+log4j.appender.local_play.layout.ConversionPattern=%d [%t] %-5p %.16c - %m%n
+log4j.additivity.local_play = false
+##hlog.async=false
+##hlog.secret.show=false
+##hlog.secret.encrypt=true
