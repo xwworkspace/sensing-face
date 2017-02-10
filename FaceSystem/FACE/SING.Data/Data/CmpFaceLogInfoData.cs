@@ -51,7 +51,7 @@ namespace SING.Data.Data
             }
         }
 
-        public virtual string Channelname
+        public virtual string ChannelName
         {
             get
             {
@@ -60,7 +60,7 @@ namespace SING.Data.Data
             set
             {
                 this._channelname = value;
-                OnPropertyChanged("Channelname");
+                OnPropertyChanged("ChannelName");
             }
         }
 
@@ -211,7 +211,7 @@ namespace SING.Data.Data
             CmpFaceLogInfo target = new CmpFaceLogInfo();
             target.Uuid = oridata.Uuid;
             target.ChannelID = oridata.ChannelID;
-            target.Channelname = oridata.Channelname;
+            target.Channelname = oridata.ChannelName;
             target.Time = oridata.Time;
             target.Quality = oridata.Quality;
             target.Score = oridata.Score;

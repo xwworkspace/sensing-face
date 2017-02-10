@@ -208,7 +208,7 @@ namespace Shell
                 AppConfig.Instance.LoginPort = txtPort.Text;
                 var localip = AppConfig.Instance.IP;
                 var mac = AppConfig.Instance.Machine_Mac;
-                //AppConfig.Instance.Save(true);
+                AppConfig.Instance.Save(true);
                 AppConfig.Instance.UserInfo = identity;
 
 

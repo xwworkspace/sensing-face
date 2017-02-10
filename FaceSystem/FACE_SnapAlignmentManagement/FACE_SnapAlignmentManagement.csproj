@@ -65,6 +65,7 @@
       <HintPath>..\FACE\Lib\System.ComponentModel.Composition.Codeplex.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -94,11 +95,18 @@
       <HintPath>..\FACE\Lib\Telerik.Windows.Data.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ChannelCfgViewData.cs" />
+    <Compile Include="Models\TreeItem.cs" />
     <Compile Include="ModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ChannelService\IniChannelService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\HelpService\RealtimeCapService.cs" />
+    <Compile Include="Services\HelpService\RealtimeCmpService.cs" />
+    <Compile Include="Services\HelpService\ThresholdService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
@@ -117,9 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converter\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FACE\SING.Data\Dev_SING.Data.csproj">
+      <Project>{35a1c45e-f5f7-4ee7-8681-3228648eb93b}</Project>
+      <Name>Dev_SING.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FACE\SING.Infrastructure\Dev_SING.Infrastructure.csproj">
       <Project>{27d04ae8-c4eb-474f-b7b6-a8a6fc958d69}</Project>
       <Name>Dev_SING.Infrastructure</Name>
@@ -151,6 +162,13 @@
     <Resource Include="Images\VideoPreviewbottom.png" />
     <Resource Include="Images\VideoPreviewMiddle.png" />
     <Resource Include="Images\VideoPreviewTop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\channelLeftVideoLightState.png" />
+    <Resource Include="Images\channelLeftVideoNotLightState.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

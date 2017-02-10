@@ -9,33 +9,21 @@ using System.Windows.Media;
 
 namespace FACE_ChannelManagement.UserControls
 {
-    [Export("FACE.MainRegion.ViewContract", typeof(UserControl))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
-    [ExportMetadata("ProductPrimaryName", "FACE_ChannelManagement")]
-    [ExportMetadata("ProductSecondaryName", "")]
-    [ExportMetadata("AuthoizedWord", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")]
-    [ExportMetadata("AvalonContentType", "DocumentContent")]
-    [ExportMetadata("AvalonPaneGroup", "WorkPad")]
-    [ExportMetadata("IfExists_DefaultValue", "UseIt")]
-    [ExportMetadata("ImageURI", "")]
-    [ExportMetadata("Label", "通道管理")]
-    [ExportMetadata("DockId", 0)]
     /// <summary>
     /// Interaction logic for ChannelTreeControl.xaml
     /// </summary>
     public partial class ChannelTreeControl : UserControl
     {
-        ChannelGroupViewModel channelMgt;
-        ChannelViewModel channelVMdoel;
+        //ChannelGroupViewModel channelMgt;
+        ChannelTreeViewModel channelVMdoel;
 
         public ChannelTreeControl()
         {
             InitializeComponent();
 
-            channelMgt = new ChannelGroupViewModel();
-            this.DataContext = channelMgt;
-
-            string s = ";";
+            //channelMgt = new ChannelGroupViewModel();
+            //this.DataContext = channelMgt;
+            
         }
 
         TextBox tBox = new TextBox();
@@ -51,7 +39,7 @@ namespace FACE_ChannelManagement.UserControls
                 object selectedItem = treeView.SelectedItem;
                 TreeViewItem item = GetParentObjectEx<TreeViewItem>(e.OriginalSource as DependencyObject) as TreeViewItem;
 
-                channelVMdoel = item.DataContext as ChannelViewModel;
+                channelVMdoel = item.DataContext as ChannelTreeViewModel;
 
                 tBox = FindVisualChidl<TextBox>(item as DependencyObject);
                 tBlock = FindVisualChidl<TextBlock>(item as DependencyObject);
@@ -74,13 +62,13 @@ namespace FACE_ChannelManagement.UserControls
             tBlock.Text = tBox.Text;
         }
 
-        private IEnumerable<ChannelViewModel> GetMatchesChannel(string renameText, ChannelViewModel person)
+        private IEnumerable<ChannelTreeViewModel> GetMatchesChannel(string renameText, ChannelTreeViewModel person)
         {
             if (person.NameContainsText(renameText))
                 yield return person;
 
-            foreach (ChannelViewModel child in person.Children)
-                foreach (ChannelViewModel match in this.GetMatchesChannel(renameText, child))
+            foreach (ChannelTreeViewModel child in person.Children)
+                foreach (ChannelTreeViewModel match in this.GetMatchesChannel(renameText, child))
                 {
                     match.Name = renameText;
 

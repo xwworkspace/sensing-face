@@ -6,14 +6,54 @@
              xmlns:local="clr-namespace:FACE_ChannelManagement.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ContextMenu x:Key="sampleContextMenu">
+            <MenuItem Header="预 览  " Command="{Binding PreviewCameraCommand}"/>
+            <MenuItem Header="编 辑  " Command="{Binding EditCameraCommand}" />
+            <MenuItem Header="删 除  " Command="{Binding DeleteCameraCommand}" />
+        </ContextMenu>
+    </UserControl.Resources>
+
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="该组包含的摄像头列表" FontSize="16" Foreground="White" 
+                       Margin="5"
+                       HorizontalContentAlignment="Left"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <!--<Label HorizontalContentAlignment="Right" 
+                   Margin="5" Content="+" Foreground="Thistle" Background="Purple"
+                   Width="20" Height="20"/>-->
+
+                <Button Width="40" Height="26" Content="+" FontSize="16" FontWeight="Bold" 
+                        HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center"
+                        Command="{Binding AddCameraInfoCommand}"></Button>
+            </StackPanel>
+        </Grid>
+
         <ListView Grid.Row="1" 
-                  Name="channelCemaraIp" 
+                  Name="cameraList" 
                   SelectionMode="Multiple" 
                   Background="{x:Null}"
-                  ItemsSource="{Binding}"
-                  SelectedItem="{Binding}">
+                  ItemsSource="{Binding Cameras,Mode=TwoWay}"
+                  SelectedItem="{Binding Camera,Mode=TwoWay}"
+                  ContextMenu="{StaticResource ResourceKey=sampleContextMenu}"
+                  MouseRightButtonUp="cameraList_MouseRightButtonUp"
+                  MouseLeftButtonUp="cameraList_MouseLeftButtonUp">
             <ListView.Template>
                 <ControlTemplate>
                     <Border BorderThickness="2">
@@ -33,8 +73,17 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                <Border Name="BD_Collector" CornerRadius="0" Background="DarkSeaGreen" Width="100" Height="100" Margin="10">
-                                    <Label Content="{Binding}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="13" />
+                                <Border Name="BD_Collector" CornerRadius="0" Background="DarkSeaGreen" Width="120" Height="120" Margin="15,0,15,15">
+                                    <Label Content="{Binding CameraName}" 
+                                           VerticalContentAlignment="Center" 
+                                           HorizontalContentAlignment="Center" 
+                                           FontSize="15"/>
+
+                                    <!--<Button FontSize="16"
+                                            Content="{Binding CameraName}"
+                                            Background="White"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center" />-->
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">

@@ -1,5 +1,4 @@
 ﻿using FACE_ChannelManagement.Models;
-using FACE_ChannelManagement.Utilities;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using System;
@@ -10,59 +9,23 @@ using System.Windows.Input;
 
 namespace FACE_ChannelManagement.ViewModels
 {
-    public class ChannelGroupViewModel : NotificationObject
+    public partial class ViewModel : NotificationObject
     {
-        #region Data
-
-        Collection<ChannelViewModel> _firstGeneration;
-        ChannelViewModel _rootNode;
-
-        IEnumerator<ChannelViewModel> _matchingChannelEnumerator;
-        string _searchText = String.Empty;
-
-        #endregion // Data
-
-        #region Constructor
-
+        #region Command
         public ICommand SearchCommand { get; private set; }
         public ICommand SelectedCommand { get; private set; }
-
         public ICommand AddNewFolderCommand { get; private set; }
-        public ICommand RenameCommand { get; set; }
+        public ICommand RenameCommand { get; private set; } 
+        #endregion
 
-        public ChannelGroupViewModel()
-        {
-            Channel rootNode = DataAccess.GetFamilyTree();
-            _rootNode = new ChannelViewModel(rootNode);
+        #region Data
 
-            _firstGeneration = new Collection<ChannelViewModel>(
-                new ChannelViewModel[]
-                {
-                    _rootNode
-                });
-
-            SearchCommand = new DelegateCommand<object>((obj) => { this.PerformSearch(); });
-            AddNewFolderCommand = new DelegateCommand<object>(AddNewFolderFunc);
-            RenameCommand = new DelegateCommand<object>(RenameFunc);
-        }
-
-        private void RenameFunc(object obj)
-        {
-
-        }
-
-        private void AddNewFolderFunc(object obj)
-        {
-
-        }
-
-        #endregion // Constructor
-
-        #region Properties
-
-        #region FirstGeneration
-
-        public Collection<ChannelViewModel> FirstGeneration
+        Collection<ChannelTreeViewModel> _firstGeneration;
+        ChannelTreeViewModel _rootNode;
+        IEnumerator<ChannelTreeViewModel> _matchingChannelEnumerator;
+        string _searchText = String.Empty;
+        
+        public Collection<ChannelTreeViewModel> FirstGeneration
         {
             get { return _firstGeneration; }
             set
@@ -71,11 +34,6 @@ namespace FACE_ChannelManagement.ViewModels
                 this.RaisePropertyChanged("FirstGeneration");
             }
         }
-
-        #endregion // FirstGeneration
-
-        #region SearchText
-
         public string SearchText
         {
             get { return _searchText; }
@@ -91,12 +49,37 @@ namespace FACE_ChannelManagement.ViewModels
             }
         }
 
-        #endregion // SearchText
+        #endregion // Data
+        
+        public void InitChannelGroupViewModel()
+        {
+            Channel rootNode = DataAccess.GetFamilyTree();
+            _rootNode = new ChannelTreeViewModel(rootNode);
 
+            _firstGeneration = new Collection<ChannelTreeViewModel>(
+                new ChannelTreeViewModel[]
+                {
+                    _rootNode
+                });
+
+            SearchCommand = new DelegateCommand<object>((obj) => { this.PerformSearch(); });
+            AddNewFolderCommand = new DelegateCommand<object>(AddNewFolderFunc);
+            RenameCommand = new DelegateCommand<object>(RenameFunc);
+        }
+
+        #region CommandFunc
+        private void RenameFunc(object obj)
+        {
+
+        }
+
+        private void AddNewFolderFunc(object obj)
+        {
+
+        }
         #endregion // Properties
 
         #region Search Logic
-
         void PerformSearch()
         {
             if (_matchingChannelEnumerator == null || !_matchingChannelEnumerator.MoveNext())
@@ -130,13 +113,13 @@ namespace FACE_ChannelManagement.ViewModels
             }
         }
 
-        IEnumerable<ChannelViewModel> FindMatches(string searchText, ChannelViewModel person)
+        IEnumerable<ChannelTreeViewModel> FindMatches(string searchText, ChannelTreeViewModel person)
         {
             if (person.NameContainsText(searchText))
                 yield return person;
 
-            foreach (ChannelViewModel child in person.Children)
-                foreach (ChannelViewModel match in this.FindMatches(searchText, child))
+            foreach (ChannelTreeViewModel child in person.Children)
+                foreach (ChannelTreeViewModel match in this.FindMatches(searchText, child))
                     yield return match;
         }
 

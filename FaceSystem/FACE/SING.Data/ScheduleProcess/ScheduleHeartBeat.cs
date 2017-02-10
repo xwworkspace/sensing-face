@@ -47,8 +47,8 @@ namespace SING.Data.ScheduleProcess
                 {
                     transport.Close();
                 }
-                System.Windows.MessageBox.Show("心跳异常，稍后重试！");
-                Logger.Logger.Error("心跳连接服务器失败", ex);
+                System.Windows.MessageBox.Show("心跳失败，稍后重试！");
+                Logger.Logger.Error("心跳连接服务器异常", ex);
                 return nSuccess;
             }
             return nSuccess;

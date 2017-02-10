@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                     xmlns:Converter="clr-namespace:SING.Infrastructure.Converter;assembly=SING.Infrastructure" 
-                    xmlns:Controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" >
+                    xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" >
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/SING.Infrastructure;component/Themes/Generic.xaml" />
@@ -32,7 +32,7 @@
         <Setter Property="Height" Value="23" />
     </Style>
 
-    <Style x:Key="{x:Type Controls:RadComboBox}" TargetType="{x:Type Controls:RadComboBox}">
+    <Style x:Key="{x:Type telerik:RadComboBox}" TargetType="{x:Type telerik:RadComboBox}">
         <Setter Property="FontFamily" Value="新宋体"/>
     </Style>
 
@@ -55,7 +55,7 @@
                 <ColumnDefinition Width="10"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image  Grid.Row="1" Grid.Column="1" Width="20" x:Name="MeetingGroup_Image"  Source="Images/channelLeftCameraNotlight.png"></Image>
-            <TextBlock Margin="10,0,0,0" Foreground="White" Grid.Row="1" Grid.Column="2" FontSize="20" x:Name="MeetingGroup_TextBlock" VerticalAlignment="Center" Text="{Binding MyChannelCfg.Name}"></TextBlock>
+            <TextBlock Margin="10,0,0,0" Foreground="White" Grid.Row="1" Grid.Column="2" FontSize="20" x:Name="MeetingGroup_TextBlock" VerticalAlignment="Center" Text="{Binding ChannelCfgData.Name}"></TextBlock>
             <Grid Visibility="Hidden" x:Name="buttongrid" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
                 <Grid.RenderTransform>
                     <TranslateTransform X="0"></TranslateTransform>
@@ -196,4 +196,18 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--抓拍照片数据模版-->
+    <DataTemplate x:Key="CaptureDataTemplate">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" ></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <!--<RowDefinition Height="auto"></RowDefinition>-->
+            </Grid.RowDefinitions>
+            <Image  Grid.Row="0" Width="110" Height="110" Stretch="Fill" x:Name="MeetingGroup_Image"  Source="{Binding Img}"/>
+            <TextBlock Foreground="White" Grid.Row="1"  FontSize="20" x:Name="MeetingGroup_TextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ChannelName}"/>
+            <!--<TextBlock Foreground="White" Grid.Row="2" FontSize="20" VerticalAlignment="Center" Text="{Binding time}"></TextBlock>-->
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

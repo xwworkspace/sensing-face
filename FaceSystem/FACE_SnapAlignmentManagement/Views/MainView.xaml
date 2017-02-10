@@ -5,12 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FACE_SnapAlignmentManagement.Views"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:Converter="clr-namespace:SING.Infrastructure.Converter;assembly=SING.Infrastructure"
              mc:Ignorable="d" Background="Transparent" d:DesignHeight="900" d:DesignWidth="1540">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/FACE_SnapAlignmentManagement;component/StyleResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Converter:TestBindingConvert x:Key="TestBindingConvert"/>
             <ImageBrush x:Key="SystemBackground"  ImageSource="../Images/SystemBackground.jpg"  Stretch="UniformToFill"/>
             <ImageBrush x:Key="channelBackground"  ImageSource="../Images/channelBackground.png"  Stretch="UniformToFill"/>
             <ImageBrush x:Key="channelPrecinct" ImageSource="../Images/channelPrecinct.png" Stretch="UniformToFill"/>
@@ -21,277 +23,338 @@
             <ImageBrush x:Key="VideoPreviewbottom" ImageSource="../Images/VideoPreviewbottom.png" Stretch="UniformToFill"/>
             <ImageBrush x:Key="captureIdentifyAreaPhotoBackground" ImageSource="../Images/captureIdentifyAreaPhotoBackground.png"/>
             <ImageBrush x:Key="captureResultBackgroundBorderLine" ImageSource="../Images/captureResultBackgroundBorderLine.png"/>
+            <ImageBrush x:Key="channelName"  Stretch="Fill" ImageSource="../Images/channelName.png" />
+            <Style x:Key="Searchstyle" TargetType="{x:Type telerik:RadButton}">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type telerik:RadButton}">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Background="{StaticResource SystemBackground}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.2*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="1.6*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Background="{StaticResource channelBackground}">
-                <Grid.Effect>
-                    <DropShadowEffect ShadowDepth="5">
-                    </DropShadowEffect>
-                </Grid.Effect>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="60"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Grid>
-                    <Image Stretch="Fill" Source="../Images/channelName.png" />
-                    <Button Command="{Binding CommandRefreshChannel}"  VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource NoBorderButton}" Background="Transparent" >
-                        <Image Width="40" Height="40"  Source="../Images/refreshButton.png"/>
-                    </Button>
-                </Grid>
-
-                <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="{StaticResource channelPrecinct}" x:Name="ChannelManageListBox" ItemTemplate="{StaticResource ChannelManageDataTemplate}" Margin="0,-1,0,-1" BorderThickness="0" Grid.Row="1">
-                    <ListBox.Resources>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Tag" Value="0"></Setter>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                        <Grid>
-                                            <Border Padding="0,0,0,0" x:Name="Bd"  Background="{TemplateBinding Background}"  SnapsToDevicePixels="true">
-                                                <ContentPresenter  x:Name="Content" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Top">
-                                                    <ContentPresenter.RenderTransform>
-                                                        <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
-                                                    </ContentPresenter.RenderTransform>
-                                                </ContentPresenter>
-                                            </Border>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsEnabled" Value="false">
-                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                            </Trigger>
-                                            <Trigger Property="IsSelected" Value="true">
-                                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource selectedbackground}"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListBox.Resources>
-                </ListBox>
-
-                <Grid Grid.Row="2" Background="{StaticResource channelDownBackground}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <!--添加-->
-                        <Button x:Name="btnAddPassageWay"  FontSize="15" Margin="3,0,0,3" Content="添加" Style="{StaticResource btnAddPassageWayStyle}"/>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <!--修改-->
-                        <Button x:Name="btnModifyPassageWay"  FontSize="15" Margin="0,0,0,3" Content="修改" Style="{StaticResource btnModifyPassageWayStyle}"/>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <!--删除-->
-                        <Button x:Name="btnDeletePassageWay"  FontSize="15"  Margin="0,0,3,3" Style="{StaticResource btnDeletePassageWayStyle}" Content="删除"/>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <GridSplitter Grid.Column="0" Width="10" Margin="0,0,-10,0" Background="Transparent"/>
-
-            <Grid Grid.Column="1" Margin="10,0,0,0" Background="{StaticResource VideoPreview}">
-                <Grid.Effect>
-                    <DropShadowEffect ShadowDepth="5"></DropShadowEffect>
-                </Grid.Effect>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="60"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid>
-                    <Image Stretch="Fill" Source="../Images/VideoPreviewTop.png"></Image>
-                    <ToggleButton Content="打开视频" Foreground="White"  Style="{StaticResource CaptureVideoButton}" Background="Transparent" x:Name="btnSetWindowVideo" Margin="0,15,100,15"  Width="120" Height="30" >
-                    </ToggleButton>
-                    <!--<ToggleButton Content="播放" Foreground="White"  Style="{StaticResource CaptureVideoButton}" Background="Transparent" x:Name="btnPlayWindowVideo"  Width="120" Height="30" >
-                </ToggleButton>-->
-                    <ToggleButton Content="暂停" Foreground="White"  Style="{StaticResource CaptureVideoButton}"  Background="Transparent" x:Name="btnPauseVideoFile"  Margin="150,15,0,15"  Width="120" Height="30" >
-                    </ToggleButton>
-                    <ToggleButton Content="关闭" Foreground="White"  Style="{StaticResource CaptureVideoButton}"  Background="Transparent" x:Name="btnCloseVideoFile"  Margin="400,15,0,15"  Width="120" Height="30" >
-                    </ToggleButton>
-                </Grid>
-
-                <Grid x:Name="VideoPartGrid" Visibility="Visible" Grid.Row="1" Background="{StaticResource noVideoBackground}"></Grid>
-
-                <Grid Grid.Row="2" Background="{StaticResource VideoPreviewbottom}">
-                    <ToggleButton Content="设置窗口布局" Foreground="White" Style="{StaticResource CaptureRecordButton}" Background="Transparent" x:Name="btnSetWindowLayout" Margin="15" Width="120" Height="30" >
-                    </ToggleButton>
-                    <Popup x:Name="Pop" PopupAnimation="Slide" PlacementTarget="{Binding ElementName=btnSetWindowLayout}" Placement="Top"
-                                          IsOpen="{Binding ElementName=btnSetWindowLayout,Path=IsChecked,Mode=TwoWay}" StaysOpen="False" >
-                        <Border Background="Transparent"  CornerRadius="8" Width="120" Height="200" BorderBrush="#FF000000" BorderThickness="1">
-                            <Grid x:Name="gridSetWindowLayout">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Row="0" Grid.Column="0" Margin="1" x:Name="btnOneScreen" Content="1" Background="Transparent" Foreground="White"/>
-                                <Button Grid.Row="0" Grid.Column="1" Margin="1" x:Name="btnTowScreen" Content="2" Foreground="White" Background="Transparent"/>
-                                <Button Grid.Row="1" Grid.Column="0" Margin="1" x:Name="btnThreeScreen" Content="3" Foreground="White" Background="Transparent"/>
-                                <Button Grid.Row="1" Grid.Column="1" Margin="1" x:Name="btnFourScreen" Content="4" Foreground="White" Background="Transparent"/>
-                                <Button Grid.Row="2" Grid.Column="0" Margin="1" x:Name="btnSixScreen" Content="6" Foreground="White" Background="Transparent"/>
-                                <Button Grid.Row="2" Grid.Column="1" Margin="1" x:Name="btnNineScreen" Content="9" Foreground="White" Background="Transparent"/>
-                                <Button Grid.Row="3" Grid.Column="0" Margin="1" x:Name="btnTwelveScreen" Content="12" Foreground="White" Background="Transparent"/>
-                                <Button Grid.Row="3" Grid.Column="1" Margin="1" x:Name="btnSixteenScreen" Content="16" Foreground="White" Background="Transparent"/>
-                            </Grid>
-                        </Border>
-                    </Popup>
-                </Grid>
-            </Grid>
-            <GridSplitter Grid.Column="1" Width="10" Margin="0,0,-10,0" Background="Transparent"></GridSplitter>
-
-            <Grid Grid.Column="3" Margin="10,0,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <!--抓拍识别切换按钮-->
-                <Grid Visibility="Hidden">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <ToggleButton IsChecked="True" x:Name="SnapshotToggleButton" Background="Transparent" Style="{StaticResource CaptureRecordButton}">抓拍结果</ToggleButton>
-                    <ToggleButton x:Name="DistinguishToggleButton" Background="Transparent" Style="{StaticResource CaptureRecordButton}" Grid.Column="1">识别结果</ToggleButton>
-                </Grid>
-                <Grid  x:Name="Distinguish" Grid.Row="0" Grid.RowSpan="2" Background="{StaticResource captureIdentifyAreaPhotoBackground}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Background="{StaticResource channelBackground}">
                     <Grid.Effect>
-                        <DropShadowEffect></DropShadowEffect>
+                        <DropShadowEffect ShadowDepth="5">
+                        </DropShadowEffect>
                     </Grid.Effect>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <!--<RowDefinition Height="60"/>-->
                     </Grid.RowDefinitions>
-                    <Image Stretch="Fill" Source="../Images/identifyResultTop.png"></Image>
-                    <Image Stretch="Fill" Source="../Images/identifyResultBottom.png" Grid.Row="1"></Image>
-                    <ComboBox x:Name="comboAutoSend" SelectedIndex="0" Style="{DynamicResource ComboBoxStyle2}" Width="150" Grid.Row="1" HorizontalAlignment="Left">
-                        <ComboBoxItem>关闭自动推送</ComboBoxItem>
-                        <ComboBoxItem>开启自动推送</ComboBoxItem>
-                    </ComboBox>
-                    <StackPanel VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                        <Label FontSize="15" Content="一共识别到了" FontWeight="Bold"></Label>
-                        <Label FontSize="15" FontWeight="Bold" Content="{Binding ComImageCount}"></Label>
-                        <Label FontSize="15" FontWeight="Bold" Content="张照片"></Label>
-                    </StackPanel>
-                    <ListView Grid.Row="2" x:Name="listViewContIdentifyResults" Background="{StaticResource captureResultBackgroundBorderLine}"  BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                        <ListView.Resources>
-                            <Style TargetType="{x:Type ListViewItem}">
-                                <Setter Property="SnapsToDevicePixels" Value="True"/>
+
+                    <Grid Background="{StaticResource channelName}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <!--<Button Command="{Binding CommandRefreshChannel}"  VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource NoBorderButton}" Background="Transparent" >
+                        <Image Width="30" Height="30"  Source="../Images/refreshButton.png"/>
+                    </Button>-->
+                        <telerik:RadButton Grid.Row="1" Tag="False" IsDefault="True" HorizontalAlignment="Right" ToolTip="查询(Enter)" Width="30" Style="{StaticResource Searchstyle}">
+                            <telerik:RadButton.Content>
+                                <Image Source="../Images/refreshButton.png" Width="22" Height="22"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </telerik:RadButton.Content>
+                        </telerik:RadButton>
+                    </Grid>
+                    <Grid Grid.Row="1" Background="{StaticResource channelPrecinct}" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox VerticalAlignment="Stretch" Margin="2 0 0 0"  HorizontalAlignment="Stretch" Height="22"  Style="{StaticResource RadiusTextBox}"/>
+                        <telerik:RadButton Grid.Column="1" Tag="False" IsDefault="True" ToolTip="查询(Enter)" Width="30" Style="{StaticResource Searchstyle}">
+                            <telerik:RadButton.Content>
+                                <Image Source="../Images/find.png" Width="22" Height="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </telerik:RadButton.Content>
+                        </telerik:RadButton>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Background="{StaticResource channelPrecinct}">
+                        <!--<TreeView   MouseDoubleClick="{Binding .}"  TreeViewItem.Expanded="{Binding .}"  ItemsSource="{Binding ChannelTree}"  BorderThickness="0" Background="Transparent"  x:Name="ChannelTreeView">
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Child}">
+                                    <Grid HorizontalAlignment="Left" Height="45">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Margin="5,0,0,0" Grid.Column="1" Foreground="White"  FontSize="20"  x:Name="texHeader"   VerticalAlignment="Center" Text="{Binding Header}"/>
+                                        <Image Width="20" x:Name="imgAdd" Grid.Column="0" Visibility="Collapsed" Source="../Images/channelLeftVideoNotLightState.png">
+                                        </Image>
+                                    </Grid>
+                                    <HierarchicalDataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsChannel}" Value="true">
+                                            <Setter Property="Visibility" TargetName="imgAdd" Value="Visible"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsOpened}" Value="true">
+                                            <Setter Property="Source" TargetName="imgAdd" Value="../Images/channelLeftVideoLightState.png"></Setter>
+                                        </DataTrigger>
+                                    </HierarchicalDataTemplate.Triggers>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>-->
+                    </Grid>
+
+                    <ListBox ItemsSource="{Binding ChannelListCV}" SelectedItem="{Binding ChannelCurrentItem}" ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="{StaticResource channelPrecinct}" x:Name="ChannelManageListBox" ItemTemplate="{StaticResource ChannelManageDataTemplate}" Margin="0,-1,0,-1" BorderThickness="0" Grid.Row="2">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Tag" Value="0"></Setter>
                                 <Setter Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <Grid Background="Transparent">
-                                                <Border x:Name="bd" BorderThickness="1" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
-                                                    <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="3"/>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Grid>
+                                                <Border Padding="0,0,0,0" x:Name="Bd"  Background="{TemplateBinding Background}"  SnapsToDevicePixels="true">
+                                                    <ContentPresenter  x:Name="Content" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Top">
+                                                        <ContentPresenter.RenderTransform>
+                                                            <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
+                                                        </ContentPresenter.RenderTransform>
+                                                    </ContentPresenter>
                                                 </Border>
                                             </Grid>
                                             <ControlTemplate.Triggers>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter TargetName="bd" Property="Background" Value="{StaticResource selectedbackground}"/>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="true">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{StaticResource selectedbackground}"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-                        </ListView.Resources>
-                        <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource MyCmpHeaderStyle}">
-                                <GridViewColumn Header="抓拍照片" Width="auto" x:Name="GVCCapPic">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border BorderBrush="#346381" BorderThickness="3">
-                                                <TextBlock Margin="2" Foreground="White" Width="{Binding Path=ActualWidth,ElementName=GVCCapPic}" Height="{Binding Path=ActualWidth,ElementName=GVCCapPic}">
-                                                    <TextBlock.Background>
-                                                        <ImageBrush ImageSource="{Binding CapImg}"></ImageBrush>
-                                                    </TextBlock.Background>
-                                                </TextBlock>
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="注册照片" Width="auto" x:Name="GVCCmpPic">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border BorderBrush="#346381" BorderThickness="3">
-                                                <TextBlock Margin="2"  Foreground="White" Width="{Binding Path=ActualWidth,ElementName=GVCCmpPic}" Height="{Binding Path=ActualWidth,ElementName=GVCCmpPic}">
-                                                    <TextBlock.Background>
-                                                        <ImageBrush ImageSource="{Binding RegImg}"></ImageBrush>
-                                                    </TextBlock.Background>
-                                                </TextBlock>
-                                            </Border>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="详细信息" Width="auto" x:Name="GVCRegInfo">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Width="Auto" FontSize="20" FontWeight="Bold"  Foreground="White" TextAlignment ="Left" Text="{Binding Path=RegInfo}" MinWidth="{Binding Path=ActualWidth,ElementName=GVCRegInfo}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                        </ListBox.Resources>
+                    </ListBox>
 
-                    <Image Stretch="Fill" Source="../Images/captureIdentifyAreaBluePhotoBottom.png" Grid.Row="3"></Image>
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="3">
-                        <Label Foreground="White" FontSize="11" Content="阈值"></Label>
-                        <ComboBox x:Name="comboThreshold" Height="24" ItemsSource="{Binding Threshold}" SelectedIndex="{Binding SelectedThreshold}" Style="{DynamicResource ComboBoxStyle2}" Width="100"></ComboBox>
-                    </StackPanel>
+
+                    <!--<Grid Grid.Row="3" Background="{StaticResource channelDownBackground}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            -->
+                    <!--添加-->
+                    <!--
+                            <Button x:Name="btnAddPassageWay"  FontSize="15" Margin="3,0,0,3" Content="添加" Style="{StaticResource btnAddPassageWayStyle}"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            -->
+                    <!--修改-->
+                    <!--
+                            <Button x:Name="btnModifyPassageWay"  FontSize="15" Margin="0,0,0,3" Content="修改" Style="{StaticResource btnModifyPassageWayStyle}"/>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            -->
+                    <!--删除-->
+                    <!--
+                            <Button x:Name="btnDeletePassageWay"  FontSize="15"  Margin="0,0,3,3" Style="{StaticResource btnDeletePassageWayStyle}" Content="删除"/>
+                        </Grid>
+                    </Grid>-->
+                </Grid>
+                <GridSplitter Grid.Column="0" Width="5" Margin="0,0,-5,0" Background="Transparent"/>
+                <Grid Grid.Column="1" Margin="5,0,0,0" Background="{StaticResource VideoPreview}">
+                    <Grid.Effect>
+                        <DropShadowEffect ShadowDepth="5"></DropShadowEffect>
+                    </Grid.Effect>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Image Stretch="Fill" Source="../Images/VideoPreviewTop.png"></Image>
+                        <ToggleButton Content="打开视频" Foreground="White"  Style="{StaticResource CaptureVideoButton}" Background="Transparent" x:Name="btnSetWindowVideo" Margin="0,15,100,15"  Width="120" Height="30" >
+                        </ToggleButton>
+                        <!--<ToggleButton Content="播放" Foreground="White"  Style="{StaticResource CaptureVideoButton}" Background="Transparent" x:Name="btnPlayWindowVideo"  Width="120" Height="30" >
+                </ToggleButton>-->
+                        <ToggleButton Content="暂停" Foreground="White"  Style="{StaticResource CaptureVideoButton}"  Background="Transparent" x:Name="btnPauseVideoFile"  Margin="150,15,0,15"  Width="120" Height="30" >
+                        </ToggleButton>
+                        <ToggleButton Content="关闭" Foreground="White"  Style="{StaticResource CaptureVideoButton}"  Background="Transparent" x:Name="btnCloseVideoFile"  Margin="400,15,0,15"  Width="120" Height="30" >
+                        </ToggleButton>
+                    </Grid>
+                    <ContentControl x:Name="VideoPartName" Content="{Binding VideoPartGrid}" Visibility="Visible" Grid.Row="1" Background="{StaticResource noVideoBackground}"/>
+                    <Grid Grid.Row="2" Background="{StaticResource VideoPreviewbottom}">
+                        <ToggleButton Content="设置窗口布局" Foreground="White" Style="{StaticResource CaptureRecordButton}" Background="Transparent" x:Name="btnSetWindowLayout" Margin="15" Width="120" Height="30" >
+                        </ToggleButton>
+                        <Popup x:Name="Pop" PopupAnimation="Slide" PlacementTarget="{Binding ElementName=btnSetWindowLayout}" Placement="Top"
+                                          IsOpen="{Binding ElementName=btnSetWindowLayout,Path=IsChecked,Mode=TwoWay}" StaysOpen="False" >
+                            <Border Background="Transparent"  CornerRadius="8" Width="120" Height="200" BorderBrush="#FF000000" BorderThickness="1">
+                                <Grid x:Name="gridSetWindowLayout">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <telerik:RadButton Grid.Row="0" Grid.Column="0" Margin="1" x:Name="btnOneScreen" Content="1" Background="Transparent" Foreground="White" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnOneScreen"/>
+                                    <telerik:RadButton Grid.Row="0" Grid.Column="1" Margin="1" x:Name="btnTowScreen" Content="2" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnTowScreen"/>
+                                    <telerik:RadButton Grid.Row="1" Grid.Column="0" Margin="1" x:Name="btnThreeScreen" Content="3" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnThreeScreen"/>
+                                    <telerik:RadButton Grid.Row="1" Grid.Column="1" Margin="1" x:Name="btnFourScreen" Content="4" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnFourScreen"/>
+                                    <telerik:RadButton Grid.Row="2" Grid.Column="0" Margin="1" x:Name="btnSixScreen" Content="6" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnSixScreen"/>
+                                    <telerik:RadButton Grid.Row="2" Grid.Column="1" Margin="1" x:Name="btnNineScreen" Content="9" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnNineScreen"/>
+                                    <telerik:RadButton Grid.Row="3" Grid.Column="0" Margin="1" x:Name="btnTwelveScreen" Content="12" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnTwelveScreen"/>
+                                    <telerik:RadButton Grid.Row="3" Grid.Column="1" Margin="1" x:Name="btnSixteenScreen" Content="16" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnSixteenScreen"/>
+                                </Grid>
+                            </Border>
+                        </Popup>
+                    </Grid>
                 </Grid>
             </Grid>
+            <GridSplitter HorizontalAlignment="Stretch" Margin="0,0,0,-5" VerticalAlignment="Top" Grid.Row="1" Height="5" Background="Transparent"/>
+            <ScrollViewer x:Name="Snapshot" Grid.Row="1" Margin="0,5,0,0" Visibility="Visible" Background="{StaticResource captureIdentifyAreaPhotoBackground}" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical">
+                    <ListBox BorderThickness="0" ItemsSource="{Binding CapFaceLogWithImgDataCV}" Background="Transparent" ItemTemplate="{StaticResource CaptureDataTemplate}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="2" Background="Transparent"/>
+                    <ListBox BorderThickness="0" ItemsSource="{Binding CapFaceLogWithImgDataCV}" Background="Transparent" ItemTemplate="{StaticResource CaptureDataTemplate}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
-        <Grid Margin="0,10,0,0" x:Name="Snapshot" Visibility="Visible"  Grid.Row="1" Background="{StaticResource captureIdentifyAreaPhotoBackground}">
+        
+        <GridSplitter Grid.Column="1" Width="5" Margin="0,0,-5,0" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+
+        <Grid x:Name="Distinguish" Background="{StaticResource captureIdentifyAreaPhotoBackground}" Grid.Column="1" Margin="5,0,0,0">
             <Grid.Effect>
                 <DropShadowEffect></DropShadowEffect>
             </Grid.Effect>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0"></RowDefinition>
-                <RowDefinition Height="0"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="0"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
             <Image Stretch="Fill" Source="../Images/identifyResultTop.png"></Image>
             <Image Stretch="Fill" Source="../Images/identifyResultBottom.png" Grid.Row="1"></Image>
-            <Image Stretch="Fill" Source="../Images/captureIdentifyAreaBluePhotoBottom.png" Grid.Row="3"></Image>
-            <ListBox BorderThickness="0" ItemsSource="{Binding MyCapFaceLogWithImgCV}" ScrollViewer.VerticalScrollBarVisibility="Disabled" x:Name="listViewCaptureResults" Background="Transparent" Grid.Row="2" ItemTemplate="{StaticResource CaptureDataTemplate}">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
+            <ComboBox x:Name="comboAutoSend" SelectedIndex="0" Style="{DynamicResource ComboBoxStyle2}" Width="150" Grid.Row="1" HorizontalAlignment="Left">
+                <ComboBoxItem>关闭自动推送</ComboBoxItem>
+                <ComboBoxItem>开启自动推送</ComboBoxItem>
+            </ComboBox>
             <StackPanel VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Label FontSize="15" Content="一共抓拍到了" FontWeight="Bold"></Label>
-                <Label FontSize="15" FontWeight="Bold" Content="{Binding CapImageCount}"></Label>
+                <Label FontSize="15" Content="一共识别到了" FontWeight="Bold"></Label>
+                <Label FontSize="15" FontWeight="Bold" Content="{Binding ComImageCount}"></Label>
                 <Label FontSize="15" FontWeight="Bold" Content="张照片"></Label>
             </StackPanel>
+            <ListView Grid.Row="2" x:Name="listViewContIdentifyResults" ItemsSource="{Binding RealtimeCmpInfoViewDataCV}" Background="{StaticResource captureResultBackgroundBorderLine}"  BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Grid Background="Transparent">
+                                        <Border x:Name="bd" BorderThickness="1" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                                            <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="3"/>
+                                        </Border>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="bd" Property="Background" Value="{StaticResource selectedbackground}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource MyCmpHeaderStyle}">
+                        <GridViewColumn Header="抓拍照片" Width="auto" x:Name="GVCCapPic">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#346381" BorderThickness="3">
+                                        <TextBlock Margin="2" Foreground="White" Width="{Binding Path=ActualWidth,ElementName=GVCCapPic}" Height="{Binding Path=ActualWidth,ElementName=GVCCapPic}">
+                                            <TextBlock.Background>
+                                                <ImageBrush ImageSource="{Binding CapImg}"></ImageBrush>
+                                            </TextBlock.Background>
+                                        </TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="注册照片" Width="auto" x:Name="GVCCmpPic">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#346381" BorderThickness="3">
+                                        <TextBlock Margin="2"  Foreground="White" Width="{Binding Path=ActualWidth,ElementName=GVCCmpPic}" Height="{Binding Path=ActualWidth,ElementName=GVCCmpPic}">
+                                            <TextBlock.Background>
+                                                <ImageBrush ImageSource="{Binding ObjImg}"></ImageBrush>
+                                            </TextBlock.Background>
+                                        </TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="详细信息" Width="auto" x:Name="GVCRegInfo">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Width="Auto" FontSize="20" FontWeight="Bold"  Foreground="White" TextAlignment ="Left" Text="{Binding Path=RegInfo}" MinWidth="{Binding Path=ActualWidth,ElementName=GVCRegInfo}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Image Stretch="Fill" Source="../Images/captureIdentifyAreaBluePhotoBottom.png" Grid.Row="3"></Image>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="3">
+                <Label Foreground="White" FontSize="11" Content="阈值"></Label>
+                <ComboBox x:Name="comboThreshold" Height="24" ItemsSource="{Binding ThresholdCV}" SelectedIndex="{Binding SelectedThreshold}" Style="{DynamicResource ComboBoxStyle2}" Width="100"/>
+            </StackPanel>
         </Grid>
-
-
     </Grid>
 </UserControl>
+
+
+

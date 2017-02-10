@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="FACE_ChannelManagement.UserControls.ChannelCameraInfoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_ChannelManagement.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="500">
+    <Grid Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="通道基本信息" BorderBrush="Gray" BorderThickness="1" Margin="0,2,2,2" 
+                    Command="{Binding CameraInfoSaveCommand}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Background="Gray">
+            <Label Content="通道基本信息"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" Background="Gray">
+            <Label Content="通道配置参数"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" Background="Gray">
+            <Label Content="图像源参数设置"/>
+        </StackPanel>
+
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="5,0" Orientation="Vertical">
+                <Label Content="通道编号" Margin="0,5" />
+                <Label Content="通道名称" Margin="0,5" />
+                <Label Content="通道类型" Margin="0,5" />
+                <Label Content="备注信息" Margin="0,5" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="5,0" Orientation="Vertical">
+                <TextBox Text="" Margin="0,5" />
+                <TextBox Text="" Margin="0,5" />
+                <TextBox Text="" Margin="0,5" />
+                <TextBox Text="" Margin="0,5" />
+            </StackPanel>
+
+
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+    </Grid>
+</UserControl>

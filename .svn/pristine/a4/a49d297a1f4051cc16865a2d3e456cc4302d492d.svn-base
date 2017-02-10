@@ -1,0 +1,10 @@
+﻿using Microsoft.Practices.Prism.ViewModel;
+
+namespace FACE_ChannelManagement.ViewModels
+{
+
+    public class ChannelPreviewViewModel:NotificationObject
+    {
+        
+    }
+}

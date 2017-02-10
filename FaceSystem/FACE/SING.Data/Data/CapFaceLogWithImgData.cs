@@ -138,7 +138,7 @@ namespace SING.Data.Data
             }
         }
 
-        public virtual string Channelname
+        public virtual string ChannelName
         {
             get
             {
@@ -147,7 +147,7 @@ namespace SING.Data.Data
             set
             {
                 this._channelname = value;
-                OnPropertyChanged("Channelname");
+                OnPropertyChanged("ChannelName");
             }
         }
 
@@ -163,7 +163,7 @@ namespace SING.Data.Data
             target.Age = oridata.Age;
             target.Gender = oridata.Gender;
             target.Img = oridata.Img;
-            target.Channelname = oridata.Channelname;
+            target.Channelname = oridata.ChannelName;
             return target;
         }
 

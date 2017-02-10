@@ -237,7 +237,7 @@ namespace SING.Data.BaseTools
         }
 
         /// <summary>
-        /// 登录用户名
+        /// 登录密码
         /// </summary>
         public string LoginPwd
         {
@@ -298,7 +298,7 @@ namespace SING.Data.BaseTools
         }
 
         /// <summary>
-        /// 登录服务器地址
+        /// 登录服务器端口
         /// </summary>
         public string LoginPort
         {
@@ -334,6 +334,40 @@ namespace SING.Data.BaseTools
         }
 
         /// <summary>
+        /// 客户端端口
+        /// </summary>
+        public string StartPort
+        {
+            get
+            {
+                try
+                {
+                    return _innerConfig.AppSettings.Settings["StartPort"].Value;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("配置文件读取错误！");
+                    Logger.Logger.Error("配置节点【StartPort】读取失败");
+                }
+                return string.Empty;
+            }
+            set
+            {
+                try
+                {
+                    this._innerConfig.AppSettings.Settings["StartPort"].Value = value;
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+        public int StartPortInt
+        {
+            get { return Convert.ToInt32(StartPort); }
+        }
+        /// <summary>
         /// 默认恢复上次窗口
         /// </summary>
         public bool IsResumeLastWindow
@@ -365,7 +399,7 @@ namespace SING.Data.BaseTools
         }
 
         /// <summary>
-        /// 登录服务器地址
+        /// 阈值
         /// </summary>
         public string Threshold
         {

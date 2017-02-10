@@ -9,11 +9,16 @@
         xmlns:cal="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
         xmlns:Infrastructure="clr-namespace:SING.Infrastructure;assembly=SING.Infrastructure"
         xmlns:Clocks="clr-namespace:Shell.DigitalClock"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" Icon="../Resources/logoIcon.png"
-        Closing="Window_Closing" Background="Transparent"  ResizeMode="CanResizeWithGrip" WindowStyle="None" AllowsTransparency="True"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" Icon="../Resources/logoIcon.png" WindowChrome.WindowChrome="{DynamicResource WindowChromeKey}"
+        Closing="Window_Closing" Background="Transparent"  ResizeMode="CanResizeWithGrip" WindowStyle="None"
         x:Name="window">
     
     <Window.Resources>
+        <WindowChrome x:Key="WindowChromeKey">
+            <WindowChrome.ResizeBorderThickness>
+                <Thickness>5</Thickness>
+            </WindowChrome.ResizeBorderThickness>
+        </WindowChrome>
         <LinearGradientBrush x:Key="RectangleOperateBackground" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#065387" Offset="0"/>
             <GradientStop Color="#0772B8" Offset="0.20"/>

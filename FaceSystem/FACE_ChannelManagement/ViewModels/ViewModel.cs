@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using FACE_ChannelManagement.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -14,7 +13,7 @@ namespace FACE_ChannelManagement.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class ViewModel : NotificationObject, INavigationAware
+    public partial class ViewModel : NotificationObject, INavigationAware
     {
         public readonly IDataService _dataService;
         public readonly IEventAggregator _eventAggregator;
@@ -30,6 +29,11 @@ namespace FACE_ChannelManagement.ViewModels
             _serviceLocator = serviceLocator;
 
             CommandRefreshChannel = new DelegateCommand<string>(ExecuteCommandRefreshChannel, CanCommandRefreshChannel);
+
+
+            this.InitChannelGroupViewModel();
+            this.InitChannelGridViewModel();
+            this.InitChannelCameraInfoViewModel();
         }
 
         #region 属性
@@ -45,11 +49,11 @@ namespace FACE_ChannelManagement.ViewModels
         {
             try
             {
-                
+
             }
             catch
             {
-                
+
             }
         }
 
@@ -83,7 +87,7 @@ namespace FACE_ChannelManagement.ViewModels
         #endregion
 
         #region SofaCommonEventHandler
-        
+
         public SofaComponent ThisSofaComponent;
         public IBaseContainer Container;
 

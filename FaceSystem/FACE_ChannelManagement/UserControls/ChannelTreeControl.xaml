@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:FACE_ChannelManagement.UserControls"
              xmlns:viewModels="clr-namespace:FACE_ChannelManagement.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="900" d:DesignWidth="500"
-             d:DataContext="{d:DesignInstance viewModels:ChannelGroupViewModel,IsDesignTimeCreatable=True}">
+             d:DesignHeight="1000" d:DesignWidth="500">
 
     <UserControl.Resources>
         <ContextMenu x:Key="sampleContextMenu">
@@ -22,16 +21,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Left" 
-                    Grid.Row="0"
-                    Orientation="Horizontal" 
-                    VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal">
             <TextBox Margin="5" 
+                     HorizontalAlignment="Left"
                      Grid.Column="0"
                      Height="23"  
-                     Width="200"
+                     Width="300"
                      Text="{Binding SearchText,Mode=TwoWay}"/>
             <Button Margin="5" 
+                    HorizontalAlignment="Right"
                     Grid.Column="1"
                     Content="Search" 
                     Height="23"
@@ -44,6 +42,7 @@
                   Width="500"
                   Height="900"
                   x:Name="treeView"
+                  FontSize="16"
                   HorizontalAlignment="Left"  
                   VerticalAlignment="Top"
                   MouseDoubleClick="treeView_MouseDoubleClick"
@@ -63,7 +62,7 @@
 
             <TreeView.Resources>
                 <HierarchicalDataTemplate
-                    DataType="{x:Type viewModels:ChannelViewModel}"
+                    DataType="{x:Type viewModels:ChannelTreeViewModel}"
                     ItemsSource="{Binding Children}">
                     <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <TextBlock x:Name="txtBlockNode" Text="{Binding Name,Mode=TwoWay}" Visibility="{Binding}"/>
@@ -72,10 +71,11 @@
                                  HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed"/>
 
                         <Button x:Name="button1" Width="16" Height="16" Margin="3,0">
-                            <Image Stretch="Fill" Width="16" Height="16" Source="pack://application:,,,../Images/link.png"/>
+                            <!--/FACE_ChannelManagement;component/Images/link.png-->
+                            <Image Stretch="Fill" Width="16" Height="16" Source="../Images/link.png"/>
                         </Button>
                         <Button x:Name="button2" Width="16" Height="16" Margin="3,0">
-                            <Image Stretch="Fill" Width="16" Height="16" Source="pack://application:,,,../Images/link.png"/>
+                            <Image Stretch="Fill" Width="16" Height="16" Source="../Images/link.png"/>
                         </Button>
                     </StackPanel>
                 </HierarchicalDataTemplate>
