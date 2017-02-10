@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="FACE_ChannelManagement.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_ChannelManagement.Views"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:controls="clr-namespace:FACE_ChannelManagement.UserControls"
+             mc:Ignorable="d" Background="Transparent" d:DesignHeight="900" d:DesignWidth="1540">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ImageBrush x:Key="SystemBackground"  ImageSource="../Images/SystemBackground.jpg"  Stretch="UniformToFill"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource SystemBackground}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+
+        <!--摄像头分组及摄像头拓扑树-->
+        <Grid Grid.RowSpan="2" Tag="ChannelTreeList">
+            <controls:ChannelTreeControl />
+        </Grid>
+
+        <!--摄像头信息列表-->
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" Tag="ChannelGrid"
+              Visibility="{Binding IsViewChannelList,Mode=TwoWay}">
+            <controls:ChannelGridControl />
+        </Grid>
+
+        <!--摄像头调试预览-->
+        <Grid Grid.Row="1" Grid.Column="1" Tag="PreviewCamera"
+              Visibility="{Binding IsViewChannelList,Mode=TwoWay}">
+            <controls:ChannelPreviewControl />
+        </Grid>
+
+        <!--Visibility="{Binding _isViewChannelList,Mode=TwoWay}"-->
+        <!--摄像头所在地理位置-->
+        <Grid Grid.Row="1" Grid.Column="2" Tag="CameraLocation"
+              Visibility="{Binding IsViewChannelList,Mode=TwoWay}">
+            <controls:ChannelLocationControl />
+        </Grid>
+
+        <!--Visibility="{Binding _isEditChannelCameraInfo,Mode=TwoWay}"-->
+        <!--添加摄像头信息   即：通道信息-->
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
+              Visibility="{Binding IsEditChannelCameraInfo,Mode=TwoWay}">
+            <controls:ChannelCameraInfoControl />
+        </Grid>
+
+    </Grid>
+</UserControl>
+
+
+
