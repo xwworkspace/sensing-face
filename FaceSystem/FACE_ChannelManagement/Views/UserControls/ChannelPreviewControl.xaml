@@ -7,16 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ImageBrush x:Key="noVideoBackground" ImageSource="../../Images/noVideoBackground.png"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid x:Name="CameraPartGrid" DataContext="{Binding }" Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        
-        
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Label DataContext="{Binding}" Content="{Binding}" HorizontalContentAlignment="Center" />
+        <ContentControl x:Name="VideoPartName" Content="{Binding VideoPartGrid}" Visibility="Visible" Grid.Row="1" Background="{StaticResource noVideoBackground}"/>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label FontSize="16" Content="当前预览视频通道" HorizontalContentAlignment="Center" />
+            <Label FontSize="16" Content="（" HorizontalContentAlignment="Center" />
+            <Label FontSize="16" Content="{Binding CameraPreview,Mode=TwoWay}" Foreground="Blue" FontWeight="Bold" HorizontalContentAlignment="Center" />
+            <Label FontSize="16" Content="）" HorizontalContentAlignment="Center" />
         </StackPanel>
 
     </Grid>

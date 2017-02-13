@@ -14,7 +14,7 @@
             <MenuItem Header="重命名" Command="{Binding}" />
         </ContextMenu>
 
-        <ImageBrush x:Key="Link" ImageSource="../Images/link.png" Stretch="Fill"/>
+        <!--<ImageBrush x:Key="Link" ImageSource="../Images/link.png" Stretch="Fill"/>-->
 
     </UserControl.Resources>
 
@@ -37,7 +37,6 @@
                     Content="Search" 
                     Height="23"
                     Command="{Binding SearchCommand}"/>
-            <Image Stretch="Fill" Width="16" Height="16" Source="../Images/link.png"/>
         </StackPanel>
 
         <TreeView Grid.Row="1" 
@@ -74,11 +73,11 @@
                         <TextBox x:Name="txtBoxNode" Text="{Binding Name,Mode=TwoWay}" BorderBrush="Black" BorderThickness="1" 
                                  HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed"/>
 
-                        <Button x:Name="button1" Width="16" Height="16" Margin="3,0" Background="{StaticResource ResourceKey=Link}">
+                        <Button x:Name="button1" Width="16" Height="16" Margin="3,0">
                             <!--/FACE_ChannelManagement;component/Images/link.png-->
                             <!--<Image Stretch="Fill" Width="16" Height="16" Source="../Images/link.png"/>-->
                         </Button>
-                        <Button x:Name="button2" Width="16" Height="16" Margin="3,0" Background="{StaticResource ResourceKey=Link}">
+                        <Button x:Name="button2" Width="16" Height="16" Margin="3,0">
                             <!--<Image Stretch="Fill" Width="16" Height="16" Source="../Images/link.png"/>-->
                         </Button>
                     </StackPanel>

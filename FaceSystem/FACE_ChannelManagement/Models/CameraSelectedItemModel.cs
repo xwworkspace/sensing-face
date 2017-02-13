@@ -18,6 +18,6 @@
         /// <summary>
         /// 链接摄像头所需的配置信息
         /// </summary>
-        public ChannelCameraCfgModel CameraConfig { get; set; }
+        public ChannelCfgViewData CameraConfig { get; set; }
     }
 }

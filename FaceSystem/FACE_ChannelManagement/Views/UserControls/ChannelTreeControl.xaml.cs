@@ -1,10 +1,9 @@
 ﻿using FACE_ChannelManagement.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace FACE_ChannelManagement.UserControls
@@ -14,16 +13,12 @@ namespace FACE_ChannelManagement.UserControls
     /// </summary>
     public partial class ChannelTreeControl : UserControl
     {
-        //ChannelGroupViewModel channelMgt;
         ChannelTreeViewModel channelVMdoel;
 
         public ChannelTreeControl()
         {
             InitializeComponent();
 
-            //channelMgt = new ChannelGroupViewModel();
-            //this.DataContext = channelMgt;
-            
         }
 
         TextBox tBox = new TextBox();
@@ -152,5 +147,12 @@ namespace FACE_ChannelManagement.UserControls
             return null;
         }
 
+        private void TextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                
+            }
+        }
     }
 }

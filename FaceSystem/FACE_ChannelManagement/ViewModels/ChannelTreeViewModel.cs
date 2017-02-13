@@ -16,6 +16,8 @@ namespace FACE_ChannelManagement.ViewModels
         bool _isExpanded;
         bool _isSelected;
 
+
+
         public ChannelTreeViewModel Root { get; set; }
         public Collection<ChannelTreeViewModel> Children { get { return _children; } set { _children = value; } }
         public string Name { get { return _channel.Name; } set { _channel.Name = value; } }

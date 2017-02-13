@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label Content="000该组包含的摄像头列表" FontSize="16" Foreground="White" 
+                <Label Content="该组包含的摄像头列表" FontSize="16" Foreground="White" 
                        Margin="5"
                        HorizontalContentAlignment="Left"/>
             </StackPanel>

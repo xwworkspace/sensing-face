@@ -47,8 +47,7 @@
     <Reference Include="Microsoft.Practices.Prism.MefExtensions">
       <HintPath>..\FACE\Lib\Microsoft.Practices.Prism.MefExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\FACE\Lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -122,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CameraSelectedItemModel.cs" />
-    <Compile Include="Models\ChannelCameraCfgModel.cs" />
+    <Compile Include="Models\ChannelCfgViewData.cs" />
     <Compile Include="Models\CameraParamInfoModel.cs" />
     <Compile Include="Models\ChannelTreeUtilitiesModel.cs" />
     <Compile Include="Models\DataAccess.cs" />
@@ -132,22 +131,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ChannelServices\InitChannelService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\HelperServices\ThresholdService.cs" />
     <Compile Include="Services\IDataService.cs" />
-    <Compile Include="UserControls\ChannelCameraInfoControl.xaml.cs">
-      <DependentUpon>ChannelCameraInfoControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ChannelGridControl.xaml.cs">
-      <DependentUpon>ChannelGridControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ChannelLocationControl.xaml.cs">
-      <DependentUpon>ChannelLocationControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ChannelPreviewControl.xaml.cs">
-      <DependentUpon>ChannelPreviewControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ChannelTreeControl.xaml.cs">
-      <DependentUpon>ChannelTreeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Utilities\AddNewFolderCmd.cs" />
     <Compile Include="Utilities\IChannelTree.cs" />
     <Compile Include="Utilities\RenameCmd.cs" />
@@ -160,39 +145,53 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ChannelCameraInfoControl.xaml.cs">
+      <DependentUpon>ChannelCameraInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChannelGridControl.xaml.cs">
+      <DependentUpon>ChannelGridControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChannelLocationControl.xaml.cs">
+      <DependentUpon>ChannelLocationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChannelPreviewControl.xaml.cs">
+      <DependentUpon>ChannelPreviewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChannelTreeControl.xaml.cs">
+      <DependentUpon>ChannelTreeControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converter\" />
-    <Folder Include="Services\HelperServices\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="StyleResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ChannelCameraInfoControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\ChannelGridControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\ChannelLocationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\ChannelPreviewControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\ChannelTreeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ChannelCameraInfoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\ChannelGridControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\ChannelLocationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\ChannelPreviewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\ChannelTreeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -250,10 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Images\link.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FACE\SING.Data\Dev_SING.Data.csproj">
@@ -269,17 +264,16 @@
       <Name>Dev_SING.Service</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\channel-delete.png" />
+    <Resource Include="Images\channel_.png" />
+    <Resource Include="Images\channel_add.png" />
+    <Resource Include="Images\channel_search.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /I "$(TargetPath)" "$(SolutionDir)FACE\Shell\bin\Debug\Modules"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Esri.ArcGISRuntime.10.2.7.1234\build\net45\Esri.ArcGISRuntime.targets" Condition="Exists('..\packages\Esri.ArcGISRuntime.10.2.7.1234\build\net45\Esri.ArcGISRuntime.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Esri.ArcGISRuntime.10.2.7.1234\build\net45\Esri.ArcGISRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Esri.ArcGISRuntime.10.2.7.1234\build\net45\Esri.ArcGISRuntime.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

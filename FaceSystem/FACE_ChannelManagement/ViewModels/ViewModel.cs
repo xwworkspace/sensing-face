@@ -31,9 +31,17 @@ namespace FACE_ChannelManagement.ViewModels
             CommandRefreshChannel = new DelegateCommand<string>(ExecuteCommandRefreshChannel, CanCommandRefreshChannel);
 
 
+            #region 部分类
             this.InitChannelGroupViewModel();
             this.InitChannelGridViewModel();
             this.InitChannelCameraInfoViewModel();
+            #endregion
+
+
+            this.IniThreshold();//初始化阈值
+            this.InitialChannel();//初始化通道
+            this.IniWindowsFormsHostlist();//初始化对比结果窗口
+            //this.SetVideoGridScreen(1);
         }
 
         #region 属性

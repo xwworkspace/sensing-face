@@ -94,7 +94,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox VerticalAlignment="Stretch" Margin="2 0 0 0"  HorizontalAlignment="Stretch" Height="22"  Style="{StaticResource RadiusTextBox}"/>
+                        <TextBox VerticalAlignment="Stretch" Margin="2 0 0 0" Text="123123" HorizontalAlignment="Stretch" Height="22"  Style="{StaticResource RadiusTextBox}"/>
                         <telerik:RadButton Grid.Column="1" Tag="False" IsDefault="True" ToolTip="查询(Enter)" Width="30" Style="{StaticResource Searchstyle}">
                             <telerik:RadButton.Content>
                                 <Image Source="../Images/find.png" Width="22" Height="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>

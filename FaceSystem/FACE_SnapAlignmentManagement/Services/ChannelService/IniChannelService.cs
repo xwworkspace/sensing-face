@@ -54,6 +54,11 @@ namespace FACE_SnapAlignmentManagement.Services.ChannelService
             //viewModel.Progress.ProgressValue = e.ProgressPercentage;
         }
 
+    
+        /// <summary>
+        /// 透过通道列表  查询列表中所有通道，并为其注册事件
+        /// 当点击当前列表中的某一个通道时，
+        /// </summary>
         private void Search()
         {
             try

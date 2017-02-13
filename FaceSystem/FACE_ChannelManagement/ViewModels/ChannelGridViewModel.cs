@@ -34,7 +34,7 @@ namespace FACE_ChannelManagement.ViewModels
 
         Visibility _isViewChannelList;//是否查看通道列表
         Visibility _isEditChannelCameraInfo;//是否编辑摄像头信息       
-        ChannelCameraCfgModel _linkCameraChannel;//连接摄像头所需的参数
+        ChannelCfgViewData _linkCameraChannel;//连接摄像头所需的参数
         private bool isSelectedCamera;
 
         private ChannelTreeViewModel channelVModel { get; set; }
@@ -68,7 +68,7 @@ namespace FACE_ChannelManagement.ViewModels
         /// <summary>
         /// 连接到摄像头所需要的参数
         /// </summary>
-        public ChannelCameraCfgModel LinkCameraChannel
+        public ChannelCfgViewData LinkCameraChannel
         {
             get { return _linkCameraChannel; }
             set { _linkCameraChannel = value; }

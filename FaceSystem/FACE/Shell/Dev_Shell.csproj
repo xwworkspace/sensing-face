@@ -37,11 +37,19 @@
     <StartupObject>Shell.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.DZVideoActiveXLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\AxDZVideoActiveXLib\AxInterop.DZVideoActiveXLib.dll</HintPath>
+    </Reference>
     <Reference Include="ExternalFrameworks">
       <HintPath>..\Lib\ExternalFrameworks.dll</HintPath>
     </Reference>
     <Reference Include="Fluent">
       <HintPath>..\Lib\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.DZVideoActiveXLib">
+      <HintPath>..\Lib\AxDZVideoActiveXLib\Interop.DZVideoActiveXLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

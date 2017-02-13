@@ -15,16 +15,22 @@ namespace FACE_ChannelManagement.ViewModels
         public ICommand SearchCommand { get; private set; }
         public ICommand SelectedCommand { get; private set; }
         public ICommand AddNewFolderCommand { get; private set; }
-        public ICommand RenameCommand { get; private set; } 
+        public ICommand RenameCommand { get; private set; }
         #endregion
 
         #region Data
 
         Collection<ChannelTreeViewModel> _firstGeneration;
         ChannelTreeViewModel _rootNode;
+        public ChannelTreeViewModel RootNode
+        {
+            get { return _rootNode; }
+            set { _rootNode = value; RaisePropertyChanged("RootNode"); }
+        }
         IEnumerator<ChannelTreeViewModel> _matchingChannelEnumerator;
         string _searchText = String.Empty;
-        
+
+
         public Collection<ChannelTreeViewModel> FirstGeneration
         {
             get { return _firstGeneration; }
@@ -50,7 +56,7 @@ namespace FACE_ChannelManagement.ViewModels
         }
 
         #endregion // Data
-        
+
         public void InitChannelGroupViewModel()
         {
             Channel rootNode = DataAccess.GetFamilyTree();

@@ -55,18 +55,18 @@ namespace FACE_SnapAlignmentManagement.ViewModels
 
             IniWindowsFormsHostlist();
 
-            SetVideoGridScreen(1);
-
+            //SetVideoGridScreen(1);
+            MessageBox.Show("cap");
             //打开客户端服务，接收业务服务器上传的实时抓拍和实时识别结果     
-            Thread ThreadStarServer = new System.Threading.Thread(new ParameterizedThreadStart(StartServer));
-            ThreadStarServer.SetApartmentState(ApartmentState.STA);
-            ThreadStarServer.Start();
+            //Thread ThreadStarServer = new System.Threading.Thread(new ParameterizedThreadStart(StartServer));
+            //ThreadStarServer.SetApartmentState(ApartmentState.STA);
+            //ThreadStarServer.Start();
 
-            _eventAggregator.GetEvent<RealtimeCaptureEvent>().Subscribe(OnRealtimeCaptureEvent);
-            _eventAggregator.GetEvent<RealtimeCmpInfoEvent>().Subscribe(OnRealtimeCmpInfoEvent);
-            CommandSetScreen = new DelegateCommand<string>(ExecuteCommandSetScreen, CanCommandSetScreen);
-            CommandChannelVideoSearch = new DelegateCommand<string>(ExecuteCommandChannelVideoSearch, CanCommandChannelVideoSearch);
-            CommandRefreshChannel = new DelegateCommand<string>(ExecuteCommandRefreshChannel, CanCommandRefreshChannel);
+            //_eventAggregator.GetEvent<RealtimeCaptureEvent>().Subscribe(OnRealtimeCaptureEvent);
+            //_eventAggregator.GetEvent<RealtimeCmpInfoEvent>().Subscribe(OnRealtimeCmpInfoEvent);
+            //CommandSetScreen = new DelegateCommand<string>(ExecuteCommandSetScreen, CanCommandSetScreen);
+            //CommandChannelVideoSearch = new DelegateCommand<string>(ExecuteCommandChannelVideoSearch, CanCommandChannelVideoSearch);
+            //CommandRefreshChannel = new DelegateCommand<string>(ExecuteCommandRefreshChannel, CanCommandRefreshChannel);
         }
 
         #region 属性
