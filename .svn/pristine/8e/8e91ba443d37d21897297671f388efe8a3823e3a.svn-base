@@ -1,0 +1,170 @@
+﻿<UserControl x:Class="FACE_ChannelManagement.UserControls.ChannelGridControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_ChannelManagement.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ContextMenu x:Key="sampleContextMenu">
+            <MenuItem Header="预 览  " Command="{Binding PreviewCameraCommand}"/>
+            <MenuItem Header="编 辑  " Command="{Binding EditCameraCommand}" />
+            <MenuItem Header="删 除  " Command="{Binding DeleteCameraCommand}" />
+        </ContextMenu>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="该组包含的摄像头列表" FontSize="16" Foreground="White" 
+                       Margin="5"
+                       HorizontalContentAlignment="Left"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <!--<Label HorizontalContentAlignment="Right" 
+                   Margin="5" Content="+" Foreground="Thistle" Background="Purple"
+                   Width="20" Height="20"/>-->
+
+                <Button Width="40" Height="26" Content="+" FontSize="16" FontWeight="Bold" 
+                        HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center"
+                        Command="{Binding AddCameraInfoCommand}"></Button>
+            </StackPanel>
+        </Grid>
+
+        <ListView Visibility="Hidden" ItemsSource="{Binding ChannelListCV}" SelectedItem="{Binding ChannelCurrentItem}"></ListView>
+
+
+
+
+        <ListView Grid.Row="1" 
+                  Name="cameraList" 
+                  SelectionMode="Multiple" 
+                  Background="{x:Null}"
+                  ItemsSource="{Binding ChannelListCV,Mode=TwoWay}"
+                  SelectedItem="{Binding ChannelCurrentItem,Mode=TwoWay}"
+                  ContextMenu="{StaticResource ResourceKey=sampleContextMenu}"
+                  MouseRightButtonUp="cameraList_MouseRightButtonUp"
+                  MouseLeftButtonUp="cameraList_MouseLeftButtonUp">
+            <ListView.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="2">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ListView.Template>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border Name="BD_Collector" CornerRadius="0" Background="Gray" Width="120" Height="120" Margin="15,0,15,15">
+                                    <Label Content="{Binding ChannelCfgData.Name}" 
+                                           VerticalContentAlignment="Center" 
+                                           HorizontalContentAlignment="Center" 
+                                           FontSize="15"
+                                           x:Name="cameraName"/>
+
+                                    <!--<Button FontSize="16"
+                                            Content="{Binding CameraName}"
+                                            Background="White"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center" />-->
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <!--<Setter TargetName="BD_Collector" Property="Background" Value="Gray" />-->
+                                        <Setter TargetName="cameraName" Property="Foreground" Value="White" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="BD_Collector" Property="Background" Value="DarkSeaGreen" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+
+
+        <!--<ListView Grid.Row="1" 
+                  Name="cameraList" 
+                  SelectionMode="Multiple" 
+                  Background="{x:Null}"
+                  ItemsSource="{Binding Cameras,Mode=TwoWay}"
+                  SelectedItem="{Binding Camera,Mode=TwoWay}"
+                  ContextMenu="{StaticResource ResourceKey=sampleContextMenu}"
+                  MouseRightButtonUp="cameraList_MouseRightButtonUp"
+                  MouseLeftButtonUp="cameraList_MouseLeftButtonUp">
+            <ListView.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="2">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ListView.Template>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border Name="BD_Collector" CornerRadius="0" Background="DarkSeaGreen" Width="120" Height="120" Margin="15,0,15,15">
+                                    <Label Content="{Binding CameraName}" 
+                                           VerticalContentAlignment="Center" 
+                                           HorizontalContentAlignment="Center" 
+                                           FontSize="15"/>
+
+                                    -->
+        <!--<Button FontSize="16"
+                                            Content="{Binding CameraName}"
+                                            Background="White"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center" />-->
+        <!--
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BD_Collector" Property="Background" Value="YellowGreen" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="BD_Collector" Property="Background" Value="DarkGreen" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>-->
+
+    </Grid>
+</UserControl>
