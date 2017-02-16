@@ -1,10 +1,12 @@
 ﻿using FACE_ChannelManagement.Models;
+using FACE_ChannelManagement.Services.ChannelServices;
 using Microsoft.Practices.Prism.ViewModel;
 using SING.Data.Controls.ActiveXControl.DZVideoActiveX;
+using SING.Data.Data;
 using SING.Data.Logger;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +16,10 @@ using System.Windows.Resources;
 
 namespace FACE_ChannelManagement.ViewModels
 {
+    /// <summary>
+    /// ChannelPreviewViewModel
+    /// 通道预览视图 viewModel
+    /// </summary>
     public partial class ViewModel : NotificationObject
     {
         #region ViewLableTile
@@ -60,8 +66,6 @@ namespace FACE_ChannelManagement.ViewModels
                 RaisePropertyChanged("WfhList");
             }
         }
-
-
         private ChannelConfigData channelListItem;
         public ChannelConfigData ChannelListItem
         {
@@ -83,7 +87,6 @@ namespace FACE_ChannelManagement.ViewModels
                 RaisePropertyChanged("ChannelList");
             }
         }
-
         #endregion
 
 
@@ -113,7 +116,6 @@ namespace FACE_ChannelManagement.ViewModels
             _dataService.InitialChannel(this);
         }
 
-
         #region 初始化阈值
         private void IniThreshold()
         {
@@ -123,11 +125,31 @@ namespace FACE_ChannelManagement.ViewModels
 
         public void ChannelListItemChanged(object sender, EventArgs e)
         {
+            if (true)
+            {
+
+            }
             if (Cameras != null && Cameras.CurrentItem != null)
             {
                 Camera = Cameras.CurrentItem as ChannelConfigData;
                 CameraPreview = Camera.ChannelCfgData.Name;//视频预览窗口抬头
+                if (varPrevSelectedCamera == null)
+                {
+                    varPrevSelectedCamera = Camera;//上一次选中的摄像头
+                }
+                //not null，即：有一个已被选中，且与当前选中的相同
+                else if (varPrevSelectedCamera != Camera)
+                {
+                    //关闭上一个预览的摄像头
+                    CloseChannelService.CloseChannelFunc(WfhList, varPrevSelectedCamera)();
+
+                    //然后设置当前选中的摄像头为上一个
+                    varPrevSelectedCamera = Camera;
+                }
             }
+
+            ChannelCfg channelCfg = ChannelCfgData.Convert(Camera.ChannelCfgData);
+            ChannelInfoData = _dataService.ConvertToViewData(channelCfg);
 
             ChannelVideoSearch();
         }
@@ -154,7 +176,6 @@ namespace FACE_ChannelManagement.ViewModels
                                                 Camera.ChannelCfgData.TcDescription, (uint)Camera.ChannelCfgData.CaptureCfgData.NPort,
                                                 Camera.ChannelCfgData.CaptureCfgData.TcUID, Camera.ChannelCfgData.CaptureCfgData.TcPSW, 1, 1);
 
-
                     foreach (WindowsFormsHost wfh in WfhList)
                     {
                         if (wfh.Tag == null)
@@ -163,23 +184,14 @@ namespace FACE_ChannelManagement.ViewModels
                             wfh.Tag = Camera.ChannelCfgData.TcChaneelID;
                             break;
                         }
-                    }                    
+                    }
+
+                    CameraVideoPlayerFunc(WfhList, AxVideoControl, Camera)();
+                    SingleScreen(1)();// 设置分屏
                 }
                 else
                 {
-                    foreach (WindowsFormsHost wfh in WfhList)
-                    {
-                        if (wfh.Tag != null && wfh.Tag.ToString() == Camera.ChannelCfgData.TcChaneelID)
-                        {
-                            (wfh.Child as AxDZVideoControl).CloseCamera();
-                            //wfh.Child = null;
-                            //wfh.Child.Dispose();
-                            wfh.Child = null;
-                            wfh.Tag = null;
-                            break;
-                        }
-                    }
-                    Camera.IsOpened = false;
+                    CloseChannelService.CloseChannelFunc(WfhList, Camera)();
                 }
             }
             catch (Exception ex)
@@ -187,140 +199,9 @@ namespace FACE_ChannelManagement.ViewModels
                 System.Windows.MessageBox.Show("摄像机无法连接！");
                 Logger.Error("通道摄像机连接异常，方法名：ChannelListItemChanged", ex);
             }
-
         }
 
         #endregion
-
-
-        #region 设置视频分屏
-        private void IniWindowsFormsHostlist()
-        {
-            WfhList = new List<WindowsFormsHost>();
-            WindowsFormsHost wfh = new WindowsFormsHost();
-            wfh.Tag = null;
-            WfhList.Add(wfh);
-
-            //if (WfhList == null) WfhList = new List<WindowsFormsHost>();
-            //for (int i = 0; i < 1; i++)
-            //{
-            //    WindowsFormsHost wfh = new WindowsFormsHost();
-            //    wfh.Tag = null;
-            //    WfhList.Add(wfh);
-            //}
-        }
-
-        /// <summary>
-        /// 设置分屏,并添加子项
-        /// </summary>
-        /// <param name="i">几分屏</param>
-        //public void SetVideoGridScreen(int sceenCount)
-        //{
-
-        //    if (VideoPartGrid == null) VideoPartGrid = new Grid();
-        //    try
-        //    {
-        //        //设置分屏,添加行列
-        //        int rowCount = 0;
-        //        int ColCount = 0;
-        //        for (int i = 0; i < VideoPartGrid.Children.Count; i++)
-        //        {
-        //            if (VideoPartGrid.Children[i] is Grid)
-        //            {
-        //                ((Grid)VideoPartGrid.Children[i]).Children.Clear();
-        //            }
-        //        }
-        //        //foreach (Grid thing in VideoPartGrid.Children)
-        //        //{
-        //        //    thing.Children.Clear();
-        //        //}
-        //        VideoPartGrid.Children.Clear();
-        //        VideoPartGrid.RowDefinitions.Clear();
-        //        VideoPartGrid.ColumnDefinitions.Clear();
-        //        switch (sceenCount)
-        //        {
-        //            case 1:
-        //                rowCount = 1;
-        //                ColCount = 1;
-        //                break;
-        //            case 2:
-        //                rowCount = 2;
-        //                ColCount = 1;
-        //                break;
-        //            case 3:
-        //                rowCount = 2;
-        //                ColCount = 2;
-        //                break;
-        //            case 4:
-        //                rowCount = 2;
-        //                ColCount = 2;
-        //                break;
-        //            case 5:
-        //            case 6:
-        //                rowCount = 3;
-        //                ColCount = 2;
-        //                break;
-        //            case 7:
-        //            case 8:
-        //            case 9:
-        //                rowCount = 3;
-        //                ColCount = 3;
-        //                break;
-        //            case 10:
-        //            case 11:
-        //            case 12:
-        //                rowCount = 4;
-        //                ColCount = 3;
-        //                break;
-        //            case 13:
-        //            case 14:
-        //            case 15:
-        //            case 16:
-        //                rowCount = 4;
-        //                ColCount = 4;
-        //                break;
-        //        }
-        //        for (int i = 1; i <= rowCount; i++)
-        //        {
-        //            VideoPartGrid.RowDefinitions.Add(new RowDefinition());
-        //        }
-        //        for (int i = 1; i <= ColCount; i++)
-        //        {
-        //            VideoPartGrid.ColumnDefinitions.Add(new ColumnDefinition());
-        //        }
-
-        //        //添加子项
-        //        for (int i = 0; i < sceenCount; i++)
-        //        {
-        //            Grid screenGrid = new Grid();
-        //            ImageSourceConverter imageSourceConverter = new ImageSourceConverter();
-        //            StreamResourceInfo streamResourceInfo;
-        //            string resourceStr = string.Empty;
-        //            resourceStr = @"pack://application:,,,/FACE;component/Resources/noVideoBackground.png";
-        //            streamResourceInfo = Application.GetResourceStream(new Uri(resourceStr, UriKind.Absolute));
-        //            screenGrid.Background = new ImageBrush((ImageSource)imageSourceConverter.ConvertFrom(streamResourceInfo.Stream));
-        //            if (sceenCount == 3 && i == 2)
-        //            {
-        //                screenGrid.SetValue(Grid.RowProperty, i / ColCount);
-        //                screenGrid.SetValue(Grid.ColumnProperty, i % ColCount);
-        //                screenGrid.SetValue(Grid.ColumnSpanProperty, 2);
-        //            }
-        //            else
-        //            {
-        //                screenGrid.SetValue(Grid.RowProperty, i / ColCount);
-        //                screenGrid.SetValue(Grid.ColumnProperty, i % ColCount);
-        //            }
-
-        //            screenGrid.Children.Add(WfhList[i]);
-        //            VideoPartGrid.Children.Add(screenGrid);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-        #endregion
-
+        
     }
 }

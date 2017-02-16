@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Forms.Integration;
 
 namespace FACE_ChannelManagement.Services
 {
@@ -24,5 +26,11 @@ namespace FACE_ChannelManagement.Services
 
         ChannelCameraInfoViewData ConvertToViewData(ChannelCfg thriftData);
         ChannelCfg ConvertToChannelCfgData(ChannelCameraInfoViewData viewData);
+
+
+        int DelChannelService(string channelID, params object[] ip_port);
+
+        Action SingleScreen(Grid VideoPartGrid, List<WindowsFormsHost> windowsFormHostList);
+
     }
 }

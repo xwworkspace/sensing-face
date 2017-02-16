@@ -5,6 +5,8 @@ using FACE_ChannelManagement.Services.ChannelServices;
 using FACE_ChannelManagement.Services.HelperServices;
 using System;
 using FACE_ChannelManagement.Models;
+using System.Windows.Controls;
+using System.Windows.Forms.Integration;
 
 namespace FACE_ChannelManagement.Services
 {
@@ -59,6 +61,22 @@ namespace FACE_ChannelManagement.Services
         {
             ChannelDataService service = new ChannelDataService();
             return service.ConvertToChannelCfgData(viewData);
+        }
+
+        /// <summary>
+        /// 删除当前选中的摄像头（通道）
+        /// </summary>
+        /// <param name="channelID"></param>
+        /// <param name="ip_port"></param>
+        /// <returns></returns>
+        public int DelChannelService(string channelID, params object[] ip_port)
+        {
+            return new ChannelDataService().DelChannel(channelID, ip_port);
+        }
+
+        public Action SingleScreen(Grid VideoPartGrid, List<WindowsFormsHost> windowsFormHostList)
+        {
+            return new ScreenSettingsService().SingleScreen(VideoPartGrid, windowsFormHostList);
         }
         #endregion
     }

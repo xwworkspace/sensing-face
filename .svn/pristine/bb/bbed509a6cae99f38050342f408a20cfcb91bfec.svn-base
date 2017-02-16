@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="FACE_CaptureComparisonManagement.Views.RealtimeCmpListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_CaptureComparisonManagement.Views"
+             xmlns:Converter="clr-namespace:FACE_CaptureComparisonManagement.Converter"
+             mc:Ignorable="d"  Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FACE_CaptureComparisonManagement;component/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+           
+            <ImageBrush x:Key="captureResultBackgroundBorderLine" ImageSource="../Images/captureResultBackgroundBorderLine.png"/>
+            <Converter:MonthYearStringByLongConvert x:Key="MonthYearStringByLongConvert"/>
+            <Converter:HHmmTimeStringByLongConvert x:Key="HHmmTimeStringByLongConvert"/>
+            <Converter:DescriptionByTypeConvert x:Key="DescriptionByTypeConvert"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+      
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <ListView x:Name="realTimeCmpListView" HorizontalContentAlignment="Center" ItemsSource="{Binding RealtimeCmpInfoViewDataCV}" Background="{StaticResource captureResultBackgroundBorderLine}"  BorderThickness="0">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Grid Background="Transparent">
+                                        <Border x:Name="bd" BorderThickness="1" SnapsToDevicePixels="True">
+                                            <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0,3"/>
+                                        </Border>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="bd"  Property="Background" Value="{StaticResource selectedbackground}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource MyCmpHeaderStyle}">
+                        <GridViewColumn Header="抓拍照片" Width="170" x:Name="GVCCapPic">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#346381" BorderThickness="3">
+                                        <StackPanel Orientation="Vertical">
+                                            <Image Width="155" Height="155" Stretch="Fill" Source="{Binding CapImg}" />
+                                            <Label Content="{Binding ChannelName}" HorizontalContentAlignment="Center" Foreground="White" FontFamily="新宋体" FontSize="20" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="详细信息" Width="250" x:Name="GVCRegInfo">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Width="{Binding Path=ActualWidth,ElementName=GVCRegInfo}" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                
+                                        <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Margin="0,5" Text="{Binding Name}" TextAlignment="Left" Foreground="White" TextWrapping="Wrap" FontFamily="新宋体" FontSize="20" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Time,Converter={StaticResource MonthYearStringByLongConvert}}" TextWrapping="Wrap" TextAlignment="Left" Foreground="White" FontFamily="新宋体" FontSize="20" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Time,Converter={StaticResource HHmmTimeStringByLongConvert}}" TextWrapping="Wrap" TextAlignment="Left" Foreground="White" FontFamily="新宋体" FontSize="20" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Type,Converter={StaticResource DescriptionByTypeConvert}}" TextAlignment="Left" Foreground="White" FontFamily="新宋体" TextWrapping="Wrap" FontSize="20" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Score}" TextAlignment="Left"  Foreground="White" FontFamily="新宋体" TextWrapping="Wrap" FontSize="20" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Margin="0,5" Text="{Binding Name}" TextAlignment="Right"  Foreground="White" FontFamily="新宋体" TextWrapping="Wrap" FontSize="20" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Time,Converter={StaticResource MonthYearStringByLongConvert}}" TextAlignment="Right" TextWrapping="Wrap" Foreground="White" FontFamily="新宋体" FontSize="20" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Time,Converter={StaticResource HHmmTimeStringByLongConvert}}" TextAlignment="Right" TextWrapping="Wrap" Foreground="White" FontFamily="新宋体" FontSize="20" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Type,Converter={StaticResource DescriptionByTypeConvert}}" TextAlignment="Right" Foreground="White" FontFamily="新宋体" FontSize="20" TextWrapping="Wrap" FontWeight="Bold"/>
+                                            <TextBlock Margin="0,5" Text="{Binding Score}" TextAlignment="Right" Foreground="White" FontFamily="新宋体" FontSize="20" TextWrapping="Wrap" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <!--<TextBlock Width="Auto" FontSize="20" FontWeight="Bold"  Foreground="White" TextAlignment ="Right"  Text="{Binding Path=RegInfo}" MinWidth="{Binding Path=ActualWidth,ElementName=GVCRegInfo}" />-->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="注册照片" Width="170" x:Name="GVCCmpPic" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#346381" BorderThickness="3">
+                                        <StackPanel Orientation="Vertical">
+                                            <Image Width="155" Height="155" Stretch="Fill" Source="{Binding ObjImg}" />
+                                            <Label Content="{Binding ChannelName}" HorizontalContentAlignment="Center" Foreground="White" FontFamily="新宋体" FontSize="20" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="FACE_ChannelManagement.Views.UserControls.ChannelLocationUserControls.LocationTextControls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_ChannelManagement.Views.UserControls.ChannelLocationUserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="0" Grid.Column="0" Text="通道名称：" />
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="0" Grid.Column="2" Text="通道类型：" />
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="1" Grid.Column="0" Text="抓拍服务器 IP：" />
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="1" Grid.Column="2" Text="抓拍服务器端口：" />
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="2" Grid.Column="0" Text="视频源 IP：" />
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="2" Grid.Column="2" Text="视频源端口：" />
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="3" Grid.Column="0" Text="登陆相机用户名：" />
+        <TextBlock TextAlignment="Right" Margin="5" Grid.Row="3" Grid.Column="2" Text="登陆相机端密码：" />
+        <!--<TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="4" Grid.Column="0" Text="1：" />
+        <TextBlock TextAlignment="Right" Margin="5,10" Grid.Row="4" Grid.Column="2" Text="1：" />-->
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin="5,10" Text="{Binding ChannelInfoData.ChannelName,Mode=OneWay}"/>
+        <TextBlock Grid.Row="0" Grid.Column="3" Margin="5,10" Text="{Binding ChannelInfoData.ChannelType,Mode=OneWay}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="5,10" Text="{Binding ChannelInfoData.CaptureAddr,Mode=OneWay}"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" Margin="5,10" Text="{Binding ChannelInfoData.CapturePort,Mode=OneWay}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,10" Text="{Binding ChannelInfoData.VideoAddr,Mode=OneWay}"/>
+        <TextBlock Grid.Row="2" Grid.Column="3" Margin="5,10" Text="{Binding ChannelInfoData.VideoPort,Mode=OneWay}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,10" Text="{Binding ChannelInfoData.UID,Mode=OneWay}"/>
+        <TextBlock Grid.Row="3" Grid.Column="3" Margin="5,10" Text="{Binding ChannelInfoData.PSW,Mode=OneWay}"/>
+        <!--<TextBlock Grid.Row="4" Grid.Column="1" Margin="5,10" Text=""/>
+        <TextBlock Grid.Row="4" Grid.Column="3" Margin="5,10" Text=""/>-->
+
+    </Grid>
+</UserControl>

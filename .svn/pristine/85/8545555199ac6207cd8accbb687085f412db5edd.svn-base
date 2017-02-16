@@ -1,0 +1,62 @@
+﻿using Microsoft.Practices.Prism.ViewModel;
+
+namespace FACE_ChannelManagement.ViewModels
+{
+    /// <summary>
+    /// ChannelLocationViewModel
+    /// </summary>
+    public partial class ViewModel : NotificationObject
+    {
+        #region Command
+
+        #endregion
+
+        #region CommandFunc
+
+        #endregion
+
+        #region viewData Properties
+
+        string _lvSelectedChannelType;//通道类型
+        string _lvCameraSourceType;//视频源名称
+
+        public string LvSelectedChannelType
+        {
+            get { return _lvSelectedChannelType; }
+            set
+            {
+                _lvSelectedChannelType = value;
+                RaisePropertyChanged("LvSelectedChannelType");
+            }
+        }
+
+        public string LvCameraSourceType
+        {
+            get { return _lvCameraSourceType; }
+            set
+            {
+                _lvCameraSourceType = value;
+                RaisePropertyChanged("LvCameraSourceType");
+            }
+        }
+        #endregion
+    }
+
+    public enum ChannelType
+    {
+        ComeIn = 0,
+        ComeOut = 1
+    }
+
+    public enum VideoSourceType
+    {
+        Null = 0,
+        NetworkCamera = 1,
+        UsbCamera = 2,
+        HaiKangCamera = 3,
+        YuShiCamera = 4,
+        DaHuaCamera = 5,
+        DaHuaSdkCamera = 6,
+        HaiKang8200Camera = 7
+    }
+}

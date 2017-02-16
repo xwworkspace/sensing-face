@@ -40,7 +40,7 @@ namespace FACE_ChannelManagement.ViewModels
 
             this.IniThreshold();//初始化阈值
             this.InitialChannel();//初始化通道
-            this.IniWindowsFormsHostlist();//初始化对比结果窗口
+            this.IniWindowsFormsHostlist()();//初始化对比结果窗口
             //this.SetVideoGridScreen(1);
         }
 

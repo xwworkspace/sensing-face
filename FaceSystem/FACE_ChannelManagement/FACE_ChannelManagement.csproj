@@ -128,12 +128,16 @@
     <Compile Include="Models\ChannelConfigData.cs" />
     <Compile Include="Models\ChannelCameraInfoViewData.cs" />
     <Compile Include="Models\ChannelTreeUtilitiesModel.cs" />
+    <Compile Include="Models\ChannelTypeNameViewData.cs" />
     <Compile Include="Models\DataAccess.cs" />
     <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\TreeNodeCtrl.cs" />
+    <Compile Include="Models\VideoSourceTypeNameViewData.cs" />
     <Compile Include="ModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ChannelServices\CloseChannelService.cs" />
     <Compile Include="Services\ChannelServices\InitChannelService.cs" />
+    <Compile Include="Services\ChannelServices\ScreenSettingsService.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\HelperServices\ChannelDataService.cs" />
     <Compile Include="Services\HelperServices\ThresholdService.cs" />
@@ -144,8 +148,10 @@
     <Compile Include="ViewModels\ChannelCameraInfoViewModel.cs" />
     <Compile Include="ViewModels\ChannelGridViewModel.cs" />
     <Compile Include="ViewModels\ChannelGroupViewModel.cs" />
+    <Compile Include="ViewModels\ChannelLocationViewModel.cs" />
     <Compile Include="ViewModels\ChannelPreviewViewModel.cs" />
-    <Compile Include="ViewModels\ChannelTreeViewModel.cs" />
+    <Compile Include="Models\ChannelTreeViewData.cs" />
+    <Compile Include="ViewModels\UtilitiesViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -158,6 +164,9 @@
     </Compile>
     <Compile Include="Views\UserControls\ChannelLocationControl.xaml.cs">
       <DependentUpon>ChannelLocationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChannelLocationUserControls\LocationTextControls.xaml.cs">
+      <DependentUpon>LocationTextControls.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ChannelPreviewControl.xaml.cs">
       <DependentUpon>ChannelPreviewControl.xaml</DependentUpon>
@@ -189,6 +198,10 @@
     <Page Include="Views\UserControls\ChannelLocationControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\ChannelLocationUserControls\LocationTextControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\ChannelPreviewControl.xaml">
       <Generator>MSBuild:Compile</Generator>

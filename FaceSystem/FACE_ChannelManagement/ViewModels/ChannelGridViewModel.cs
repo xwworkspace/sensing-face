@@ -8,6 +8,10 @@ using SING.Data.Logger;
 using System.ComponentModel;
 using System.Collections.Generic;
 using SING.Data.Data;
+using System.Collections;
+using System.Windows.Data;
+using System.Windows.Forms.Integration;
+using SING.Data.Controls.ActiveXControl.DZVideoActiveX;
 
 namespace FACE_ChannelManagement.ViewModels
 {
@@ -17,76 +21,163 @@ namespace FACE_ChannelManagement.ViewModels
     /// </summary>
     public partial class ViewModel : NotificationObject
     {
+        ChannelConfigData varPrevSelectedCamera = null;//上一个选中的摄像头（通道）
+
+        #region Command
+        /// <summary>
+        /// 编辑摄像头参数 （即：通道参数信息）
+        /// </summary>
+        public ICommand EditCameraCommand { get; private set; }
+        /// <summary>
+        /// 删除摄像头
+        /// </summary>
+        public ICommand DeleteCameraCommand { get; private set; }
+        /// <summary>
+        /// 添加摄像头信息
+        /// </summary>
+        public ICommand AddCameraInfoCommand { get; private set; }
+
+        void InitCommand()
+        {
+            EditCameraCommand = new DelegateCommand<object>(EditCameraFunc);
+            DeleteCameraCommand = new DelegateCommand<object>(DeleteCameraFunc);
+            AddCameraInfoCommand = new DelegateCommand<object>(AddCameraInfoFunc);
+        }
+        #endregion
+
+        #region CommandFunc
+
+        /// <summary>
+        /// 删除当前摄像头 及其通道配置信息
+        /// </summary>
+        /// <param name="obj"></param>
+        private void DeleteCameraFunc(object obj)
+        {
+            try
+            {
+                //todo(已经完成) 先关闭视频 再进行删除
+                int success = -1;
+
+                if (MessageBox.Show("您确定要删除该通道？", "提示信息", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                {
+                    //ChannelListItemChanged 当前选中的摄像头
+                    //删除摄像头（通道）
+                    success = _dataService.DelChannelService(Camera.ChannelCfgData.TcChaneelID);
+
+                    if (success == 0)
+                    {
+                        MessageBox.Show("删除通道成功！");
+                        //todo(已经完成 ) 添加刷新通道的方法
+                        Action act = () =>
+                        {
+                            if (Camera.IsOpened == true)
+                            {
+                                foreach (WindowsFormsHost wfh in WfhList)
+                                {
+                                    if (wfh.Tag != null && wfh.Tag.ToString() == Camera.ChannelCfgData.TcChaneelID)
+                                    {
+                                        (wfh.Child as AxDZVideoControl).CloseCamera();
+                                        wfh.Child = null;
+                                        wfh.Tag = null;
+                                    }
+                                }
+                                Camera.IsOpened = false;
+                            }
+                        };
+
+                        act();
+
+                        ChannelList.Remove(Camera);
+                        Cameras = new ListCollectionView(ChannelList);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除通道失败！");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(string.Format("ViewModel.DeleteCameraFunc\n摄像头预览出现异常：【{0}】", ex.Message));
+            }
+        }
+
+        void AddCameraInfoFunc(object i)
+        {
+            channelInfoData = new ChannelCameraInfoViewData();
+
+            IsEditChannelCameraInfo = Visibility.Visible;
+            IsViewChannelList = Visibility.Collapsed;
+
+            channelInfoData.Title = "添加通道数据";
+            isAddChannelData = true;//添加新的通道数据
+            //初始化通道数据
+            this.InitChannelCameraInfoData();
+        }
+
+        /// <summary>
+        /// 编辑当前摄像头 及其通道配置信息
+        /// </summary>
+        /// <param name="obj"></param>
+        private void EditCameraFunc(object obj)
+        {
+            try
+            {
+                IsEditChannelCameraInfo = Visibility.Visible;
+                IsViewChannelList = Visibility.Collapsed;
+
+                channelInfoData.Title = "编辑通道数据";
+                isAddChannelData = false;//添加新的通道数据
+
+                //加载通道类型
+                List<string> channelType = new List<string>();
+                _dataService.InitChannelType(this, ref channelType);
+
+                //加载视频源类型
+                List<string> cameraSourceType = new List<string>();
+                _dataService.InitChannelCameraSourceType(this, ref cameraSourceType);
+
+                ChannelConfigData da = obj as ChannelConfigData;
+                ChannelCfg thriftData = ChannelCfgData.Convert(da.ChannelCfgData);
+                channelInfoData = _dataService.ConvertToViewData(thriftData);//视图与DB数据转换
+                channelInfoData.ChannelType = channelType;
+                channelInfoData.CaptureType = cameraSourceType;
+
+                RaisePropertyChanged("ChannelInfoData");//刷新
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(string.Format("ViewModel.EditCameraFunc\n摄像头预览出现异常：【{0}】", ex.Message));
+            }
+        }
+        #endregion
+
         #region 方法
         /// <summary>
         /// 初始化器
         /// </summary>
         void InitChannelGridViewModel()
         {
-            PreviewCameraCommand = new DelegateCommand(PreviewCameraFunc);
-            EditCameraCommand = new DelegateCommand<object>(EditCameraFunc);
-            DeleteCameraCommand = new DelegateCommand<object>(DeleteCameraFunc);
-            AddCameraInfoCommand = new DelegateCommand(AddCameraInfoFunc);
+            this.InitCommand();
 
             IsViewChannelList = Visibility.Visible;
             IsEditChannelCameraInfo = Visibility.Collapsed;
-
-            //初始化OCX控件载体
         }
 
-        void AddCameraInfoFunc()
-        {
-            IsEditChannelCameraInfo = Visibility.Visible;
-            IsViewChannelList = Visibility.Collapsed;
 
-            ChannelInfoData.Title = "添加通道数据";
-            isAddChannelData = true;//添加新的通道数据
-            //初始化通道数据
-            this.InitChannelCameraInfoData();
-
-        }
         #endregion //方法
 
         #region Properties
 
-        Visibility _isViewChannelList;//是否查看通道列表
-        Visibility _isEditChannelCameraInfo;//是否编辑摄像头信息       
-        ChannelConfigData _linkCameraChannel;//连接摄像头所需的参数
-        private bool isSelectedCamera;
+        Visibility _isViewChannelList = Visibility.Visible;//是否查看通道列表
+        Visibility _isEditChannelCameraInfo = Visibility.Collapsed;//是否编辑摄像头信息  
 
-        private ChannelTreeViewModel channelVModel { get; set; }
+        private ChannelTreeViewData channelVModel { get; set; }
         private ICollectionView cameras;
         private ChannelConfigData camera;
 
         #region 通道分组及摄像头通道
-
-        #region deleted
-        //private ChannelCfgViewData _channelCurrentItem;
-
-        //public ChannelCfgViewData ChannelCurrentItem
-        //{
-        //    get { return _channelCurrentItem; }
-        //    set
-        //    {
-        //        _channelCurrentItem = value;
-        //        RaisePropertyChanged("ChannelCurrentItem");
-        //    }
-        //}
-
-        //private ICollectionView _channelListCV;
-        //public ICollectionView ChannelListCV
-        //{
-        //    get
-        //    {
-        //        return _channelListCV;
-        //    }
-        //    set
-        //    {
-        //        _channelListCV = value;
-        //        RaisePropertyChanged("ChannelListCV");
-        //    }
-        //} 
-        #endregion
 
         /// <summary>
         /// 通道组下所有的摄像头列表
@@ -109,15 +200,6 @@ namespace FACE_ChannelManagement.ViewModels
 
         #region Properties
 
-        /// <summary>
-        /// 连接到摄像头所需要的参数
-        /// </summary>
-        public ChannelConfigData LinkCameraChannel
-        {
-            get { return _linkCameraChannel; }
-            set { _linkCameraChannel = value; }
-        }
-
         public Visibility IsViewChannelList
         {
             get { return _isViewChannelList; }
@@ -134,86 +216,5 @@ namespace FACE_ChannelManagement.ViewModels
 
         #endregion //Properties
 
-        #region Command
-        public ICommand PreviewCameraCommand { get; private set; }
-        /// <summary>
-        /// 编辑摄像头参数 （即：通道参数信息）
-        /// </summary>
-        public ICommand EditCameraCommand { get; private set; }
-        /// <summary>
-        /// 删除摄像头
-        /// </summary>
-        public ICommand DeleteCameraCommand { get; private set; }
-        /// <summary>
-        /// 添加摄像头信息
-        /// </summary>
-        public ICommand AddCameraInfoCommand { get; private set; }
-        #endregion //Command
-
-        #region Command指令执行方法
-        private void PreviewCameraFunc()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(string.Format("ViewModel.PreviewCameraFunc\n摄像头预览出现异常：【{0}】", ex.Message));
-            }
-        }
-
-        /// <summary>
-        /// 删除当前摄像头 及其通道配置信息
-        /// </summary>
-        /// <param name="obj"></param>
-        private void DeleteCameraFunc(object obj)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(string.Format("ViewModel.DeleteCameraFunc\n摄像头预览出现异常：【{0}】", ex.Message));
-            }
-        }
-
-        /// <summary>
-        /// 编辑当前摄像头 及其通道配置信息
-        /// </summary>
-        /// <param name="obj"></param>
-        private void EditCameraFunc(object obj)
-        {
-            try
-            {
-                IsEditChannelCameraInfo = Visibility.Visible;
-                IsViewChannelList = Visibility.Collapsed;
-
-                channelInfoData.Title = "编辑通道数据";
-                isAddChannelData = false;//添加新的通道数据
-                                
-                //加载通道类型
-                List<string> channelType = new List<string>();
-                _dataService.InitChannelType(this, ref channelType);                
-                
-                //加载视频源类型
-                List<string> cameraSourceType = new List<string>();
-                _dataService.InitChannelCameraSourceType(this, ref cameraSourceType);               
-
-                ChannelConfigData da = obj as ChannelConfigData;
-                ChannelCfg thriftData = ChannelCfgData.Convert(da.ChannelCfgData);
-                channelInfoData = _dataService.ConvertToViewData(thriftData);//视图与DB数据转换
-                channelInfoData.ChannelType = channelType;
-                channelInfoData.CaptureType = cameraSourceType;
-
-                RaisePropertyChanged("ChannelInfoData");//刷新
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(string.Format("ViewModel.EditCameraFunc\n摄像头预览出现异常：【{0}】", ex.Message));
-            }
-        }
-        #endregion
     }
 }

@@ -1,0 +1,327 @@
+﻿using FACE_ChannelManagement.Models;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.ViewModel;
+using SING.Data.Data;
+using SING.Data.Logger;
+using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Input;
+
+namespace FACE_ChannelManagement.ViewModels
+{
+    public partial class ViewModel : NotificationObject
+    {
+        #region Command
+        public ICommand CameraInfoSaveCommand { get; set; }
+        public ICommand CameraInfoCancelCommand { get; set; }
+        public ICommand CameraInfoResetCommand { get; set; }
+
+        void InitCameraInfoViewCommand()
+        {
+            CameraInfoSaveCommand = new DelegateCommand<object>(CameraInfoSaveFunc);
+            CameraInfoResetCommand = new DelegateCommand(CameraInfoResetFunc);
+            CameraInfoCancelCommand = new DelegateCommand(CameraInfoCancelFunc);
+        }
+
+        #endregion //Command
+
+        #region CommandFunc
+        /// <summary>
+        /// 保存
+        /// </summary>
+        private void CameraInfoSaveFunc(object viewDataObj)
+        {
+            try
+            {
+                int isSuccess = -1;
+                //判断是添加还是修改
+                //if (!CheckInfo())
+                //{
+                //    return;
+                //}
+                ChannelCfg channelCfg = new ChannelCfg();
+                #region channelConfigInfo
+                ChannelCameraInfoViewData viewData = viewDataObj as ChannelCameraInfoViewData;
+                channelCfg = _dataService.ConvertToChannelCfgData(viewData);//DB数据与视图数据转化
+                ChannelCfgData channelCfgData = ChannelCfgData.ConvertToData(channelCfg);
+
+                #endregion
+
+                if (isAddChannelData)//新通道
+                    isSuccess = _dataService.InitAddChannelData(this, channelCfg);
+                else//修改通道
+                    isSuccess = _dataService.InitModifyChannelData(this, channelCfg);
+
+                if (isSuccess == 0)
+                {
+                    if (MessageBox.Show("保存成功", "保存结果", MessageBoxButton.OK) == MessageBoxResult.OK)
+                    {
+                        IsViewChannelList = Visibility.Visible;
+                        IsEditChannelCameraInfo = Visibility.Collapsed;
+
+                        if (isAddChannelData)
+                        {
+                            Camera = new ChannelConfigData()
+                            {
+                                ChannelCfgData = channelCfgData,
+                                IsOpened = true
+                            };
+
+                            if (ChannelList == null)
+                            {
+                                ChannelList = new List<ChannelConfigData>();
+                            }
+                            ChannelList.Add(Camera);
+                            Cameras = new ListCollectionView(ChannelList);
+                            CameraPreview = Camera.ChannelCfgData.Name;//视频预览窗口抬头
+                        }
+
+                        //修改通道 如果通道已经被打开则关闭
+                        //if (!cIViewModel.Title.Equals("添加通道"))
+                        //{
+                        //    CloseVideoDelegate();
+                        //}
+                        //this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("操作失败！");
+                }
+                /**
+                 * 刷新通道列表  ---
+                 * **/
+            }
+            catch (Exception ex)
+            {
+                Logger.Info(string.Format("CameraInfoSaveFunc保存通道信息时出现异常：【{0}】", ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// 重置通道编号
+        /// </summary>
+        private void CameraInfoResetFunc()
+        {
+            channelInfoData.ChannelId = System.Guid.NewGuid().ToString().Replace("-", "");
+
+            RaisePropertyChanged("ChannelInfoData");
+        }
+
+        private void CameraInfoCancelFunc()
+        {
+            IsViewChannelList = Visibility.Visible;
+            IsEditChannelCameraInfo = Visibility.Collapsed;
+        }
+        #endregion //CommandFunc
+
+        public void InitChannelCameraInfoViewModel()
+        {
+            InitCameraInfoViewCommand();
+        }
+
+        bool isAddChannelData;//是否为 新的通道数据
+
+        /// <summary>
+        /// 检测各项的值
+        /// </summary>
+        private bool CheckInfo()
+        {
+            //    //通道uuid，默认生成
+            //    if (!string.IsNullOrEmpty(cIViewModel.ChannelId))
+            //    {
+            //        _ChannelCfg.TcChaneelID = cIViewModel.ChannelId;
+            //    }
+            //    //通道名称，必填项
+            //    if (!string.IsNullOrEmpty(cIViewModel.ChannelName))
+            //    {
+            //        _ChannelCfg.Name = cIViewModel.ChannelName;
+            //    }
+            //    else
+            //    {
+            //        //MyMessage.showYes("通道名称必填！");
+            //        MyMessage.showYes("通道名称必填");
+            //        return false;
+            //    }
+            //    //备注
+            //    if (!string.IsNullOrEmpty(cIViewModel.Remark))
+            //    {
+            //        _ChannelCfg.TcDescription = cIViewModel.Remark;
+            //    }
+            //    //抓拍服务器IP，必须项
+            //    if (!string.IsNullOrEmpty(cIViewModel.CaptureAddr))
+            //    {
+            //        string message = _validationRule.ipValidationRule(cIViewModel.CaptureAddr);
+            //        if (message != "")
+            //        {
+            //            //MyMessage.showYes(message);
+            //            MyMessage.showYes(message);
+            //            return false;
+            //        }
+            //        _ChannelCfg.Addr = cIViewModel.CaptureAddr;
+            //    }
+            //    else
+            //    {
+            //        MyMessage.showYes("抓拍服务器IP必填！");
+            //        return false;
+            //    }
+            //    //抓拍服务器端口必输项
+            //    if (!string.IsNullOrEmpty(cIViewModel.CapturePort))
+            //    {
+            //        string message = _validationRule.intValidationRule(cIViewModel.CapturePort);
+            //        if (message != "")
+            //        {
+            //            //MyMessage.showYes(message);
+            //            MyMessage.showYes(message);
+            //            return false;
+            //        }
+            //        _ChannelCfg.Port = int.Parse(cIViewModel.CapturePort);
+            //    }
+            //    else
+            //    {
+            //        MyMessage.showYes("抓拍服务器端口必填！");
+            //        return false;
+            //    }
+
+            //    //视频源类型
+            //    _ChannelCfg.CaptureCfg = new CaptureCfg();
+            //    _ChannelCfg.CaptureCfg.NCaptureType = cIViewModel.SelectedType;
+            //    //视频源地址
+            //    if (!string.IsNullOrEmpty(cIViewModel.VideoAddr))
+            //    {
+            //        string message = _validationRule.ipValidationRule(this.txttcAddr.Text.Trim());
+            //        if (message != "")
+            //        {
+            //            MyMessage.showYes(message);
+            //            return false;
+            //        }
+            //        _ChannelCfg.CaptureCfg.TcAddr = cIViewModel.VideoAddr;
+            //    }
+            //    else
+            //    {
+            //        if (cIViewModel.SelectedType != 2)
+            //        {
+            //            MyMessage.showYes("视频源地址必输项");
+            //            return false;
+            //        }
+            //    }
+
+            //    //登录相机用户名
+            //    if (!string.IsNullOrEmpty(cIViewModel.UID))
+            //    {
+            //        _ChannelCfg.CaptureCfg.TcUID = cIViewModel.UID;
+            //    }
+            //    else
+            //    {
+            //        if (cIViewModel.SelectedType != 2)
+            //        {
+            //            //MyMessage.showYes("登录相机用户名必输项");
+            //            MyMessage.showYes("登录相机用户名必输项");
+            //            return false;
+            //        }
+            //    }
+            //    //登录相机端密码
+            //    if (!string.IsNullOrEmpty(cIViewModel.PSW))
+            //    {
+            //        _ChannelCfg.CaptureCfg.TcPSW = cIViewModel.PSW;
+            //    }
+            //    else
+            //    {
+            //        if (cIViewModel.SelectedType != 2)
+            //        {
+            //            MyMessage.showYes("登录相机端密码必输项");
+            //            return false;
+            //        }
+            //    }
+            //    //视频源端口
+            //    if (!string.IsNullOrEmpty(cIViewModel.VideoPort))
+            //    {
+            //        string message = _validationRule.intValidationRule(this.txtnPort.Text.Trim());
+            //        if (message != "")
+            //        {
+            //            //MyMessage.showYes(message);
+            //            MyMessage.showYes(message);
+            //            return false;
+            //        }
+            //        _ChannelCfg.CaptureCfg.NPort = int.Parse(cIViewModel.VideoPort);
+            //    }
+            //    else
+            //    {
+            //        MyMessage.showYes("视频源端口必输项");
+            //        return false;
+            //    }
+
+            //    //人脸参数判断
+            //    _ChannelCfg.CatchFaceCfg = new CatchFaceCfg();
+            //    _ChannelCfg.CatchFaceCfg.NMinFace = Convert.ToInt32(cIViewModel.MinFace);
+            //    _ChannelCfg.CatchFaceCfg.NMinQuality = Convert.ToInt32(cIViewModel.MinQuality);
+            //    _ChannelCfg.CatchFaceCfg.NMinCapDistance = Convert.ToInt32(cIViewModel.MinCapDistance);
+            //    _ChannelCfg.CatchFaceCfg.NMaxFaceSaveDistance = Convert.ToInt32(cIViewModel.MaxFaceSaveDistance);
+            //    _ChannelCfg.CatchFaceCfg.NYaw = Convert.ToInt32(cIViewModel.Yaw);
+            //    _ChannelCfg.CatchFaceCfg.NPitch = Convert.ToInt32(cIViewModel.Pitch);
+            //    _ChannelCfg.CatchFaceCfg.NYoll = Convert.ToInt32(cIViewModel.Yoll);
+
+
+            return true;
+        }
+
+
+        #region Data
+
+        private ChannelCameraInfoViewData channelInfoData = new ChannelCameraInfoViewData();
+        public ChannelCameraInfoViewData ChannelInfoData
+        {
+            get { return channelInfoData; }
+            set { channelInfoData = value; RaisePropertyChanged("ChannelInfoData"); }
+        }
+
+        /// <summary>
+        /// 初始化页面数据
+        /// </summary>
+        private void InitChannelCameraInfoData()
+        {
+            #region 添加通道，初始化部分通道内容
+
+            channelInfoData.ChannelId = System.Guid.NewGuid().ToString().Replace("-", "");//初始化通道编码
+
+            //加载通道类型
+            List<string> channelType = new List<string>();
+            _dataService.InitChannelType(this, ref channelType);
+            if (channelType.Count > 0)
+            {
+                channelInfoData.ChannelType = channelType;
+            }
+            else
+            {
+                channelInfoData.ChannelType.Add("-无数据可用-");
+            }
+
+
+            //加载视频源类型
+            List<string> cameraSourceType = new List<string>();
+            _dataService.InitChannelCameraSourceType(this, ref cameraSourceType);
+            if (cameraSourceType.Count > 0)
+            {
+                channelInfoData.CaptureType = cameraSourceType;
+            }
+            else
+            {
+                channelInfoData.CaptureType.Add("-无数据可用-");
+            }
+
+            channelInfoData.MinFace = "96";
+            channelInfoData.MinCapDistance = "2";
+            channelInfoData.Yaw = "30";
+            channelInfoData.Pitch = "30";
+            channelInfoData.Yoll = "30";
+
+            RaisePropertyChanged("ChannelInfoData");
+
+            #endregion
+        }
+
+        #endregion
+    }
+}

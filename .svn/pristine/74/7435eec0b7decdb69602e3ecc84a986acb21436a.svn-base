@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="FACE_CaptureComparisonManagement.Views.RealtimeCmpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_CaptureComparisonManagement.Views"
+             mc:Ignorable="d" >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FACE_CaptureComparisonManagement;component/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ImageBrush x:Key="comboThresholdBackground" Stretch="UniformToFill" ImageSource="../Images/identifyResultBottom.png"/>
+            <ImageBrush x:Key="ComImageCountBackground" Stretch="UniformToFill" ImageSource="../Images/captureIdentifyAreaBluePhotoBottom.png"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="Distinguish" Background="{StaticResource captureIdentifyAreaPhotoBackground}">
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Stretch="Fill" Source="../Images/identifyResultTop.png"></Image>
+        <Grid Grid.Row="1" Background="{StaticResource ComImageCountBackground}">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label FontSize="15" Content="一共识别到了" FontWeight="Bold"/>
+                <Label FontSize="15" FontWeight="Bold" Content="{Binding ComImageCount}"/>
+                <Label FontSize="15" FontWeight="Bold" Content="张照片"/>
+            </StackPanel>
+        </Grid>
+
+        <local:RealtimeCmpListView Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        
+        <Grid Grid.Row="3" Background="{StaticResource comboThresholdBackground}">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Label Foreground="White" FontSize="11" Content="阈值"></Label>
+                <ComboBox x:Name="comboThreshold" Height="24" ItemsSource="{Binding ThresholdCV}" SelectedItem="{Binding SelectedThreshold}" Style="{DynamicResource ComboBoxStyle2}" Width="100"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

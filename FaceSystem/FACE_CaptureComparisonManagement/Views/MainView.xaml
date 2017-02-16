@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="FACE_CaptureComparisonManagement.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FACE_CaptureComparisonManagement.Views"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:Converter="clr-namespace:SING.Infrastructure.Converter;assembly=SING.Infrastructure"
+             mc:Ignorable="d" Background="Transparent" d:DesignHeight="900" d:DesignWidth="1540">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FACE_CaptureComparisonManagement;component/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Converter:TestBindingConvert x:Key="TestBindingConvert"/>
+            <ImageBrush x:Key="SystemBackground"  ImageSource="../Images/SystemBackground.jpg"  Stretch="UniformToFill"/>
+            <ImageBrush x:Key="channelDownBackground" ImageSource="../Images/channelDownBackground.png" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="VideoPreview" ImageSource="../Images/VideoPreviewMiddle.png"/>
+            <ImageBrush x:Key="noVideoBackground" ImageSource="../Images/noVideoBackground.png"/>
+            <ImageBrush x:Key="VideoPreviewbottom" ImageSource="../Images/VideoPreviewbottom.png" Stretch="UniformToFill"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource SystemBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.65*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <local:ChannelView VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <GridSplitter Grid.Column="0" Width="5" Margin="0,0,-5,0" Background="Transparent"/>
+                <Grid Grid.Column="1" Margin="5,0,0,0" Background="{StaticResource VideoPreview}">
+                    <Grid.Effect>
+                        <DropShadowEffect ShadowDepth="5"></DropShadowEffect>
+                    </Grid.Effect>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Image Stretch="Fill" Source="../Images/VideoPreviewTop.png"></Image>
+                        <!--<ToggleButton Content="打开视频" Foreground="White"  Style="{StaticResource CaptureVideoButton}" Background="Transparent" x:Name="btnSetWindowVideo" Margin="0,15,100,15"  Width="120" Height="30" >
+                        </ToggleButton>
+                        <ToggleButton Content="暂停" Foreground="White"  Style="{StaticResource CaptureVideoButton}"  Background="Transparent" x:Name="btnPauseVideoFile"  Margin="150,15,0,15"  Width="120" Height="30" >
+                        </ToggleButton>
+                        <ToggleButton Content="关闭" Foreground="White"  Style="{StaticResource CaptureVideoButton}"  Background="Transparent" x:Name="btnCloseVideoFile"  Margin="400,15,0,15"  Width="120" Height="30" >
+                        </ToggleButton>-->
+                    </Grid>
+                    <ContentControl x:Name="VideoPartName" Content="{Binding VideoPartGrid}" Visibility="Visible" Grid.Row="1" Background="{StaticResource noVideoBackground}"/>
+                    <Grid Grid.Row="2" Background="{StaticResource VideoPreviewbottom}">
+                        <ToggleButton Content="设置窗口布局" Foreground="White" Style="{StaticResource CaptureRecordButton}" Background="Transparent" x:Name="btnSetWindowLayout" Margin="15" Width="120" Height="30" >
+                        </ToggleButton>
+                        <Popup x:Name="Pop" PopupAnimation="Slide" PlacementTarget="{Binding ElementName=btnSetWindowLayout}" Placement="Top"
+                                          IsOpen="{Binding ElementName=btnSetWindowLayout,Path=IsChecked,Mode=TwoWay}" StaysOpen="False" >
+                            <Border Background="Transparent"  CornerRadius="8" Width="120" Height="200" BorderBrush="#FF000000" BorderThickness="1">
+                                <Grid x:Name="gridSetWindowLayout">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <telerik:RadButton Grid.Row="0" Grid.Column="0" Margin="1" x:Name="btnOneScreen" Content="1" Background="Transparent" Foreground="White" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnOneScreen"/>
+                                    <telerik:RadButton Grid.Row="0" Grid.Column="1" Margin="1" x:Name="btnTowScreen" Content="2" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnTowScreen"/>
+                                    <telerik:RadButton Grid.Row="1" Grid.Column="0" Margin="1" x:Name="btnThreeScreen" Content="3" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnThreeScreen"/>
+                                    <telerik:RadButton Grid.Row="1" Grid.Column="1" Margin="1" x:Name="btnFourScreen" Content="4" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnFourScreen"/>
+                                    <telerik:RadButton Grid.Row="2" Grid.Column="0" Margin="1" x:Name="btnSixScreen" Content="6" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnSixScreen"/>
+                                    <telerik:RadButton Grid.Row="2" Grid.Column="1" Margin="1" x:Name="btnNineScreen" Content="9" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnNineScreen"/>
+                                    <telerik:RadButton Grid.Row="3" Grid.Column="0" Margin="1" x:Name="btnTwelveScreen" Content="12" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnTwelveScreen"/>
+                                    <telerik:RadButton Grid.Row="3" Grid.Column="1" Margin="1" x:Name="btnSixteenScreen" Content="16" Foreground="White" Background="Transparent" Click="btnOneScreen_Click" Command="{Binding Path=CommandSetScreen}" CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}" Tag="btnSixteenScreen"/>
+                                </Grid>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Background="{StaticResource captureIdentifyAreaPhotoBackground}">
+                <StackPanel Orientation="Vertical">
+                    <GridSplitter HorizontalAlignment="Stretch" Margin="0,0,0,-5" VerticalAlignment="Top" Height="5" Background="Transparent"/>
+                    <local:RealtimeCapView Margin="0,5,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <local:RealtimeCmpView Grid.Column="1" Margin="5,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+    </Grid>
+</UserControl>
+
+
+
