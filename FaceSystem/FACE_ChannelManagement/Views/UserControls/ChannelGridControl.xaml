@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FACE_ChannelManagement.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="500">
+             d:DesignHeight="300" d:DesignWidth="600">
 
     <UserControl.Resources>
         <ContextMenu x:Key="sampleContextMenu">
-            <MenuItem Header="编 辑  " Command="{Binding EditCameraCommand}" CommandParameter="{Binding Cameras.CurrentItem,Mode=OneWay}" />
-            <MenuItem Header="删 除  " Command="{Binding DeleteCameraCommand}" CommandParameter="{Binding Cameras.CurrentItem,Mode=OneWay}" />
+            <MenuItem Header="编 辑" Command="{Binding EditCameraCommand}" CommandParameter="{Binding Cameras.CurrentItem,Mode=OneWay}" />
+            <MenuItem Header="删 除" Command="{Binding DeleteCameraCommand}" CommandParameter="{Binding Cameras.CurrentItem,Mode=OneWay}" />
         </ContextMenu>
     </UserControl.Resources>
 
@@ -66,7 +66,12 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                <Border Name="BD_Collector" CornerRadius="0" Background="Gray" Width="120" Height="120" Margin="15,0,15,15">
+                                <Border Name="BD_Collector" CornerRadius="0" Background="White" 
+                                        Width="160" Height="90" Margin="15,0,15,15">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Gray" ShadowDepth="4" Opacity="7"/>
+                                    </Border.Effect>
+
                                     <Label Content="{Binding ChannelCfgData.Name}" 
                                            VerticalContentAlignment="Center" 
                                            HorizontalContentAlignment="Center" 
@@ -75,7 +80,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="cameraName" Property="Foreground" Value="White" />
+                                        <Setter TargetName="cameraName" Property="Foreground" Value="Blue" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="BD_Collector" Property="Background" Value="DarkSeaGreen" />

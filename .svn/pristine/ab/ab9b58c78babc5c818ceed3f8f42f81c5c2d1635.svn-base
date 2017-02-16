@@ -4,12 +4,14 @@ using Microsoft.Practices.Prism.ViewModel;
 using System.Windows.Input;
 using System;
 using System.Windows;
-using tip = FACE_ChannelManagement.ViewModels.Toptip;
 using SING.Data.Logger;
 using System.ComponentModel;
 using System.Collections.Generic;
 using SING.Data.Data;
+using System.Collections;
 using System.Windows.Data;
+using System.Windows.Forms.Integration;
+using SING.Data.Controls.ActiveXControl.DZVideoActiveX;
 
 namespace FACE_ChannelManagement.ViewModels
 {
@@ -35,7 +37,7 @@ namespace FACE_ChannelManagement.ViewModels
         /// </summary>
         public ICommand AddCameraInfoCommand { get; private set; }
 
-        void InitChannelGridViewCommand()
+        void InitCommand()
         {
             EditCameraCommand = new DelegateCommand<object>(EditCameraFunc);
             DeleteCameraCommand = new DelegateCommand<object>(DeleteCameraFunc);
@@ -53,18 +55,46 @@ namespace FACE_ChannelManagement.ViewModels
         {
             try
             {
+                //todo(已经完成) 先关闭视频 再进行删除
+                int success = -1;
+
                 if (MessageBox.Show("您确定要删除该通道？", "提示信息", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                 {
-                    //thrift deletefunc
-                    if (_dataService.DelChannelService(Camera.ChannelCfgData.TcChaneelID) == 0)
+                    //ChannelListItemChanged 当前选中的摄像头
+                    //删除摄像头（通道）
+                    success = _dataService.DelChannelService(Camera.ChannelCfgData.TcChaneelID);
+
+                    if (success == 0)
                     {
-                        MessageBox.Show(tip.AboutCameraPlayer.CameraDeletedSuccess);
-                        CloseCameraFunc(WfhList, Camera)();
+                        MessageBox.Show("删除通道成功！");
+                        //todo(已经完成 ) 添加刷新通道的方法
+                        Action act = () =>
+                        {
+                            if (Camera.IsOpened == true)
+                            {
+                                foreach (WindowsFormsHost wfh in WfhList)
+                                {
+                                    if (wfh.Tag != null && wfh.Tag.ToString() == Camera.ChannelCfgData.TcChaneelID)
+                                    {
+                                        (wfh.Child as AxDZVideoControl).CloseCamera();
+                                        wfh.Child = null;
+                                        wfh.Tag = null;
+                                    }
+                                }
+                                Camera.IsOpened = false;
+                            }
+                        };
+
+                        act();
+
                         ChannelList.Remove(Camera);
                         Cameras = new ListCollectionView(ChannelList);
+
                     }
                     else
-                        MessageBox.Show(tip.AboutCameraPlayer.CameraDeletedFail);
+                    {
+                        MessageBox.Show("删除通道失败！");
+                    }
                 }
             }
             catch (Exception ex)
@@ -80,7 +110,7 @@ namespace FACE_ChannelManagement.ViewModels
             IsEditChannelCameraInfo = Visibility.Visible;
             IsViewChannelList = Visibility.Collapsed;
 
-            channelInfoData.Title = tip.AboutCameraPlayer.TitleAddCamera;
+            channelInfoData.Title = "添加通道数据";
             isAddChannelData = true;//添加新的通道数据
             //初始化通道数据
             this.InitChannelCameraInfoData();
@@ -97,7 +127,7 @@ namespace FACE_ChannelManagement.ViewModels
                 IsEditChannelCameraInfo = Visibility.Visible;
                 IsViewChannelList = Visibility.Collapsed;
 
-                channelInfoData.Title = tip.AboutCameraPlayer.TitleModifyCamera;
+                channelInfoData.Title = "编辑通道数据";
                 isAddChannelData = false;//添加新的通道数据
 
                 //加载通道类型
@@ -129,10 +159,13 @@ namespace FACE_ChannelManagement.ViewModels
         /// </summary>
         void InitChannelGridViewModel()
         {
-            this.InitChannelGridViewCommand();
+            this.InitCommand();
+
             IsViewChannelList = Visibility.Visible;
             IsEditChannelCameraInfo = Visibility.Collapsed;
         }
+
+
         #endregion //方法
 
         #region Properties
@@ -163,10 +196,9 @@ namespace FACE_ChannelManagement.ViewModels
             get { return camera; }
             set { camera = value; RaisePropertyChanged("Camera"); }
         }
-
-        public List<ChannelConfigData> ChannelList { get; set; }
-
         #endregion //通道组及通道 
+
+        #region Properties
 
         public Visibility IsViewChannelList
         {
@@ -179,6 +211,9 @@ namespace FACE_ChannelManagement.ViewModels
             get { return _isEditChannelCameraInfo; }
             set { _isEditChannelCameraInfo = value; this.RaisePropertyChanged("IsEditChannelCameraInfo"); }
         }
+
+        #endregion //Properties
+
         #endregion //Properties
 
     }

@@ -17,7 +17,7 @@ namespace FACE_SearchHistoryManagement.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class ViewModel : NotificationObject, INavigationAware
+    public partial class ViewModel : NotificationObject, INavigationAware
     {
         public readonly IDataService _dataService;
         public readonly IEventAggregator _eventAggregator;

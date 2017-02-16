@@ -50,19 +50,26 @@ namespace FACE_ChannelManagement.ViewModels
         /// <returns></returns>
         private Action CameraVideoPlayerFunc(List<WindowsFormsHost> windowsFormHostList, AxDZVideoControl videoPlayerCtrlCom, ChannelConfigData CameraData)
         {
-            AxDZVideoControl AxVideoControl = CameraPlayerControlComponent<AxDZVideoControl>()(videoPlayerCtrlCom);
+            //AxDZVideoControl AxVideoControl = CameraPlayerControlComponent<AxDZVideoControl>()(videoPlayerCtrlCom);
 
             Action act = () =>
             {
+               
+                //AxDZVideoControl AxVideoControl = new AxDZVideoControl();
+                //AxVideoControl.OpenCamera(Camera.ChannelCfgData.CaptureCfgData.NCaptureType,
+                //                            Camera.ChannelCfgData.CaptureCfgData.TcAddr + "|" +
+                //                            Camera.ChannelCfgData.TcDescription, (uint)Camera.ChannelCfgData.CaptureCfgData.NPort,
+                //                            Camera.ChannelCfgData.CaptureCfgData.TcUID, Camera.ChannelCfgData.CaptureCfgData.TcPSW, 1, 1);
+
                 if (WfhList != null && WfhList.Count >= 1)
                 {
                     WindowsFormsHost wfh = WfhList[0];
                     if (wfh.Tag == null)
                     {
-                        wfh.Child = AxVideoControl;
+                        wfh.Child = videoPlayerCtrlCom;
                         wfh.Tag = Camera.ChannelCfgData.TcChaneelID;
 
-                        Camera.IsOpened = true;
+                        
                     }
                 }
             };
@@ -154,48 +161,5 @@ namespace FACE_ChannelManagement.ViewModels
 
         #endregion
 
-    }
-
-
-    namespace Toptip
-    {
-        /// <summary>
-        /// Channel
-        /// </summary>
-        public struct AboutCameraPlayer
-        {
-            /// <summary>
-            /// 摄像机IP为空！
-            /// </summary>
-            public const string CameraIpIsNull = "摄像机IP为空！";
-
-            /// <summary>
-            /// 摄像机无法连接！
-            /// </summary>
-            public const string CameraOffLink = "摄像机无法连接！";
-
-            /// <summary>
-            /// 删除通道成功！
-            /// </summary>
-            public const string CameraDeletedSuccess = "删除通道成功！";
-
-            /// <summary>
-            /// 删除通道失败！
-            /// </summary>
-            public const string CameraDeletedFail = "删除通道失败！";
-
-            /// <summary>
-            /// 窗口Title
-            /// 添加通道数据 Camera = Channel
-            /// </summary>
-            public const string TitleAddCamera = "添加通道数据";
-
-            /// <summary>
-            /// 窗口Title
-            /// 添加通道数据 Camera = Channel
-            /// </summary>
-            public const string TitleModifyCamera = "编辑通道数据";
-
-        }
     }
 }

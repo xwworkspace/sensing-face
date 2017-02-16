@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Forms.Integration;
-using tip = FACE_ChannelManagement.ViewModels.Toptip;
 
 namespace FACE_ChannelManagement.ViewModels
 {
@@ -59,7 +58,27 @@ namespace FACE_ChannelManagement.ViewModels
                 RaisePropertyChanged("WfhList");
             }
         }
+        private ChannelConfigData channelListItem;
+        public ChannelConfigData ChannelListItem
+        {
+            get { return channelListItem; }
+            set
+            {
+                channelListItem = value;
+                RaisePropertyChanged("ChannelListItem");
+            }
+        }
 
+        private List<ChannelConfigData> channelList;
+        public List<ChannelConfigData> ChannelList
+        {
+            get { return channelList; }
+            set
+            {
+                channelList = value;
+                RaisePropertyChanged("ChannelList");
+            }
+        }
         #endregion
 
 
@@ -96,7 +115,7 @@ namespace FACE_ChannelManagement.ViewModels
                 }
                 else if (varPrevSelectedCamera != Camera)
                 {
-                    CloseCameraFunc(WfhList, varPrevSelectedCamera)();
+                    CloseChannelFunc(WfhList, varPrevSelectedCamera)();
                     varPrevSelectedCamera = Camera;
                 }
             }
@@ -115,7 +134,7 @@ namespace FACE_ChannelManagement.ViewModels
                 string IP = Camera.ChannelCfgData.CaptureCfgData.TcAddr;
                 if (IP == string.Empty)
                 {
-                    System.Windows.MessageBox.Show(tip.AboutCameraPlayer.CameraIpIsNull);
+                    System.Windows.MessageBox.Show("摄像机IP为空！");
                     return;
                 }
 
@@ -125,11 +144,13 @@ namespace FACE_ChannelManagement.ViewModels
                     SingleScreen()();
                 }
                 else
-                    CloseCameraFunc(WfhList, Camera)();
+                {
+                    CloseChannelFunc(WfhList, Camera)();
+                }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(tip.AboutCameraPlayer.CameraOffLink);
+                System.Windows.MessageBox.Show("摄像机无法连接！");
                 Logger.Error("通道摄像机连接异常，方法名：ChannelListItemChanged", ex);
             }
         }
@@ -137,6 +158,4 @@ namespace FACE_ChannelManagement.ViewModels
         #endregion
 
     }
-
-
 }

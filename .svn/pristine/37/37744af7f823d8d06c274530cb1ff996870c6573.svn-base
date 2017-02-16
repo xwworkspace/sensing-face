@@ -1,5 +1,6 @@
 ﻿using FACE_ChannelManagement.Models;
 using Microsoft.Practices.Prism.ViewModel;
+using SING.Data.Controls.ActiveXControl.DZVideoActiveX;
 using SING.Data.Data;
 using SING.Data.Logger;
 using System;
@@ -7,7 +8,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Forms.Integration;
-using tip = FACE_ChannelManagement.ViewModels.Toptip;
 
 namespace FACE_ChannelManagement.ViewModels
 {
@@ -59,7 +59,27 @@ namespace FACE_ChannelManagement.ViewModels
                 RaisePropertyChanged("WfhList");
             }
         }
+        private ChannelConfigData channelListItem;
+        public ChannelConfigData ChannelListItem
+        {
+            get { return channelListItem; }
+            set
+            {
+                channelListItem = value;
+                RaisePropertyChanged("ChannelListItem");
+            }
+        }
 
+        private List<ChannelConfigData> channelList;
+        public List<ChannelConfigData> ChannelList
+        {
+            get { return channelList; }
+            set
+            {
+                channelList = value;
+                RaisePropertyChanged("ChannelList");
+            }
+        }
         #endregion
 
 
@@ -115,21 +135,31 @@ namespace FACE_ChannelManagement.ViewModels
                 string IP = Camera.ChannelCfgData.CaptureCfgData.TcAddr;
                 if (IP == string.Empty)
                 {
-                    System.Windows.MessageBox.Show(tip.AboutCameraPlayer.CameraIpIsNull);
+                    System.Windows.MessageBox.Show("摄像机IP为空！");
                     return;
                 }
 
                 if (Camera.IsOpened == false)
                 {
-                    CameraVideoPlayerFunc(WfhList, null, Camera)();
+                    Camera.IsOpened = true;
+
+                    AxDZVideoControl AxVideoControl = new AxDZVideoControl();
+                    AxVideoControl.OpenCamera(Camera.ChannelCfgData.CaptureCfgData.NCaptureType,
+                                                Camera.ChannelCfgData.CaptureCfgData.TcAddr + "|" +
+                                                Camera.ChannelCfgData.TcDescription, (uint)Camera.ChannelCfgData.CaptureCfgData.NPort,
+                                                Camera.ChannelCfgData.CaptureCfgData.TcUID, Camera.ChannelCfgData.CaptureCfgData.TcPSW, 1, 1);
+
+                    CameraVideoPlayerFunc(WfhList, AxVideoControl, Camera)();
                     SingleScreen()();
                 }
                 else
+                {
                     CloseCameraFunc(WfhList, Camera)();
+                }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(tip.AboutCameraPlayer.CameraOffLink);
+                System.Windows.MessageBox.Show("摄像机无法连接！");
                 Logger.Error("通道摄像机连接异常，方法名：ChannelListItemChanged", ex);
             }
         }
@@ -137,6 +167,4 @@ namespace FACE_ChannelManagement.ViewModels
         #endregion
 
     }
-
-
 }
