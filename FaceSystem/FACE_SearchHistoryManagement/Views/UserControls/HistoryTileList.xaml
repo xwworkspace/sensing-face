@@ -16,7 +16,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -28,11 +28,14 @@
         </StackPanel>
 
         <ListView Grid.Row="1" 
+                  x:Name="historyDataList"
+                  ItemsSource="{Binding HistorySnapItemSource,Mode=TwoWay}"
+                  SelectedItem="{Binding HistorySnapSelectedItem,Mode=TwoWay}"
                   SelectionMode="Single">
             <ListView.Template>
                 <ControlTemplate>
                     <Border BorderThickness="2">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                             <ItemsPresenter />
                         </ScrollViewer>
                     </Border>
@@ -48,21 +51,19 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                <Border Name="BD_Collector" CornerRadius="0" Background="Gray" Width="120" Height="120" Margin="15,0,15,15">
+                                <Border Name="BD_Collector" CornerRadius="0" Background="Gray" Width="160" Height="90" Margin="15,0,0,15">
 
                                     <Border.Effect>
                                         <DropShadowEffect Color="Gray" ShadowDepth="4" Opacity="7"/>
                                     </Border.Effect>
-                                    
-                                    <Label Content="{Binding ChannelCfgData.Name}" 
-                                           VerticalContentAlignment="Center" 
-                                           HorizontalContentAlignment="Center" 
-                                           FontSize="15"
-                                           x:Name="cameraName"/>
+
+                                    <Label Content="{Binding ChannelName}" 
+                                           FontSize="16"
+                                           x:Name="historySnapImg"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="cameraName" Property="Foreground" Value="White" />
+                                        <Setter TargetName="historySnapImg" Property="Foreground" Value="White" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="BD_Collector" Property="Background" Value="DarkSeaGreen" />

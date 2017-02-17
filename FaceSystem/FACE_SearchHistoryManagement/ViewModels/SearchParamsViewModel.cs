@@ -1,9 +1,5 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FACE_SearchHistoryManagement.Models;
+using Microsoft.Practices.Prism.ViewModel;
 
 namespace FACE_SearchHistoryManagement.ViewModels
 {
@@ -25,6 +21,17 @@ namespace FACE_SearchHistoryManagement.ViewModels
         #endregion
 
         #region View Properties
+
+        HistorySearchParamsModel _historySearchParams;
+
+        /// <summary>
+        /// Search Params for history data
+        /// </summary>
+        public HistorySearchParamsModel HistorySearchParams
+        {
+            get { return _historySearchParams; }
+            set { _historySearchParams = value; RaisePropertyChanged("HistorySearchParams"); }
+        }
 
         #endregion
 

@@ -19,7 +19,7 @@
 
         <controls:SearchParams Grid.Row="1" />
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" ShowGridLines="true">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />

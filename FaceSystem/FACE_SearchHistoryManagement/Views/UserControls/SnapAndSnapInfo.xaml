@@ -15,9 +15,7 @@
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="16"></Setter>
         </Style>
-        <Style x:Key="Margin50">
-
-        </Style>
+        <ImageBrush ImageSource="{Binding}" x:Key="snapImage"/>
     </UserControl.Resources>
 
     <Grid>
@@ -27,7 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Margin="5">
-            <Image Source="{Binding}" />
+            <Image Source="{Binding HistorySnapSelectedItem.Image,Mode=TwoWay}" />
         </Grid>
 
         <Grid Grid.Column="1" Margin="5">
@@ -42,32 +40,32 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Info"/>
-                <TextBlock Text="Data" />
+                <TextBlock Text="ID：" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                <TextBlock Text="{Binding HistorySnapSelectedItem.ChannelID,Mode=TwoWay}" HorizontalAlignment="Right" />
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Info" />
-                <TextBlock Text="Data" />
+                <TextBlock Text="姓名：" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                <TextBlock Text="{Binding HistorySnapSelectedItem.ChannelName,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Info" />
-                <TextBlock Text="Data" />
+                <TextBlock Text="年龄：" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                <TextBlock Text="{Binding HistorySnapSelectedItem.Age,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Info" />
-                <TextBlock Text="Data" />
+                <TextBlock Text="性别：" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                <TextBlock Text="{Binding HistorySnapSelectedItem.Genger,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Info" />
-                <TextBlock Text="Data" />
+                <TextBlock Text="所属类型：" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                <TextBlock Text="{Binding HistorySnapSelectedItem,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Info" />
-                <TextBlock Text="Data" />
+                <TextBlock Text="导入事件：" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                <TextBlock Text="{Binding HistorySnapSelectedItem,Mode=TwoWay}" />
             </StackPanel>
             <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Info" />
-                <TextBlock Text="Data" />
+                <TextBlock Text="备注：" Width="80" TextAlignment="Right" FontWeight="Bold" />
+                <TextBlock Text="{Binding HistorySnapSelectedItem,Mode=TwoWay}" TextWrapping="Wrap" />
             </StackPanel>
         </Grid>
 

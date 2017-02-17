@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FACE_SearchHistoryManagement.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="600">
+             d:DesignHeight="40" d:DesignWidth="900">
     <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"></Setter>
@@ -28,19 +28,30 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Orientation="Horizontal">
-            <TextBlock  />
-            <TextBox Width="120" Height="30"/>
+        <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="通道名称：" VerticalAlignment="Center" />
+            <TextBox Width="120" Height="30" VerticalAlignment="Center" />
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Orientation="Horizontal"></StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="通道列表：" VerticalAlignment="Center" />
+            <ComboBox Width="120" Height="30">
 
-        <StackPanel Grid.Column="2" Orientation="Horizontal"></StackPanel>
+            </ComboBox>
+        </StackPanel>
 
-        <StackPanel Grid.Column="3" Orientation="Horizontal"></StackPanel>
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="结束时间：" VerticalAlignment="Center" />
+            <TextBox Width="120" Height="30" VerticalAlignment="Center" />
+        </StackPanel>
 
-        <StackPanel Grid.Column="4" Orientation="Horizontal">
-            <Button Content="Search" />
+        <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="5">
+            <TextBlock Text="开始时间：" VerticalAlignment="Center" />
+            <TextBox Width="120" Height="30" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="5">
+            <Button Content="Search" Command="{Binding SearchBtnCommand}" />
         </StackPanel>
 
     </Grid>

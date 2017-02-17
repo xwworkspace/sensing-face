@@ -27,6 +27,9 @@ namespace FACE_SearchHistoryManagement.ViewModels
         [ImportingConstructor]
         public ViewModel(IDataService dataService, IEventAggregator eventAggregator, IRegionManager regionManager, IServiceLocator serviceLocator)
         {
+            _dataService = dataService;
+
+            InitHistoryTileListViewModel();
         }
 
         #region 属性
